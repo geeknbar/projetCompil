@@ -1,3 +1,15 @@
+Grammaire complete sous forme de graphique avec des exemples et explications.
+
+http://rmdiscala.developpez.com/cours/LesChapitres.html/Cours2/Chap2.4.htm
+
+################################
+
+Fichiers Yacc + Lex du langage pascal a voir si c'est vraiment le cas et prendre uniquement les blocs dont on a besoin
+
+http://www.lifl.fr/~marquet/ens/pcp/pcp017.html
+
+################################
+
 http://www.enib.fr/~harrouet/Data/Courses/Flex_Bison.pdf
 
 Très bon cours sur Flex et Bison
@@ -11,3 +23,6 @@ Slide 40-42 : comment reconnaître des expressions arthiméthiques.
 https://code.google.com/p/toypasc/source/browse/?r=49#svn%2Ftrunk
 
 Projet de pascal to C on peut peut être s'en servir à voir.
+
+
+################################
