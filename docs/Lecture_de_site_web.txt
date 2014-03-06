@@ -26,3 +26,6 @@ Projet de pascal to C on peut peut être s'en servir à voir.
 
 
 ################################
+A voir
+
+http://www.infeig.unige.ch/support/cpil/pract/lexic/anl/node6.html
