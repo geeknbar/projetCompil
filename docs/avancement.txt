@@ -1,0 +1,14 @@
+Avancement du projet
+
+Répertorie les différents problèmes rencontré et en cours du projet.
+(Si le problème est résolu le déplacer dans la partie 2)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Partie 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Mise en place de la table des symboles fonctionne si il n'y a pas de symboles en double sinon ==> Erreur de segmentation (core dumped)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Partie 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
