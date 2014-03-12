@@ -1,5 +1,27 @@
 Avancement du projet
 
+
+To Do
+	annalyseur grammatical
+		création de la grammaire pascal
+		annalyse syntaxique
+		annalyse sémantique
+		traduction du pascal en C
+
+
+Doing
+	annalyseur syntaxique
+		règleslexical
+		table des symboles 
+
+Done
+
+
+###############################################
+###############################################
+
+
+
 Répertorie les différents problèmes rencontré et en cours du projet.
 (Si le problème est résolu le déplacer dans la partie 2)
 
