@@ -1,5 +1,8 @@
 Avancement du projet
 
+Dorian => {D}
+Thibault => {T}
+
 
 To Do
 	annalyseur grammatical
@@ -10,9 +13,9 @@ To Do
 
 
 Doing
-	annalyseur syntaxique
-		règleslexical
-		table des symboles 
+	annalyseur syntaxique {D}
+		règleslexical {D}
+		table des symboles {D} 
 
 Done
 
