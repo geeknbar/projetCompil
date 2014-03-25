@@ -10,6 +10,7 @@ struct element
     // int val;
     char* symb;
     struct element *nxt;
+    int occurence;
 };
 
 
@@ -20,6 +21,9 @@ llist ajouterEnFin(llist table_symboles, char* symbole)
  
     /* On assigne la valeur au nouvel élément */
     nouvelElement->symb = symbole;
+
+    /* On met le nombre d'occurence à 1 */
+    nouvelElement->occurence = 1;
  
     /* On ajoute en fin, donc aucun élément ne va suivre */
     nouvelElement->nxt = NULL;
@@ -67,7 +71,7 @@ void afficherListe(llist table_symboles)
     while(tmp != NULL)
     {
         /* On affiche */
-        printf("Symbole %d : %s\n", i, tmp->symb);
+        printf("Symbole %d : %s, occurence :%d \n", i, tmp->symb, tmp->occurence);
         // printf("%s \n", tmp->symb);
         /* On avance d'une case */
         tmp = tmp->nxt;
@@ -89,7 +93,10 @@ int rechercherElement(llist table_symboles, char* symbole)
         if(strcmp(tmp->symb, symbole)==0)
         {
             /* Si l'élément a la valeur recherchée, on renvoie son adresse */
-            free(tmp);
+            //problème si on le laisse ce free , a revoir
+            // free(tmp);
+            /* On augmente le nombre d'occurence de 1*/
+            tmp->occurence +=1;
             return 1;
         }
         tmp = tmp->nxt;
