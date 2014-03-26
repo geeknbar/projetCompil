@@ -942,12 +942,12 @@ return(DIVQUOT);
 case 30:
 YY_RULE_SETUP
 #line 72 "annalyseur_lexical.l"
-return(LPAREN);
+return(PARENG);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 73 "annalyseur_lexical.l"
-return(RPAREN);
+return(PAREND);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP

@@ -69,8 +69,8 @@ LETTRE[a-zA-Z]
 "*"                                return(MULTIPLICAT);
 "/"                                return(DIVQUOT);
 
-"("                                return(LPAREN);
-")"                                return(RPAREN);
+"("                                return(PARENG);
+")"                                return(PAREND);
 
 "."                                return(DOT);
 

@@ -8,9 +8,9 @@
 %token ASSIGNMENT COLON DIV DO DOT
 %token ELSE END EQUAL
 %token FUNCTION GE GT IDENTIFIER IF
-%token LE LPAREN LT MINUS MOD NOTEQUAL
+%token LE LT MINUS MOD NOTEQUAL
 %token PBEGIN PLUS
-%token PROGRAM RPAREN
+%token PROGRAM PAREND PARENG
 %token SEMICOLON DIVQUOT MULTIPLICAT THEN
 %token VAR WHILE
 %token STRING INTEGER REAL BOOLEAN CHAR
@@ -23,22 +23,24 @@ program : program_tete semicolon block DOT;
 
 program_tete : PROGRAM identifier;
 
-block : declaration_variable_block
+block : declaration_fonction_block
+				declaration_variable_block
+			;
 
-declaration_variable_block : VAR declaration_variable semicolon
-        |
-        ;
+declaration_variable_block : VAR declaration_variable semicolon;
 
 declaration_variable : identifier COLON data_type;
+
+declaration_fonction_block : FUNCTION identifier parametre_fonction COLON data_type semicolon;
+
+parametre_fonction : PARENG identifier COLON data_type PAREND
 
 data_type : STRING
 					| INTEGER
 					| REAL
 					| BOOLEAN
-					|CHAR
+					| CHAR
 					;
-
-
 
 identifier : IDENTIFIER;
 
