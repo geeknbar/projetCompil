@@ -67,6 +67,8 @@ LETTRE[a-zA-Z]
 "("                                return(LPAREN);
 ")"                                return(RPAREN);
 
+"."                                return(DOT);
+
 {LETTRE}({LETTRE}|{CHIFFRE})* {
 	return IDENTIFIER;
 }

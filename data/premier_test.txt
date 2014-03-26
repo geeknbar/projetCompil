@@ -1,1 +1,1 @@
-PROGRAM prog;
+PROGRAM prog;.

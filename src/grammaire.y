@@ -5,7 +5,7 @@
 	extern FILE *yyin;
 %}
 
-%token ASSIGNMENT COLON DIV DO
+%token ASSIGNMENT COLON DIV DO DOT
 %token ELSE END EQUAL
 %token FUNCTION GE GT IDENTIFIER IF
 %token LE LPAREN LT MINUS MOD NOTEQUAL
@@ -18,7 +18,13 @@
 
 %%
 
-program : PROGRAM IDENTIFIER SEMICOLON {};
+program : program_tete semicolon DOT;
+
+program_tete : PROGRAM identifier;
+
+identifier : IDENTIFIER;
+
+semicolon : SEMICOLON;
 
 %%
 
