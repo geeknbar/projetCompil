@@ -1,1 +1,3 @@
-PROGRAM prog;.
+PROGRAM prog;
+VAR i:INTEGER;
+.

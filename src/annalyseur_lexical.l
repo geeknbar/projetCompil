@@ -47,6 +47,11 @@ LETTRE[a-zA-Z]
 {T}{H}{E}{N} return(THEN);
 {V}{A}{R} return(VAR);
 {W}{H}{I}{L}{E} return(WHILE);
+{I}{N}{T}{E}{G}{E}{R} return(INTEGER);
+{S}{T}{R}{I}{N}{G} return(STRING);
+{R}{E}{A}{L} return(REAL);
+{B}{O}{O}{L}{E}{A}{N} return(BOOLEAN);
+{C}{H}{A}{R} return(CHAR);
 
 ":="                                return(ASSIGNMENT);
 ":"                                return(COLON);

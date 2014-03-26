@@ -13,14 +13,32 @@
 %token PROGRAM RPAREN
 %token SEMICOLON DIVQUOT MULTIPLICAT THEN
 %token VAR WHILE
+%token STRING INTEGER REAL BOOLEAN CHAR
 
 %error-verbose
 
 %%
 
-program : program_tete semicolon DOT;
+program : program_tete semicolon block DOT;
 
 program_tete : PROGRAM identifier;
+
+block : declaration_variable_block
+
+declaration_variable_block : VAR declaration_variable semicolon
+        |
+        ;
+
+declaration_variable : identifier COLON data_type;
+
+data_type : STRING
+					| INTEGER
+					| REAL
+					| BOOLEAN
+					|CHAR
+					;
+
+
 
 identifier : IDENTIFIER;
 

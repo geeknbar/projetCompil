@@ -65,7 +65,12 @@
      MULTIPLICAT = 283,
      THEN = 284,
      VAR = 285,
-     WHILE = 286
+     WHILE = 286,
+     STRING = 287,
+     INTEGER = 288,
+     REAL = 289,
+     BOOLEAN = 290,
+     CHAR = 291
    };
 #endif
 
