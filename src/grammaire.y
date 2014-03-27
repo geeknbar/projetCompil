@@ -25,6 +25,7 @@ program_tete : PROGRAM identifier;
 
 block : declaration_fonction_block
 				declaration_variable_block
+				section_programme
 			;
 
 declaration_variable_block : VAR declaration_variable semicolon;
@@ -34,6 +35,12 @@ declaration_variable : identifier COLON data_type;
 declaration_fonction_block : FUNCTION identifier parametre_fonction COLON data_type semicolon;
 
 parametre_fonction : PARENG identifier COLON data_type PAREND
+
+section_programme : header_section_programme
+
+header_section_programme : PBEGIN END;
+
+
 
 data_type : STRING
 					| INTEGER

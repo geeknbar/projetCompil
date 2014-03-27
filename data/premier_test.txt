@@ -1,5 +1,9 @@
 PROGRAM prog;
-
+{function f}
 FUNCTION f(x:INTEGER) :INTEGER;
 VAR i:INTEGER;
+
+BEGIN
+
+END
 .
