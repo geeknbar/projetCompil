@@ -7,6 +7,7 @@ BEGIN
 	i := 3;
 	WHILE 2+3 DO
 		z := 57;
+	IF 8-4 THEN w:=8;
 END;
 
 {function g}
@@ -16,6 +17,10 @@ BEGIN
 	WHILE 2+3 DO
 	BEGIN
 		i := 3 +1;
+		IF 6/5 THEN
+		BEGIN
+			i:= 76;
+		END;
 	END;
 END;
 
@@ -25,7 +30,14 @@ BEGIN
 	b := 2/4*5;
 	WHILE 2+3 DO
 	BEGIN
-		IF 8 * 9 THEN;
+		IF 8 * 9 THEN
+		BEGIN
+			WHILE 5*9 DO
+			BEGIN
+				IF 78 + 6 THEN
+					toto := 6;
+			END;
+		END;
 	END;
 END;
 

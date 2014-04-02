@@ -105,7 +105,7 @@ instruction_assignement: IDENTIFIANT ASSIGNATION expression
 instruction_while: WHILE expression DO instructions
 	;
 
-instruction_if: IF expression THEN
+instruction_if: IF expression THEN instructions POINTVIRGULE
 	;
 
 expression:
