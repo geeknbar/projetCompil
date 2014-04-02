@@ -5,18 +5,28 @@ FUNCTION f(x:INTEGER):INTEGER;
 VAR i:INTEGER;j,l:CHAR;
 BEGIN 
 	i := 3;
+	WHILE 2+3 DO
+		z := 57;
 END;
 
 {function g}
 FUNCTION g(x:INTEGER):INTEGER;
 BEGIN 
 	a := 3+3;
+	WHILE 2+3 DO
+	BEGIN
+		i := 3 +1;
+	END;
 END;
 
 {procedure h}
 PROCEDURE h(x,y:INTEGER,z:CHAR);
 BEGIN
 	b := 2/4*5;
+	WHILE 2+3 DO
+	BEGIN
+		IF 8 * 9 THEN;
+	END;
 END;
 
 {main}

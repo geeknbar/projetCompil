@@ -92,11 +92,31 @@ instruction_list: instruction_list POINTVIRGULE instructions
 	| instructions
 	;
 
-instructions: instrcution_assignement
+instructions: instruction_simple
+	| instruction_complexe
+	;
+
+
+instruction_simple: instruction_while_simple
+	| instruction_if_simple
+	;
+
+instruction_complexe: instruction_assignement
+	| instruction_while_complexe
+	| instruction
 	|
 	;
 
-instrcution_assignement: IDENTIFIANT ASSIGNATION expression
+instruction_assignement: IDENTIFIANT ASSIGNATION expression
+	;
+
+instruction_while_simple: WHILE expression DO instruction_simple
+	;
+
+instruction_while_complexe: WHILE expression DO instruction_complexe
+	;
+
+instruction_if_simple: IF expression THEN
 	;
 
 expression:
