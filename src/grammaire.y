@@ -85,7 +85,30 @@ liste_parametres: liste_parametres VIRGULE declaration_variables
 	| declaration_variables
 	;
 
-instruction: TBEGIN TEND
+instruction: TBEGIN instruction_list TEND
+	;
+
+instruction_list: instruction_list POINTVIRGULE instructions
+	| instructions
+	;
+
+instructions: instrcution_assignement
+	|
+	;
+
+instrcution_assignement: IDENTIFIANT ASSIGNATION expression
+	;
+
+expression:
+	expression MULTIPLICATION expression
+	|
+	expression ADDITION expression
+	|
+	expression SOUSTRACTION expression
+	|
+	expression DIVISION expression
+	|
+	NOMBRE
 	;
 
 type_variable : STRING

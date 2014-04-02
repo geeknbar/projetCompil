@@ -4,22 +4,22 @@ PROGRAM prog;
 FUNCTION f(x:INTEGER):INTEGER;
 VAR i:INTEGER;j,l:CHAR;
 BEGIN 
-
+	i := 3;
 END;
 
 {function g}
 FUNCTION g(x:INTEGER):INTEGER;
 BEGIN 
-
+	a := 3+3;
 END;
 
 {procedure h}
 PROCEDURE h(x,y:INTEGER,z:CHAR);
 BEGIN
-
+	b := 2/4*5;
 END;
 
 {main}
 BEGIN
-
+	main := 3;x:=2-5;
 END.
