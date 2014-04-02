@@ -5,7 +5,7 @@
 	extern FILE *yyin;
 %}
 
-%token TBEGIN DO DIV TEND FUNCTION IF MOD PROGRAM THEN ELSE VAR WHILE
+%token TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
 %token INTEGER STRING REAL BOOLEAN CHAR
 %token ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
 %token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
@@ -30,7 +30,8 @@ programme_entete:
 	;
 
 bloc: declaration_variable
-	declaration_fonction_procedure
+	declaration_fonction
+	declaration_procedure
 	instruction
 	;
 
@@ -38,38 +39,50 @@ declaration_variable: VAR liste_variables POINTVIRGULE
 	|
 	;
 
-liste_variables: liste_variables POINTVIRGULE declaration_variable
-	| declaration_variable
+liste_variables: liste_variables POINTVIRGULE declaration_variables
+	| declaration_variables
 	;
 
-declaration_variable: liste_identifiants DEUXPOINTS type_variable
+declaration_variables: liste_identifiants DEUXPOINTS type_variable
 	;
 
 liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT
 	| IDENTIFIANT
 	;
 
-declaration_fonction_procedure: liste_fonctions_procedures POINTVIRGULE
+declaration_fonction: liste_fonctions POINTVIRGULE
 	|
 	;
 
-liste_fonctions_procedures: liste_fonctions_procedures POINTVIRGULE fonction_procedure
-	| fonction_procedure
+declaration_procedure: liste_procedures POINTVIRGULE
+	|
 	;
 
-fonction_procedure: declaration_fonction
+liste_fonctions: liste_fonctions POINTVIRGULE declaration_fonctions
+	| declaration_fonctions
 	;
 
-declaration_fonction: fonction_entete fonction_bloc
+liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
+	| declaration_procedures
 	;
 
-fonction_entete: FUNCTION IDENTIFIANT parametre_fonction DEUXPOINTS type_variable POINTVIRGULE
+declaration_fonctions: fonction_entete bloc
 	;
 
-parametre_fonction: PARENTHESEGAUCHE IDENTIFIANT DEUXPOINTS type_variable PARENTHESEDROITE
+declaration_procedures: procedure_entete bloc
 	;
 
-fonction_bloc: bloc
+fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE
+	;
+
+procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE
+	;
+
+parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE
+	;
+
+liste_parametres: liste_parametres VIRGULE declaration_variables
+	| declaration_variables
 	;
 
 instruction: TBEGIN TEND
