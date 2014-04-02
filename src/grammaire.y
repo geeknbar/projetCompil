@@ -14,6 +14,9 @@
 %token NOMBRE
 %token IDENTIFIANT
 
+%left ADDITION SOUSTRACTION
+%left MULTIPLICATION DIVISION
+
 %error-verbose
 
 %%
