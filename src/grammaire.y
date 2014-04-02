@@ -33,10 +33,9 @@ declarations_globales: declarations_globales declaration_globale
 	|
 	;
 
-declaration_globale:
-	declaration_fonction
+declaration_globale: declaration_variables
 	|
-	declaration_variables
+	declaration_fonction
 	;
 
 declaration_fonction: fonction_entete fonction_bloc
@@ -52,13 +51,17 @@ fonction_bloc: bloc
 	;
 
 bloc: declaration_variables instructions
+	| instructions
 	;
 
-declaration_variables : VAR declaration_variable POINTVIRGULE
+declaration_variables: declaration_variable declaration_variable_recursive
+	;
+
+declaration_variable: VAR IDENTIFIANT DEUXPOINTS type_variable POINTVIRGULE
+	;
+
+declaration_variable_recursive: declaration_variables
 	|
-	;
-
-declaration_variable: IDENTIFIANT DEUXPOINTS type_variable
 	;
 
 instructions: TBEGIN instruction TEND POINTVIRGULE
