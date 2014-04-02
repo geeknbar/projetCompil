@@ -57,6 +57,7 @@ LETTRE[a-zA-Z]
 ":="                               return(ASSIGNATION);
 "."                                return(POINT);
 ":"                                return(DEUXPOINTS);
+","                                return(VIRGULE);
 ";"                                return(POINTVIRGULE);
 
 "="                                return(EGAL);

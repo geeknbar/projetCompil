@@ -1,18 +1,19 @@
 PROGRAM prog;
+
 {function f}
-FUNCTION f(x:INTEGER) :INTEGER;
-VAR i:INTEGER;
-VAR j:STRING;
-BEGIN
-	i := i;
-	a := 5+2;
-	b := 2/3;
-	c := 50;
-	d := i+a-b*c;
+FUNCTION f(x:INTEGER):INTEGER;
+VAR i:INTEGER;j,l:CHAR;
+BEGIN 
+
+END;
+
+{function g}
+FUNCTION g(x:INTEGER):INTEGER;
+BEGIN 
+
 END;
 
 {main}
 BEGIN
 
-END
-.
+END.

@@ -7,7 +7,7 @@
 
 %token TBEGIN DO DIV TEND FUNCTION IF MOD PROGRAM THEN ELSE VAR WHILE
 %token INTEGER STRING REAL BOOLEAN CHAR
-%token ASSIGNATION POINT DEUXPOINTS POINTVIRGULE
+%token ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
 %token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
 %token ADDITION SOUSTRACTION MULTIPLICATION DIVISION
 %token PARENTHESEGAUCHE PARENTHESEDROITE
@@ -22,23 +22,42 @@
 %%
 
 programme:
-	programme_entete declarations_globales programme_principal POINT
+	programme_entete bloc POINT
 	;
 
 programme_entete:
 	PROGRAM IDENTIFIANT POINTVIRGULE
 	;
 
-declarations_globales: declaration_globale declaration_globale_recursive
+bloc: declaration_variable
+	declaration_fonction_procedure
+	instruction
 	;
 
-declaration_globale: declaration_variables
+declaration_variable: VAR liste_variables POINTVIRGULE
 	|
-	declaration_fonction
 	;
 
-declaration_globale_recursive: declarations_globales
+liste_variables: liste_variables POINTVIRGULE declaration_variable
+	| declaration_variable
+	;
+
+declaration_variable: liste_identifiants DEUXPOINTS type_variable
+	;
+
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT
+	| IDENTIFIANT
+	;
+
+declaration_fonction_procedure: liste_fonctions_procedures POINTVIRGULE
 	|
+	;
+
+liste_fonctions_procedures: liste_fonctions_procedures POINTVIRGULE fonction_procedure
+	| fonction_procedure
+	;
+
+fonction_procedure: declaration_fonction
 	;
 
 declaration_fonction: fonction_entete fonction_bloc
@@ -53,44 +72,7 @@ parametre_fonction: PARENTHESEGAUCHE IDENTIFIANT DEUXPOINTS type_variable PARENT
 fonction_bloc: bloc
 	;
 
-bloc: declaration_variables instructions
-	| instructions
-	;
-
-declaration_variables: declaration_variable declaration_variable_recursive
-	;
-
-declaration_variable: VAR IDENTIFIANT DEUXPOINTS type_variable POINTVIRGULE
-	;
-
-declaration_variable_recursive: declaration_variables
-	|
-	;
-
-instructions: TBEGIN instruction TEND POINTVIRGULE
-	|
-	;
-
-instruction: affectation instruction_recursive
-	;
-
-instruction_recursive: instruction
-	|
-	;
-
-affectation: IDENTIFIANT ASSIGNATION expression POINTVIRGULE
-	;
-
-expression: expression ADDITION expression
-	| expression MULTIPLICATION expression
-	| expression SOUSTRACTION expression
-	| expression DIVISION expression
-	| NOMBRE
-	| IDENTIFIANT
-	;
-
-programme_principal: declaration_variables TBEGIN TEND
-	| TBEGIN TEND
+instruction: TBEGIN TEND
 	;
 
 type_variable : STRING
