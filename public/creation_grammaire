@@ -1,0 +1,20 @@
+programme:
+	prog_entete declarations_globales prog_principal
+	;
+
+prog_entete:
+	PROGRAM ID
+	;
+
+declarations_globales:
+	declarations_globales declaration_globale
+	|
+	;
+
+declaration_globale:
+	declaration_fonction
+	|
+	declaration_procedure
+	|
+	declaration_variable
+	;
