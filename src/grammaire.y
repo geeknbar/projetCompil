@@ -5,57 +5,91 @@
 	extern FILE *yyin;
 %}
 
-%token ASSIGNMENT COLON DIV DO DOT
-%token ELSE END EQUAL
-%token FUNCTION GE GT IDENTIFIER IF
-%token LE LT MINUS MOD NOTEQUAL
-%token PBEGIN PLUS
-%token PROGRAM PAREND PARENG
-%token SEMICOLON DIVQUOT MULTIPLICAT THEN
-%token VAR WHILE
-%token STRING INTEGER REAL BOOLEAN CHAR
+%token TBEGIN DO DIV TEND FUNCTION IF MOD PROGRAM THEN ELSE VAR WHILE
+%token INTEGER STRING REAL BOOLEAN CHAR
+%token ASSIGNATION POINT DEUXPOINTS POINTVIRGULE
+%token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
+%token ADDITION SOUSTRACTION MULTIPLICATION DIVISION
+%token PARENTHESEGAUCHE PARENTHESEDROITE
+%token NOMBRE
+%token IDENTIFIANT
 
 %error-verbose
 
 %%
 
-program : program_tete semicolon bloc DOT;
+programme:
+	programme_entete declarations_globales programme_principal POINT
+	;
 
-program_tete : PROGRAM identifier;
+programme_entete:
+	PROGRAM IDENTIFIANT POINTVIRGULE
+	;
 
-bloc : declaration_fonction_bloc
-				declaration_variable_bloc
-				section_programme
-			;
+declarations_globales: declarations_globales declaration_globale
+	|
+	;
 
-declaration_variable_bloc : VAR declaration_variable semicolon;
+declaration_globale:
+	declaration_fonction
+	|
+	declaration_variables
+	;
 
-declaration_variable : identifier COLON data_type;
+declaration_fonction: fonction_entete fonction_bloc
+	;
 
-declaration_fonction_bloc : fonction_entete fonction_bloc;
+fonction_entete: FUNCTION IDENTIFIANT parametre_fonction DEUXPOINTS type_variable POINTVIRGULE
+	;
 
-fonction_entete : FUNCTION identifier parametre_fonction COLON data_type semicolon;
+parametre_fonction: PARENTHESEGAUCHE IDENTIFIANT DEUXPOINTS type_variable PARENTHESEDROITE
+	;
 
-parametre_fonction : PARENG identifier COLON data_type PAREND;
+fonction_bloc: bloc
+	;
 
-fonction_bloc : bloc;
+bloc: declaration_variables instructions
+	;
 
+declaration_variables : VAR declaration_variable POINTVIRGULE
+	|
+	;
 
+declaration_variable: IDENTIFIANT DEUXPOINTS type_variable
+	;
 
-section_programme : header_section_programme
+instructions: TBEGIN instruction TEND POINTVIRGULE
+	|
+	;
 
-header_section_programme : PBEGIN END;
+instruction: affectations
+	|
+	;
 
-data_type : STRING
-					| INTEGER
-					| REAL
-					| BOOLEAN
-					| CHAR
-					;
+affectations: affectations affectation
+	|
+	;
 
-identifier : IDENTIFIER;
+affectation: IDENTIFIANT ASSIGNATION expression POINTVIRGULE
+	;
 
-semicolon : SEMICOLON;
+expression: expression ADDITION expression
+	| expression MULTIPLICATION expression
+	| expression SOUSTRACTION expression
+	| expression DIVISION expression
+	| NOMBRE
+	| IDENTIFIANT
+	;
+
+programme_principal: TBEGIN TEND
+	;
+
+type_variable : STRING
+	| INTEGER
+	| REAL
+	| BOOLEAN
+	| CHAR
+	;
 
 %%
 

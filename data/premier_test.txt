@@ -2,7 +2,15 @@ PROGRAM prog;
 {function f}
 FUNCTION f(x:INTEGER) :INTEGER;
 VAR i:INTEGER;
+BEGIN
+	i := i;
+	a := 5+2;
+	b := 2/3;
+	c := 50;
+	d := i+a-b*c;
+END;
 
+{main}
 BEGIN
 
 END

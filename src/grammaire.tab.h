@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 2.5.  */
+/* A Bison parser, made by GNU Bison 2.7.12-4996.  */
 
 /* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,6 +30,15 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+#ifndef YY_YY_GRAMMAIRE_TAB_H_INCLUDED
+# define YY_YY_GRAMMAIRE_TAB_H_INCLUDED
+/* Enabling traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -37,43 +46,43 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ASSIGNMENT = 258,
-     COLON = 259,
+     TBEGIN = 258,
+     DO = 259,
      DIV = 260,
-     DO = 261,
-     DOT = 262,
-     ELSE = 263,
-     END = 264,
-     EQUAL = 265,
-     FUNCTION = 266,
-     GE = 267,
-     GT = 268,
-     IDENTIFIER = 269,
-     IF = 270,
-     LE = 271,
-     LT = 272,
-     MINUS = 273,
-     MOD = 274,
-     NOTEQUAL = 275,
-     PBEGIN = 276,
-     PLUS = 277,
-     PROGRAM = 278,
-     PAREND = 279,
-     PARENG = 280,
-     SEMICOLON = 281,
-     DIVQUOT = 282,
-     MULTIPLICAT = 283,
-     THEN = 284,
-     VAR = 285,
-     WHILE = 286,
-     STRING = 287,
-     INTEGER = 288,
-     REAL = 289,
-     BOOLEAN = 290,
-     CHAR = 291
+     TEND = 261,
+     FUNCTION = 262,
+     IF = 263,
+     MOD = 264,
+     PROGRAM = 265,
+     THEN = 266,
+     ELSE = 267,
+     VAR = 268,
+     WHILE = 269,
+     INTEGER = 270,
+     STRING = 271,
+     REAL = 272,
+     BOOLEAN = 273,
+     CHAR = 274,
+     ASSIGNATION = 275,
+     POINT = 276,
+     DEUXPOINTS = 277,
+     POINTVIRGULE = 278,
+     EGAL = 279,
+     SUPERIEUREGAL = 280,
+     SUPERIEUR = 281,
+     INFERIEUREGAL = 282,
+     INFERIEUR = 283,
+     DIFFERENT = 284,
+     ADDITION = 285,
+     SOUSTRACTION = 286,
+     MULTIPLICATION = 287,
+     DIVISION = 288,
+     PARENTHESEGAUCHE = 289,
+     PARENTHESEDROITE = 290,
+     NOMBRE = 291,
+     IDENTIFIANT = 292
    };
 #endif
-
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -85,4 +94,18 @@ typedef int YYSTYPE;
 
 extern YYSTYPE yylval;
 
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void *YYPARSE_PARAM);
+#else
+int yyparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void);
+#else
+int yyparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
+#endif /* !YY_YY_GRAMMAIRE_TAB_H_INCLUDED  */
