@@ -53,29 +53,29 @@ LETTRE[a-zA-Z]
 {B}{O}{O}{L}{E}{A}{N} return(BOOLEAN);
 {C}{H}{A}{R} return(CHAR);
 
-":="                                return(ASSIGNMENT);
-":"                                return(COLON);
-";"                                return(SEMICOLON);
+":="                               return(ASSIGNATION);
+":"                                return(DEUXPOINTS);
+";"                                return(POINTVIRGULE);
 
-"="                                return(EQUAL);
-">="                                return(GE);
-">"                                return(GT);
-"<="                                return(LE);
-"<"                                return(LT);
-"<>"                                return(NOTEQUAL);
+"="                                return(EGAL);
+">="                               return(SUPERIEUREGAL);
+">"                                return(SUPERIEUR);
+"<="                               return(INFERIEUREGAL);
+"<"                                return(INFERIEUR);
+"<>"                               return(DIFFERENT);
 
-"+"                                return(PLUS);
-"-"                                return(MINUS);
-"*"                                return(MULTIPLICAT);
-"/"                                return(DIVQUOT);
+"+"                                return(ADDITION);
+"-"                                return(SOUSTRACTION);
+"*"                                return(MULTIPLICATION);
+"/"                                return(DIVISION);
 
-"("                                return(PARENG);
-")"                                return(PAREND);
+"("                                return(PARENTHESEGAUCHE);
+")"                                return(PARENTHESEDROITE);
 
-"."                                return(DOT);
+"."                                return(POINT);
 
 {LETTRE}({LETTRE}|{CHIFFRE})* {
-	return IDENTIFIER;
+	return IDENTIFIANT;
 }
 
 "{"   { register int c;

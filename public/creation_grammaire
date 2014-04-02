@@ -18,3 +18,20 @@ declaration_globale:
 	|
 	declaration_variable
 	;
+
+declaration_fonction: fonction_entete fonction_bloc
+	;
+
+fonction_entete: FUNCTION IDENTIFIANT parametre_fonction DEUXPOINTS type_variable POINTVIRGULE
+	;
+
+parametre_fonction: PARENTHESEGAUCHE IDENTIFIANT DEUXPOINTS type_variable PARENTHESEDROITE;
+
+fonction_bloc: bloc;
+
+type_variable : STRING
+	| INTEGER
+	| REAL
+	| BOOLEAN
+	| CHAR
+	;
