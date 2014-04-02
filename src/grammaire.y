@@ -68,11 +68,7 @@ instructions: TBEGIN instruction TEND POINTVIRGULE
 	|
 	;
 
-instruction: affectations
-	|
-	;
-
-affectations: affectations affectation
+instruction: instruction affectation
 	|
 	;
 
@@ -87,7 +83,8 @@ expression: expression ADDITION expression
 	| IDENTIFIANT
 	;
 
-programme_principal: TBEGIN TEND
+programme_principal: declaration_variables TBEGIN TEND
+	| TBEGIN TEND
 	;
 
 type_variable : STRING
