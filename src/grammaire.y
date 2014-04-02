@@ -29,13 +29,16 @@ programme_entete:
 	PROGRAM IDENTIFIANT POINTVIRGULE
 	;
 
-declarations_globales: declarations_globales declaration_globale
-	|
+declarations_globales: declaration_globale declaration_globale_recursive
 	;
 
 declaration_globale: declaration_variables
 	|
 	declaration_fonction
+	;
+
+declaration_globale_recursive: declarations_globales
+	|
 	;
 
 declaration_fonction: fonction_entete fonction_bloc
@@ -68,7 +71,10 @@ instructions: TBEGIN instruction TEND POINTVIRGULE
 	|
 	;
 
-instruction: instruction affectation
+instruction: affectation instruction_recursive
+	;
+
+instruction_recursive: instruction
 	|
 	;
 
