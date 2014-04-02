@@ -19,28 +19,32 @@
 
 %%
 
-program : program_tete semicolon block DOT;
+program : program_tete semicolon bloc DOT;
 
 program_tete : PROGRAM identifier;
 
-block : declaration_fonction_block
-				declaration_variable_block
+bloc : declaration_fonction_bloc
+				declaration_variable_bloc
 				section_programme
 			;
 
-declaration_variable_block : VAR declaration_variable semicolon;
+declaration_variable_bloc : VAR declaration_variable semicolon;
 
 declaration_variable : identifier COLON data_type;
 
-declaration_fonction_block : FUNCTION identifier parametre_fonction COLON data_type semicolon;
+declaration_fonction_bloc : fonction_entete fonction_bloc;
 
-parametre_fonction : PARENG identifier COLON data_type PAREND
+fonction_entete : FUNCTION identifier parametre_fonction COLON data_type semicolon;
+
+parametre_fonction : PARENG identifier COLON data_type PAREND;
+
+fonction_bloc : bloc;
+
+
 
 section_programme : header_section_programme
 
 header_section_programme : PBEGIN END;
-
-
 
 data_type : STRING
 					| INTEGER
