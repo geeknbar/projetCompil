@@ -34,7 +34,7 @@ BEGIN
 		BEGIN
 			WHILE b < 10 DO
 			BEGIN
-				IF 5 = 4 + 1 THEN
+				IF b = 4 + 1 THEN
 					toto := 6;
 			END;
 		END;

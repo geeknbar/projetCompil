@@ -125,7 +125,6 @@ comparaison: expression INFERIEUREGAL expression
 	expression SUPERIEUREGAL expression
 	;
 
-
 expression: expression MULTIPLICATION expression
 	|
 	expression ADDITION expression
