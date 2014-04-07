@@ -1,0 +1,47 @@
+PROGRAM prog;
+
+{function f}
+FUNCTION f(x:INTEGER):INTEGER;
+VAR i:INTEGER;j,l:CHAR;
+BEGIN 
+	i := 3;
+	WHILE i < 5 + 2 DO
+		z := 57;
+	IF i <= z THEN w:=8;
+END;
+
+{function g}
+FUNCTION g(x:INTEGER):INTEGER;
+BEGIN 
+	a := 3+3;
+	WHILE a = 6 DO
+	BEGIN
+		i := 3 + 1;
+		IF i >= 3 - 1 THEN
+		BEGIN
+			i:= 76;
+		END;
+	END;
+END;
+
+{procedure h}
+PROCEDURE h(x,y:INTEGER,z:CHAR);
+BEGIN
+	b := 2/4*5;
+	WHILE b > 50 DO
+	BEGIN
+		IF b >= 38 THEN
+		BEGIN
+			WHILE b < 10 DO
+			BEGIN
+				IF 5 = 4 + 1 THEN
+					toto := 6;
+			END;
+		END;
+	END;
+END;
+
+{main}
+BEGIN
+	main := 3;x:=2-5;
+END.

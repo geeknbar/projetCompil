@@ -16,6 +16,7 @@
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
+%left EGAL
 
 %error-verbose
 
@@ -102,11 +103,28 @@ instructions: instruction_assignement
 instruction_assignement: IDENTIFIANT ASSIGNATION expression
 	;
 
-instruction_while: WHILE expression DO instructions
+instruction_while: WHILE expressions DO instructions
 	;
 
-instruction_if: IF expression THEN instructions POINTVIRGULE
+instruction_if: IF expressions THEN instructions POINTVIRGULE
 	;
+
+expressions: comparaison
+	|
+	NOMBRE
+	;
+
+comparaison: expression INFERIEUREGAL expression
+	| 
+	expression INFERIEUR expression
+	|
+	expression EGAL expression
+	|
+	expression SUPERIEUR expression
+	|
+	expression SUPERIEUREGAL expression
+	;
+
 
 expression: expression MULTIPLICATION expression
 	|
@@ -117,55 +135,8 @@ expression: expression MULTIPLICATION expression
 	expression DIVISION expression
 	|
 	NOMBRE
-	| 
-	comparaison_numerique
 	|
-	comparaison_numerique_identifiant
-	|
-	comparaison_identifiant
-	;
-
-comparaison_numerique: NOMBRE INFERIEUREGAL NOMBRE
-	| 
-	NOMBRE INFERIEUR NOMBRE
-	|
-	NOMBRE EGAL NOMBRE
-	|
-	NOMBRE SUPERIEUR NOMBRE
-	|
-	NOMBRE SUPERIEUREGAL NOMBRE
-	;
-
-comparaison_numerique_identifiant: NOMBRE INFERIEUREGAL IDENTIFIANT
-	| 
-	NOMBRE INFERIEUR IDENTIFIANT
-	|
-	NOMBRE EGAL IDENTIFIANT
-	|
-	NOMBRE SUPERIEUR IDENTIFIANT
-	|
-	NOMBRE SUPERIEUREGAL IDENTIFIANT
-	| 
-	IDENTIFIANT INFERIEUREGAL NOMBRE
-	|
-	IDENTIFIANT INFERIEUR NOMBRE
-	|
-	IDENTIFIANT EGAL NOMBRE
-	|
-	IDENTIFIANT SUPERIEUR NOMBRE
-	|
-	IDENTIFIANT SUPERIEUREGAL NOMBRE
-	;
-
-comparaison_identifiant: IDENTIFIANT INFERIEUREGAL IDENTIFIANT
-	| 
-	IDENTIFIANT INFERIEUR IDENTIFIANT
-	|
-	IDENTIFIANT EGAL IDENTIFIANT
-	|
-	IDENTIFIANT SUPERIEUR IDENTIFIANT
-	|
-	IDENTIFIANT SUPERIEUREGAL IDENTIFIANT
+	IDENTIFIANT
 	;
 
 type_variable : STRING
