@@ -51,11 +51,11 @@ liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT
 	| IDENTIFIANT
 	;
 
-declaration_fonction: liste_fonctions POINTVIRGULE
+declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
 	|
 	;
 
-declaration_procedure: liste_procedures POINTVIRGULE
+declaration_procedure: liste_procedures POINTVIRGULE declaration_variable
 	|
 	;
 
