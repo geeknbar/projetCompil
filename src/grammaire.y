@@ -133,6 +133,8 @@ expression: expression MULTIPLICATION expression
 	|
 	expression DIVISION expression
 	|
+	PARENTHESEGAUCHE expression PARENTHESEDROITE
+	|
 	NOMBRE
 	|
 	IDENTIFIANT

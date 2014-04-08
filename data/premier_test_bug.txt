@@ -1,0 +1,23 @@
+PROGRAM prog;
+
+{function f}
+FUNCTION f(x:INTEGER):INTEGER;
+VAR i:INTEGER;j,l:CHAR;
+BEGIN
+
+	FUNCTION g(x:INTEGER):INTEGER;
+	BEGIN
+		c := 5;
+	END;
+
+	i := 3;
+	WHILE (i * 2) + 3 < 5 + 2 DO
+		z := 57;
+	IF i <= z THEN w:=8;
+END;
+
+{main}
+VAR i:INTEGER;
+BEGIN
+	main := 3;x:=2-5;
+END.
