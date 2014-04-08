@@ -1478,16 +1478,16 @@ yyreduce:
     { printf("#include <stdio.h>\n"); }
     break;
 
+  case 35:
+/* Line 1787 of yacc.c  */
+#line 113 "grammaire.y"
+    { printf("%s", (yyvsp[(3) - (3)].t_string)); }
+    break;
+
   case 46:
 /* Line 1787 of yacc.c  */
 #line 140 "grammaire.y"
-    {  }
-    break;
-
-  case 50:
-/* Line 1787 of yacc.c  */
-#line 148 "grammaire.y"
-    { printf("%s", (yyvsp[(1) - (1)].t_string)); }
+    { (yyval.t_string) = (yyvsp[(1) - (3)].t_string) ;}
     break;
 
 

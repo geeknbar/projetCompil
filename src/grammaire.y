@@ -110,7 +110,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { printf("%s", $3); }
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -137,7 +137,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression {  }
+	expression ADDITION expression { $$ = $1; }
 	|
 	expression SOUSTRACTION expression
 	|
@@ -145,7 +145,7 @@ expression: expression MULTIPLICATION expression
 	|
 	PARENTHESEGAUCHE expression PARENTHESEDROITE
 	|
-	NOMBRE { printf("%s", $1); }
+	NOMBRE
 	|
 	IDENTIFIANT
 	;
