@@ -11,23 +11,31 @@
 %token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
 %token ADDITION SOUSTRACTION MULTIPLICATION DIVISION
 %token PARENTHESEGAUCHE PARENTHESEDROITE
-%token NOMBRE
+%token <t_float> NOMBRE
 %token IDENTIFIANT
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
+%left INFERIEUR SUPERIEUR
 %left EGAL
 
 %error-verbose
 
+%union {
+	int t_int;
+	float t_float;
+}
+
+%type <t_float> expression;
+
 %%
 
 programme:
-	programme_entete bloc POINT
+	programme_entete bloc POINT 
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE
+	PROGRAM IDENTIFIANT POINTVIRGULE { printf("#include <stdio.h>\n"); }
 	;
 
 bloc: declaration_variable
@@ -100,7 +108,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { printf("%.2f\n", $3); }
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -127,7 +135,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression
+	expression ADDITION expression { $$ = $1 + $3; }
 	|
 	expression SOUSTRACTION expression
 	|
@@ -135,7 +143,7 @@ expression: expression MULTIPLICATION expression
 	|
 	PARENTHESEGAUCHE expression PARENTHESEDROITE
 	|
-	NOMBRE
+	NOMBRE { $$ = $1; }
 	|
 	IDENTIFIANT
 	;

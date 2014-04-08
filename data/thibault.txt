@@ -1,0 +1,6 @@
+PROGRAM prog;
+
+{main}
+BEGIN
+	i := 5.2 + 2.8;
+END.

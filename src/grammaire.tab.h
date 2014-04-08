@@ -88,7 +88,18 @@ extern int yydebug;
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+{
+/* Line 2053 of yacc.c  */
+#line 24 "grammaire.y"
+
+	int t_int;
+	float t_float;
+
+
+/* Line 2053 of yacc.c  */
+#line 102 "grammaire.tab.h"
+} YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

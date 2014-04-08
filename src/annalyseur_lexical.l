@@ -79,7 +79,8 @@ LETTRE[a-zA-Z]
 {LETTRE}({LETTRE}|{CHIFFRE})* {
 	return IDENTIFIANT;
 }
-{CHIFFRE}{CHIFFRE}* {
+{CHIFFRE}{CHIFFRE}*(.{CHIFFRE}{CHIFFRE}*)? {
+  yylval.t_float = atof(yytext);
   return NOMBRE;
 }
 
@@ -105,6 +106,8 @@ LETTRE[a-zA-Z]
 [\t] {}
 
 [\n] {line_no++;}
+
+" " {}
 
 %%
 commenteof()
