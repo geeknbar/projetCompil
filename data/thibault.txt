@@ -1,6 +1,7 @@
-PROGRAM prog;
+program prog;
 
 {main}
-BEGIN
+var i:integer;
+begin
 	i := 5.2 + 2.8;
-END.
+end.

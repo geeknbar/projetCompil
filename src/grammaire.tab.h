@@ -91,14 +91,15 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2053 of yacc.c  */
-#line 24 "grammaire.y"
+#line 25 "grammaire.y"
 
 	int t_int;
 	float t_float;
+	char * t_string;
 
 
 /* Line 2053 of yacc.c  */
-#line 102 "grammaire.tab.h"
+#line 103 "grammaire.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

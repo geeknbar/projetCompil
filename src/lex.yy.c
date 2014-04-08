@@ -992,7 +992,7 @@ case 37:
 YY_RULE_SETUP
 #line 82 "annalyseur_lexical.l"
 {
-  yylval.t_float = atof(yytext);
+  yylval.t_string = yytext;
   return NOMBRE;
 }
 	YY_BREAK

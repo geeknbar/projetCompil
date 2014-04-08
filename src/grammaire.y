@@ -1,5 +1,6 @@
 %{
 	#include<stdio.h>
+	#include<string.h>
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
@@ -11,7 +12,7 @@
 %token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
 %token ADDITION SOUSTRACTION MULTIPLICATION DIVISION
 %token PARENTHESEGAUCHE PARENTHESEDROITE
-%token <t_float> NOMBRE
+%token <t_string> NOMBRE
 %token IDENTIFIANT
 
 %left ADDITION SOUSTRACTION
@@ -24,9 +25,10 @@
 %union {
 	int t_int;
 	float t_float;
+	char * t_string;
 }
 
-%type <t_float> expression;
+%type <t_string> expression;
 
 %%
 
@@ -108,7 +110,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { printf("%.2f\n", $3); }
+instruction_assignement: IDENTIFIANT ASSIGNATION expression
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -135,7 +137,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression { $$ = $1 + $3; }
+	expression ADDITION expression {  }
 	|
 	expression SOUSTRACTION expression
 	|
@@ -143,7 +145,7 @@ expression: expression MULTIPLICATION expression
 	|
 	PARENTHESEGAUCHE expression PARENTHESEDROITE
 	|
-	NOMBRE { $$ = $1; }
+	NOMBRE { printf("%s", $1); }
 	|
 	IDENTIFIANT
 	;

@@ -80,7 +80,7 @@ LETTRE[a-zA-Z]
 	return IDENTIFIANT;
 }
 {CHIFFRE}{CHIFFRE}*(.{CHIFFRE}{CHIFFRE}*)? {
-  yylval.t_float = atof(yytext);
+  yylval.t_string = yytext;
   return NOMBRE;
 }
 

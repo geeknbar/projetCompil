@@ -66,12 +66,13 @@
 #line 1 "grammaire.y"
 
 	#include<stdio.h>
+	#include<string.h>
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
 
 /* Line 371 of yacc.c  */
-#line 75 "grammaire.tab.c"
+#line 76 "grammaire.tab.c"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -152,14 +153,15 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 387 of yacc.c  */
-#line 24 "grammaire.y"
+#line 25 "grammaire.y"
 
 	int t_int;
 	float t_float;
+	char * t_string;
 
 
 /* Line 387 of yacc.c  */
-#line 163 "grammaire.tab.c"
+#line 165 "grammaire.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -187,7 +189,7 @@ int yyparse ();
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 191 "grammaire.tab.c"
+#line 193 "grammaire.tab.c"
 
 #ifdef short
 # undef short
@@ -508,12 +510,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    34,    34,    38,    41,    47,    48,    51,    52,    55,
-      58,    59,    62,    63,    66,    67,    70,    71,    74,    75,
-      78,    81,    84,    87,    90,    93,    94,    97,   100,   101,
-     104,   105,   106,   107,   108,   111,   114,   117,   120,   122,
-     125,   127,   129,   131,   133,   136,   138,   140,   142,   144,
-     146,   148,   151,   152,   153,   154,   155
+       0,    36,    36,    40,    43,    49,    50,    53,    54,    57,
+      60,    61,    64,    65,    68,    69,    72,    73,    76,    77,
+      80,    83,    86,    89,    92,    95,    96,    99,   102,   103,
+     106,   107,   108,   109,   110,   113,   116,   119,   122,   124,
+     127,   129,   131,   133,   135,   138,   140,   142,   144,   146,
+     148,   150,   153,   154,   155,   156,   157
 };
 #endif
 
@@ -1472,31 +1474,25 @@ yyreduce:
     {
         case 3:
 /* Line 1787 of yacc.c  */
-#line 38 "grammaire.y"
+#line 40 "grammaire.y"
     { printf("#include <stdio.h>\n"); }
-    break;
-
-  case 35:
-/* Line 1787 of yacc.c  */
-#line 111 "grammaire.y"
-    { printf("%.2f\n", (yyvsp[(3) - (3)].t_float)); }
     break;
 
   case 46:
 /* Line 1787 of yacc.c  */
-#line 138 "grammaire.y"
-    { (yyval.t_float) = (yyvsp[(1) - (3)].t_float) + (yyvsp[(3) - (3)].t_float); }
+#line 140 "grammaire.y"
+    {  }
     break;
 
   case 50:
 /* Line 1787 of yacc.c  */
-#line 146 "grammaire.y"
-    { (yyval.t_float) = (yyvsp[(1) - (1)].t_float); }
+#line 148 "grammaire.y"
+    { printf("%s", (yyvsp[(1) - (1)].t_string)); }
     break;
 
 
 /* Line 1787 of yacc.c  */
-#line 1500 "grammaire.tab.c"
+#line 1496 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1728,7 +1724,7 @@ yyreturn:
 
 
 /* Line 2050 of yacc.c  */
-#line 158 "grammaire.y"
+#line 160 "grammaire.y"
 
 
 int main(int argc, char* argv[]){
