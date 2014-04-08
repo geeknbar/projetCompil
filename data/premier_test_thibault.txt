@@ -42,6 +42,7 @@ BEGIN
 END;
 
 {main}
+VAR i:INTEGER;
 BEGIN
 	main := 3;x:=2-5;
 END.

@@ -89,7 +89,10 @@
 # define YYERROR_VERBOSE 1
 #endif
 
-
+/* In a future release of Bison, this section will be replaced
+   by #include "grammaire.tab.h".  */
+#ifndef YY_YY_GRAMMAIRE_TAB_H_INCLUDED
+# define YY_YY_GRAMMAIRE_TAB_H_INCLUDED
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -168,12 +171,12 @@ int yyparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-
+#endif /* !YY_YY_GRAMMAIRE_TAB_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 177 "grammaire.tab.c"
+#line 180 "grammaire.tab.c"
 
 #ifdef short
 # undef short
@@ -1458,7 +1461,7 @@ yyreduce:
     {
       
 /* Line 1787 of yacc.c  */
-#line 1462 "grammaire.tab.c"
+#line 1465 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
