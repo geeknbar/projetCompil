@@ -32,6 +32,7 @@
 
 %type <t_string> expression;
 %type <t_string> type_variable;
+%type <t_string> liste_identifiants;
 %%
 
 programme:
@@ -56,11 +57,12 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutSymbole(table_sym, $1, $3);
+																																			printf("liste_id %s\n",$1);}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $3, "liste identifiants");}
-	| IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "identifiant");}
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT {$$ = $3;}
+	| IDENTIFIANT
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
