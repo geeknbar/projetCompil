@@ -90,10 +90,7 @@
 # define YYERROR_VERBOSE 1
 #endif
 
-/* In a future release of Bison, this section will be replaced
-   by #include "grammaire.tab.h".  */
-#ifndef YY_YY_GRAMMAIRE_TAB_H_INCLUDED
-# define YY_YY_GRAMMAIRE_TAB_H_INCLUDED
+
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -161,7 +158,7 @@ typedef union YYSTYPE
 
 
 /* Line 387 of yacc.c  */
-#line 165 "grammaire.tab.c"
+#line 162 "grammaire.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -184,12 +181,12 @@ int yyparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_YY_GRAMMAIRE_TAB_H_INCLUDED  */
+
 
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 193 "grammaire.tab.c"
+#line 190 "grammaire.tab.c"
 
 #ifdef short
 # undef short
@@ -1478,21 +1475,21 @@ yyreduce:
     { printf("#include <stdio.h>\n"); }
     break;
 
-  case 46:
+  case 35:
 /* Line 1787 of yacc.c  */
-#line 140 "grammaire.y"
+#line 113 "grammaire.y"
     {  }
     break;
 
-  case 50:
+  case 46:
 /* Line 1787 of yacc.c  */
-#line 148 "grammaire.y"
-    { printf("%s", (yyvsp[(1) - (1)].t_string)); }
+#line 140 "grammaire.y"
+    { printf("%s\n%s\n%s\n\n\n", (yyvsp[(1) - (3)].t_string), (yyvsp[(2) - (3)].t_string), (yyvsp[(3) - (3)].t_string)); }
     break;
 
 
 /* Line 1787 of yacc.c  */
-#line 1496 "grammaire.tab.c"
+#line 1493 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
