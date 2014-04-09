@@ -6,14 +6,14 @@
 	extern FILE *yyin;
 %}
 
-%token TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
-%token INTEGER STRING REAL BOOLEAN CHAR
-%token ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
-%token EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
-%token ADDITION SOUSTRACTION MULTIPLICATION DIVISION
-%token PARENTHESEGAUCHE PARENTHESEDROITE
+%token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
+%token <t_string> INTEGER STRING REAL BOOLEAN CHAR
+%token <t_string> ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
+%token <t_string> EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
+%token <t_string> ADDITION SOUSTRACTION MULTIPLICATION DIVISION
+%token <t_string> PARENTHESEGAUCHE PARENTHESEDROITE
 %token <t_string> NOMBRE
-%token IDENTIFIANT
+%token <t_string> IDENTIFIANT
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
@@ -110,7 +110,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { printf("%s", $3); }
+instruction_assignement: IDENTIFIANT ASSIGNATION expression {  }
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -137,7 +137,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression { $$ = $1; }
+	expression ADDITION expression { printf("%s\n%s\n%s\n\n\n", $1, $2, $3); }
 	|
 	expression SOUSTRACTION expression
 	|

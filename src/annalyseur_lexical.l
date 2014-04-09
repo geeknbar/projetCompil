@@ -80,7 +80,9 @@ LETTRE[a-zA-Z]
 	return IDENTIFIANT;
 }
 {CHIFFRE}{CHIFFRE}*(.{CHIFFRE}{CHIFFRE}*)? {
-  yylval.t_string = yytext;
+  char * test = malloc(sizeof(yytext));
+  strcpy(test, yytext);
+  yylval.t_string = test;
   return NOMBRE;
 }
 
