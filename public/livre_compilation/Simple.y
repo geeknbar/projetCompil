@@ -88,9 +88,9 @@ TOKENS
 OPERATOR PRECEDENCE
 =========================================================================*/
 
-%left ’-’ ’+’
-%left ’*’ ’/’
-%right ’^’
+%left '-' '+'
+%left '*' '/'
+%right '^'
 
 /*=========================================================================
 GRAMMAR RULES for the Simple language
@@ -104,15 +104,15 @@ program : LET
 ;
 
 declarations : /* empty */
-	| INTEGER id_seq IDENTIFIER ’.’ { install( $3 ); }
+	| INTEGER id_seq IDENTIFIER '.' { install( $3 ); }
 ;
 
 id_seq : /* empty */
-	| id_seq IDENTIFIER ’,’ { install( $2 ); }
+	| id_seq IDENTIFIER ',' { install( $2 ); }
 ;
 
 commands : /* empty */
-	| commands command ’;’
+	| commands command ';'
 ;
 
 command : SKIP
@@ -123,6 +123,7 @@ command : SKIP
 						 							 	 $1->for_jmp_false = reserve_loc(); }
 		THEN commands 				 { $1->for_goto = reserve_loc(); }
 		ELSE 									 { back_patch( $1->for_jmp_false,JMP_FALSE,gen_label() );}
+			commands
 		FI 										 { back_patch( $1->for_goto, GOTO, gen_label() ); }
 	| WHILE 								 { $1 = (struct lbs *) newlblrec();
 														 $1->for_goto = gen_label(); }
@@ -136,15 +137,15 @@ command : SKIP
 
 exp : NUMBER { gen_code( LD_INT, $1 ); }
 	| IDENTIFIER { context_check( LD_VAR, $1 ); }
-	| exp ’<’ exp { gen_code( LT, 0 ); }
-	| exp ’=’ exp { gen_code( EQ, 0 ); }
-	| exp ’>’ exp { gen_code( GT,  0 ); }
-	| exp ’+’ exp { gen_code( ADD, 0 ); }
-	| exp ’-’ exp { gen_code( SUB, 0 ); }
-	| exp ’*’ exp { gen_code( MULT, 0 ); }
-	| exp ’/’ exp { gen_code( DIV, 0 ); }
-	| exp ’^’ exp { gen_code( PWR, 0 ); }
-	| ’(’ exp ’)’
+	| exp '<' exp { gen_code( LT, 0 ); }
+	| exp '=' exp { gen_code( EQ, 0 ); }
+	| exp '>' exp { gen_code( GT,  0 ); }
+	| exp '+' exp { gen_code( ADD, 0 ); }
+	| exp '-' exp { gen_code( SUB, 0 ); }
+	| exp '*' exp { gen_code( MULT, 0 ); }
+	| exp '/' exp { gen_code( DIV, 0 ); }
+	| exp '^' exp { gen_code( PWR, 0 ); }
+	| '(' exp ')'
 ;
 %%
 
