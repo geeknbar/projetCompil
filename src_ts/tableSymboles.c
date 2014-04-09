@@ -9,18 +9,22 @@ struct element
 {
     // int val;
     char* symb;
+    char* type;
     struct element *nxt;
     int occurence;
 };
 
 
-llist ajouterEnFin(llist table_symboles, char* symbole)
+llist ajouterEnFin(llist table_symboles, char* symbole, char* type_symb)
 {
     /* On crée un nouvel élément */
     element* nouvelElement = malloc(sizeof(element));
  
     /* On assigne la valeur au nouvel élément */
     nouvelElement->symb = symbole;
+
+    /* On assigne le type au nouvel élément */
+    nouvelElement->type = type_symb;
 
     /* On met le nombre d'occurence à 1 */
     nouvelElement->occurence = 1;
@@ -71,7 +75,7 @@ void afficherListe(llist table_symboles)
     while(tmp != NULL)
     {
         /* On affiche */
-        printf("Symbole %d : %s, occurence :%d \n", i, tmp->symb, tmp->occurence);
+        printf("Symbole %d : %s, Type : %s , occurence :%d \n", i, tmp->symb, tmp->type, tmp->occurence);
         // printf("%s \n", tmp->symb);
         /* On avance d'une case */
         tmp = tmp->nxt;
@@ -105,14 +109,17 @@ int rechercherElement(llist table_symboles, char* symbole)
     return 0;
 }
 
-llist ajoutSymbole(llist table_symboles, char* symbole)
+llist ajoutSymbole(llist table_symboles, char* symbole, char* type_symb)
 {
     char* symb;
+    char* typ;
     symb = malloc(strlen(symbole) + 1);
     strcpy(symb, symbole);
+    typ = malloc(strlen(type_symb) + 1);
+    strcpy(typ, type_symb);
     if (rechercherElement(table_symboles, symb)==0)
     {
-        table_symboles = ajouterEnFin(table_symboles, symb);
+        table_symboles = ajouterEnFin(table_symboles, symb, typ);
     } 
     else
     {

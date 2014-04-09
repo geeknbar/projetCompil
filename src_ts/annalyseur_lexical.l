@@ -1,8 +1,6 @@
 %{
 	#include<stdio.h>
-	#include "tableSymboles.h"
 	#include "grammaire.tab.h"
-	llist table_sym = NULL;
 	int line_no = 1;
 %}
 A [aA]
@@ -77,6 +75,9 @@ LETTRE[a-zA-Z]
 ")"                                return(PARENTHESEDROITE);
 
 {LETTRE}({LETTRE}|{CHIFFRE})* {
+  char * test = malloc(sizeof(yytext));
+  strcpy(test, yytext);
+  yylval.t_string = test;
 	return IDENTIFIANT;
 }
 

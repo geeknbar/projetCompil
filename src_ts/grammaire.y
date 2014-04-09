@@ -1,9 +1,11 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
+	#include"tableSymboles.h"
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
+	llist table_sym = NULL;
 %}
 
 %token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
@@ -29,7 +31,7 @@
 }
 
 %type <t_string> expression;
-
+%type <t_string> type_variable;
 %%
 
 programme:
@@ -37,7 +39,7 @@ programme:
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE { printf("#include <stdio.h>\n"); }
+	PROGRAM IDENTIFIANT POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, "nom programme");}
 	;
 
 bloc: declaration_variable
@@ -57,8 +59,8 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 declaration_variables: liste_identifiants DEUXPOINTS type_variable
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT
-	| IDENTIFIANT
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $3, "liste identifiants");}
+	| IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "identifiant");}
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
@@ -83,10 +85,10 @@ declaration_fonctions: fonction_entete bloc
 declaration_procedures: procedure_entete bloc
 	;
 
-fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE
+fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, $5);}
 	;
 
-procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE
+procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, "void");}
 	;
 
 parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE
@@ -110,7 +112,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression {  }
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { table_sym = ajoutSymbole(table_sym, $1, "assignement");}
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -137,7 +139,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression { printf("%s + %s\n", $1, $3); }
+	expression ADDITION expression
 	|
 	expression SOUSTRACTION expression
 	|
@@ -147,14 +149,14 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT
+	IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "variable expression");}
 	;
 
-type_variable : STRING
-	| INTEGER
-	| REAL
-	| BOOLEAN
-	| CHAR
+type_variable : STRING {char* s = "string"; $$ =s;}
+	| INTEGER {char* s = "integer"; $$ =s;}
+	| REAL {char* s = "integer"; $$ =s;}
+	| BOOLEAN {char* s = "integer"; $$ =s;}
+	| CHAR {char* s = "integer"; $$ =s;}
 	;
 
 %%
@@ -171,6 +173,9 @@ int main(int argc, char* argv[]){
 	yyparse();
 	if(f!=NULL)
 		fclose(f);
+
+	afficherListe(table_sym);
+	liberationMemoire(table_sym);
 }
 
 void yyerror(char const* s){
