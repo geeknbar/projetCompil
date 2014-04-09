@@ -486,10 +486,10 @@ static const yytype_uint8 yyrline[] =
 {
        0,    39,    39,    43,    46,    52,    53,    56,    57,    60,
       64,    65,    68,    69,    72,    73,    76,    77,    80,    81,
-      84,    87,    90,    93,    96,    99,   100,   103,   106,   107,
-     110,   111,   112,   113,   114,   117,   120,   123,   126,   128,
-     131,   133,   135,   137,   139,   142,   144,   146,   148,   150,
-     152,   154,   157,   158,   159,   160,   161
+      84,    87,    90,    98,   101,   104,   105,   108,   111,   112,
+     115,   116,   117,   118,   119,   122,   126,   129,   132,   134,
+     137,   139,   141,   143,   145,   148,   150,   152,   154,   156,
+     158,   160,   164,   165,   166,   167,   168
 };
 #endif
 
@@ -1508,76 +1508,90 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 64 "grammaire.y"
-    {(yyval.t_string) = (yyvsp[(3) - (3)].t_string);}
+    {(yyval.t_string) = (yyvsp[(3) - (3)].t_string);/*n'arrive pas a récupérer cet identifiant avant la virgule*/}
+    break;
+
+  case 11:
+
+/* Line 1806 of yacc.c  */
+#line 65 "grammaire.y"
+    {(yyval.t_string) = (yyvsp[(1) - (1)].t_string);}
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
 #line 90 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (6)].t_string), (yyvsp[(5) - (6)].t_string));}
+    {
+									char str[80];
+									strcpy (str,"fonction ");
+									strcat (str,(yyvsp[(5) - (6)].t_string));
+									table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (6)].t_string), str);
+									}
     break;
 
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 93 "grammaire.y"
+#line 98 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (4)].t_string), "void");}
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 117 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (3)].t_string), "assignement");}
+#line 122 "grammaire.y"
+    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (3)].t_string), "assignement");
+/* ici il ne faut pas faire un ajout mais faire une vérification*/}
     break;
 
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 154 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (1)].t_string), "variable expression");}
+#line 160 "grammaire.y"
+    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (1)].t_string), "variable expression");
+	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
     break;
 
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 157 "grammaire.y"
+#line 164 "grammaire.y"
     {char* s = "string"; (yyval.t_string) =s;}
     break;
 
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 158 "grammaire.y"
+#line 165 "grammaire.y"
     {char* s = "integer"; (yyval.t_string) =s;}
     break;
 
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 159 "grammaire.y"
-    {char* s = "integer"; (yyval.t_string) =s;}
+#line 166 "grammaire.y"
+    {char* s = "reel"; (yyval.t_string) =s;}
     break;
 
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 160 "grammaire.y"
-    {char* s = "integer"; (yyval.t_string) =s;}
+#line 167 "grammaire.y"
+    {char* s = "booleen"; (yyval.t_string) =s;}
     break;
 
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 161 "grammaire.y"
-    {char* s = "integer"; (yyval.t_string) =s;}
+#line 168 "grammaire.y"
+    {char* s = "char"; (yyval.t_string) =s;}
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1581 "grammaire.tab.c"
+#line 1595 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1808,7 +1822,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 164 "grammaire.y"
+#line 171 "grammaire.y"
 
 
 int main(int argc, char* argv[]){

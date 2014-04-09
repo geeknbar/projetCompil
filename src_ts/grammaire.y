@@ -61,8 +61,8 @@ declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym =
 																																			printf("liste_id %s\n",$1);}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT {$$ = $3;}
-	| IDENTIFIANT
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT {$$ = $3;/*n'arrive pas a récupérer cet identifiant avant la virgule*/}
+	| IDENTIFIANT {$$ = $1;}
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
@@ -87,7 +87,12 @@ declaration_fonctions: fonction_entete bloc
 declaration_procedures: procedure_entete bloc
 	;
 
-fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, $5);}
+fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {
+									char str[80];
+									strcpy (str,"fonction ");
+									strcat (str,$5);
+									table_sym = ajoutSymbole(table_sym, $2, str);
+									}
 	;
 
 procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, "void");}
@@ -114,7 +119,8 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { table_sym = ajoutSymbole(table_sym, $1, "assignement");}
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { table_sym = ajoutSymbole(table_sym, $1, "assignement");
+/* ici il ne faut pas faire un ajout mais faire une vérification*/}
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -151,14 +157,15 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "variable expression");}
+	IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "variable expression");
+	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
 	;
 
 type_variable : STRING {char* s = "string"; $$ =s;}
 	| INTEGER {char* s = "integer"; $$ =s;}
-	| REAL {char* s = "integer"; $$ =s;}
-	| BOOLEAN {char* s = "integer"; $$ =s;}
-	| CHAR {char* s = "integer"; $$ =s;}
+	| REAL {char* s = "reel"; $$ =s;}
+	| BOOLEAN {char* s = "booleen"; $$ =s;}
+	| CHAR {char* s = "char"; $$ =s;}
 	;
 
 %%
