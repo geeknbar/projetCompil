@@ -137,7 +137,7 @@ comparaison: expression INFERIEUREGAL expression
 
 expression: expression MULTIPLICATION expression
 	|
-	expression ADDITION expression { printf("%s\n%s\n%s\n\n\n", $1, $2, $3); }
+	expression ADDITION expression { printf("%s + %s\n", $1, $3); }
 	|
 	expression SOUSTRACTION expression
 	|

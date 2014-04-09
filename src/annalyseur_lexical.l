@@ -79,6 +79,7 @@ LETTRE[a-zA-Z]
 {LETTRE}({LETTRE}|{CHIFFRE})* {
 	return IDENTIFIANT;
 }
+
 {CHIFFRE}{CHIFFRE}*(.{CHIFFRE}{CHIFFRE}*)? {
   char * test = malloc(sizeof(yytext));
   strcpy(test, yytext);

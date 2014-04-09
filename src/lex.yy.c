@@ -990,7 +990,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 82 "annalyseur_lexical.l"
+#line 83 "annalyseur_lexical.l"
 {
   char * test = malloc(sizeof(yytext));
   strcpy(test, yytext);
@@ -1000,7 +1000,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 89 "annalyseur_lexical.l"
+#line 90 "annalyseur_lexical.l"
 { register int c;
         while ((c = input()))
         {
@@ -1022,23 +1022,23 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 108 "annalyseur_lexical.l"
+#line 109 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 110 "annalyseur_lexical.l"
+#line 111 "annalyseur_lexical.l"
 {line_no++;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 112 "annalyseur_lexical.l"
+#line 113 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 114 "annalyseur_lexical.l"
+#line 115 "annalyseur_lexical.l"
 ECHO;
 	YY_BREAK
 #line 1045 "lex.yy.c"
@@ -2039,7 +2039,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 114 "annalyseur_lexical.l"
+#line 115 "annalyseur_lexical.l"
 
 
 commenteof()
