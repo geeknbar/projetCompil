@@ -29,11 +29,33 @@
 	char * t_string;
 }
 
-%type <t_string> expression;
-%type <t_string> liste_identifiants;
+%type <t_string> programme;
+%type <t_string> programme_entete;
+%type <t_string> bloc;
+%type <t_string> declaration_variable;
+%type <t_string> liste_variables;
 %type <t_string> declaration_variables;
-%type <t_string> type_variable;
+%type <t_string> liste_identifiants;
+%type <t_string> declaration_fonction;
+%type <t_string> declaration_procedure;
+%type <t_string> liste_fonctions;
+%type <t_string> liste_procedures;
+%type <t_string> declaration_fonctions;
+%type <t_string> declaration_procedures;
+%type <t_string> fonction_entete;
+%type <t_string> procedure_entete;
+%type <t_string> parametres;
+%type <t_string> liste_parametres;
+%type <t_string> instruction;
+%type <t_string> instruction_list;
+%type <t_string> instructions;
+%type <t_string> instruction_assignement;
+%type <t_string> instruction_while;
+%type <t_string> instruction_if;
+%type <t_string> expressions;
 %type <t_string> comparaison;
+%type <t_string> expression;
+%type <t_string> type_variable;
 
 %%
 
@@ -45,10 +67,14 @@ programme_entete:
 	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin("#include <stdio.h>"); }
 	;
 
-bloc: declaration_variable
+bloc: declaration_variable { ajouterEnFin("PASSE LA \n"); }
 	declaration_fonction
 	declaration_procedure
-	instruction
+	instruction { 
+		ajouterEnFin("int main() {");
+		ajouterEnFin($4);
+		ajouterEnFin("return 0;}");
+	}
 	;
 
 declaration_variable: VAR liste_variables POINTVIRGULE
@@ -60,25 +86,22 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	;
 
 declaration_variables: liste_identifiants DEUXPOINTS type_variable { 
-																	if(strcmp($3,"integer") == 0) {
-																		char * s = malloc(sizeof("int " + sizeof($1) + sizeof(";")));
-																		strcat(s,"int ");
-																		strcat(s,$1);
-																		strcat(s,";");
-																		ajouterEnFin(s);
+																	if(strcmp($3,"integer") == 0) 
+																	{
+																		ajouterEnFin(concat_expression("int ",$1,";"));
 																	}  
-																	}
+																   }
 	;
 
 liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
 	| IDENTIFIANT { $$ = $1; }
 	;
 
-declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
+declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable { ajouterEnFin("PASSE ICI \n"); }
 	|
 	;
 
-declaration_procedure: liste_procedures POINTVIRGULE declaration_variable
+declaration_procedure: liste_procedures POINTVIRGULE declaration_variable { ajouterEnFin("PASSE ICI \n"); }
 	|
 	;
 
@@ -109,7 +132,7 @@ liste_parametres: liste_parametres VIRGULE declaration_variables
 	| declaration_variables
 	;
 
-instruction: TBEGIN instruction_list TEND
+instruction: TBEGIN instruction_list TEND 
 	;
 
 instruction_list: instruction_list POINTVIRGULE instructions
@@ -129,12 +152,15 @@ instruction_assignement: IDENTIFIANT ASSIGNATION expression {  }
 instruction_while: WHILE expressions DO instructions
 	;
 
-instruction_if: IF expressions THEN instructions POINTVIRGULE
+instruction_if: IF expressions THEN instructions POINTVIRGULE { char * s1 = concat_deux_chaines($1,$2); 
+																char * s2 = concat_expression($3,$4,$5);
+																$$ = concat_deux_chaines(s1,s2);
+															  }
 	;
 
-expressions: comparaison
+expressions: comparaison { $$ = $1; }
 	|
-	NOMBRE
+	NOMBRE { $$ = $1; }
 	;
 
 comparaison: expression INFERIEUREGAL expression { $$ = concat_expression($1,$2,$3); }
