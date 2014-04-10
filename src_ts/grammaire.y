@@ -81,9 +81,7 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable {table_sym = ajoutListeSymbole(table_sym, $1, $3);
-																			
-																				printf("liste_id %s\n",$1);}
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutListeSymbole(table_sym, $1, $3);}
 	;
 
 liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
@@ -113,10 +111,7 @@ declaration_procedures: procedure_entete bloc
 	;
 
 fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {
-									char str[80];
-									strcpy (str,"fonction ");
-									strcat (str,$5);
-									table_sym = ajoutSymbole(table_sym, $2, str);
+									table_sym = ajoutSymbole(table_sym, $2, concat_deux_chaines("fonction", $5));
 									}
 	;
 
