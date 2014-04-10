@@ -57,12 +57,13 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutSymbole(table_sym, $1, $3);
-																																			printf("liste_id %s\n",$1);}
+declaration_variables: liste_identifiants DEUXPOINTS type_variable {
+																			
+																				printf("liste_id %s\n",$1);}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT {$$ = $3;/*n'arrive pas a récupérer cet identifiant avant la virgule*/}
-	| IDENTIFIANT {$$ = $1;}
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
+	| IDENTIFIANT
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable

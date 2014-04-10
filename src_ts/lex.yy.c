@@ -530,8 +530,9 @@ char *yytext;
 #line 2 "annalyseur_lexical.l"
 	#include<stdio.h>
 	#include "grammaire.tab.h"
+  #include "tableSymboles.h"
 	int line_no = 1;
-#line 535 "lex.yy.c"
+#line 536 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -718,10 +719,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 35 "annalyseur_lexical.l"
+#line 36 "annalyseur_lexical.l"
 
 
-#line 725 "lex.yy.c"
+#line 726 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -806,202 +807,198 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 37 "annalyseur_lexical.l"
-return(TBEGIN);
+#line 38 "annalyseur_lexical.l"
+{ yylval.t_string = "begin"; return(TBEGIN); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 38 "annalyseur_lexical.l"
-return(DO);
+#line 39 "annalyseur_lexical.l"
+{ yylval.t_string = "do"; return(DO); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 39 "annalyseur_lexical.l"
-return(DIV);
+#line 40 "annalyseur_lexical.l"
+{ yylval.t_string = "div"; return(DIV); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 40 "annalyseur_lexical.l"
-return(TEND);
+#line 41 "annalyseur_lexical.l"
+{ yylval.t_string = "end"; return(TEND); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 41 "annalyseur_lexical.l"
-return(FUNCTION);
+#line 42 "annalyseur_lexical.l"
+{ yylval.t_string = "function"; return(FUNCTION); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 42 "annalyseur_lexical.l"
-return(PROCEDURE);
+#line 43 "annalyseur_lexical.l"
+{ yylval.t_string = "procedure"; return(PROCEDURE); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 43 "annalyseur_lexical.l"
-return(IF);
+#line 44 "annalyseur_lexical.l"
+{ yylval.t_string = "if"; return(IF); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 44 "annalyseur_lexical.l"
-return(MOD);
+#line 45 "annalyseur_lexical.l"
+{ yylval.t_string = "mod"; return(MOD); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 45 "annalyseur_lexical.l"
-return(PROGRAM);
+#line 46 "annalyseur_lexical.l"
+{ yylval.t_string = "program"; return(PROGRAM); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 46 "annalyseur_lexical.l"
-return(THEN);
+#line 47 "annalyseur_lexical.l"
+{ yylval.t_string = "then"; return(THEN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 47 "annalyseur_lexical.l"
-return(ELSE);
+#line 48 "annalyseur_lexical.l"
+{ yylval.t_string = "else"; return(ELSE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 48 "annalyseur_lexical.l"
-return(VAR);
+#line 49 "annalyseur_lexical.l"
+{ yylval.t_string = "var"; return(VAR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 49 "annalyseur_lexical.l"
-return(WHILE);
+#line 50 "annalyseur_lexical.l"
+{ yylval.t_string = "while"; return(WHILE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 50 "annalyseur_lexical.l"
-return(INTEGER);
+#line 51 "annalyseur_lexical.l"
+{ yylval.t_string = "integer"; return(INTEGER); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 51 "annalyseur_lexical.l"
-return(STRING);
+#line 52 "annalyseur_lexical.l"
+{ yylval.t_string = "string"; return(STRING); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 52 "annalyseur_lexical.l"
-return(REAL);
+#line 53 "annalyseur_lexical.l"
+{ yylval.t_string = "real"; return(REAL); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 53 "annalyseur_lexical.l"
-return(BOOLEAN);
+#line 54 "annalyseur_lexical.l"
+{ yylval.t_string = "boolean"; return(BOOLEAN); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 54 "annalyseur_lexical.l"
-return(CHAR);
+#line 55 "annalyseur_lexical.l"
+{ yylval.t_string = "char"; return(CHAR); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 56 "annalyseur_lexical.l"
-return(ASSIGNATION);
+#line 57 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(ASSIGNATION); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 57 "annalyseur_lexical.l"
-return(POINT);
+#line 58 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(POINT); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 58 "annalyseur_lexical.l"
-return(DEUXPOINTS);
+#line 59 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(DEUXPOINTS); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 59 "annalyseur_lexical.l"
-return(VIRGULE);
+#line 60 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(VIRGULE); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 60 "annalyseur_lexical.l"
-return(POINTVIRGULE);
+#line 61 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(POINTVIRGULE); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 62 "annalyseur_lexical.l"
-return(EGAL);
+#line 63 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(EGAL); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 63 "annalyseur_lexical.l"
-return(SUPERIEUREGAL);
+#line 64 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(SUPERIEUREGAL); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 64 "annalyseur_lexical.l"
-return(SUPERIEUR);
+#line 65 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(SUPERIEUR); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 65 "annalyseur_lexical.l"
-return(INFERIEUREGAL);
+#line 66 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(INFERIEUREGAL); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 66 "annalyseur_lexical.l"
-return(INFERIEUR);
+#line 67 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(INFERIEUR); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 67 "annalyseur_lexical.l"
-return(DIFFERENT);
+#line 68 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(DIFFERENT); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 69 "annalyseur_lexical.l"
-return(ADDITION);
+#line 70 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(ADDITION); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 70 "annalyseur_lexical.l"
-return(SOUSTRACTION);
+#line 71 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(SOUSTRACTION); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 71 "annalyseur_lexical.l"
-return(MULTIPLICATION);
+#line 72 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(MULTIPLICATION); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 72 "annalyseur_lexical.l"
-return(DIVISION);
+#line 73 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(DIVISION); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 74 "annalyseur_lexical.l"
-return(PARENTHESEGAUCHE);
+#line 75 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(PARENTHESEGAUCHE); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 75 "annalyseur_lexical.l"
-return(PARENTHESEDROITE);
+#line 76 "annalyseur_lexical.l"
+{ yylval.t_string = alloc_yytext(yytext); return(PARENTHESEDROITE); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "annalyseur_lexical.l"
+#line 78 "annalyseur_lexical.l"
 {
-  char * test = malloc(sizeof(yytext));
-  strcpy(test, yytext);
-  yylval.t_string = test;
-	return IDENTIFIANT;
+  yylval.t_string = alloc_yytext(yytext);
+  return IDENTIFIANT;
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 84 "annalyseur_lexical.l"
+#line 83 "annalyseur_lexical.l"
 {
-  char * test = malloc(sizeof(yytext));
-  strcpy(test, yytext);
-  yylval.t_string = test;
+  yylval.t_string = alloc_yytext(yytext);
   return NOMBRE;
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 91 "annalyseur_lexical.l"
+#line 88 "annalyseur_lexical.l"
 { register int c;
         while ((c = input()))
         {
@@ -1023,26 +1020,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 110 "annalyseur_lexical.l"
+#line 107 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 112 "annalyseur_lexical.l"
+#line 109 "annalyseur_lexical.l"
 {line_no++;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 114 "annalyseur_lexical.l"
+#line 111 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 116 "annalyseur_lexical.l"
+#line 113 "annalyseur_lexical.l"
 ECHO;
 	YY_BREAK
-#line 1046 "lex.yy.c"
+#line 1043 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2040,7 +2037,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 116 "annalyseur_lexical.l"
+#line 113 "annalyseur_lexical.l"
 
 
 commenteof()

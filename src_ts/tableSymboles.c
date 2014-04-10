@@ -128,6 +128,21 @@ llist ajoutSymbole(llist table_symboles, char* symbole, char* type_symb)
     return table_symboles;
 }
 
+llist ajoutListeSymbole(llist table_symboles, char* listeVariable, char* type_symb){
+    char * pch;
+    pch = strtok (listeVariable,",");
+    while (pch != NULL)
+    {
+        ajoutSymbole(table_symboles, pch, type_symb);
+    }
+    return table_symboles;
+}
+
+
+
+
+
+
 llist supprimerElementEnTete(llist liste)
 {
     if(liste != NULL)
@@ -155,3 +170,26 @@ void liberationMemoire(llist liste)
     }
     free(liste);
 }
+
+
+char * concat_expression(char * s1, char * op, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2)); 
+    strcat(s,s1);
+    strcat(s,op);
+    strcat(s,s2);
+    return s;  
+}
+
+char * concat_deux_chaines(char * s1, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(s2)); 
+    strcat(s,s1);
+    strcat(s,s2);
+    return s;  
+}
+
+char * alloc_yytext(char * yytext) {
+    char * test = malloc(sizeof(yytext));
+    strcpy(test, yytext);
+    return test;
+}
+

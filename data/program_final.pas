@@ -2,7 +2,7 @@ PROGRAM prog;
 
 { function f }
 FUNCTION f(x:INTEGER) :INTEGER;
-VAR i,y:INTEGER;
+VAR pp,yy:INTEGER;
 BEGIN
 	i := 0;
 	f := 0;
