@@ -2,10 +2,11 @@ PROGRAM prog;
 
 { function f }
 FUNCTION f(x:INTEGER) :INTEGER;
-VAR pp,yy:INTEGER;
+VAR i,pp,yy:INTEGER;
 BEGIN
 	i := 0;
 	f := 0;
+	z := 9;
 	WHILE i < x DO
 	BEGIN
 		IF i + a = 0 THEN
@@ -16,5 +17,5 @@ END;
 { main program }
 VAR x: INTEGER;
 BEGIN
- o:=0;
+ o:= 0;
 END.

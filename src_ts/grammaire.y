@@ -139,8 +139,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { table_sym = ajoutSymbole(table_sym, $1, "assignement");
-/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -177,8 +176,7 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT { verificationContexte(table_sym, $1);
-	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+	IDENTIFIANT { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 type_variable : STRING

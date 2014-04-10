@@ -487,9 +487,9 @@ static const yytype_uint8 yyrline[] =
        0,    63,    63,    67,    70,    76,    77,    80,    81,    84,
       87,    88,    91,    92,    95,    96,    99,   100,   103,   104,
      107,   110,   113,   118,   121,   124,   125,   128,   131,   132,
-     135,   136,   137,   138,   139,   142,   146,   149,   152,   154,
-     157,   159,   161,   163,   165,   168,   170,   172,   174,   176,
-     178,   180,   184,   185,   186,   187,   188
+     135,   136,   137,   138,   139,   142,   145,   148,   151,   153,
+     156,   158,   160,   162,   164,   167,   169,   171,   173,   175,
+     177,   179,   182,   183,   184,   185,   186
 };
 #endif
 
@@ -1530,22 +1530,20 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 142 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (3)].t_string), "assignement");
-/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+    { verificationContexte(table_sym, (yyvsp[(1) - (3)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 180 "grammaire.y"
-    { verificationContexte(table_sym, (yyvsp[(1) - (1)].t_string));
-	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+#line 179 "grammaire.y"
+    { verificationContexte(table_sym, (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1549 "grammaire.tab.c"
+#line 1547 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1776,7 +1774,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 191 "grammaire.y"
+#line 189 "grammaire.y"
 
 
 int main(int argc, char* argv[]){
