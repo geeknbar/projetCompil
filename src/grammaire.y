@@ -1,6 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
+	#include"translate.h"
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
@@ -29,6 +30,10 @@
 }
 
 %type <t_string> expression;
+%type <t_string> liste_identifiants;
+%type <t_string> declaration_variables;
+%type <t_string> type_variable;
+%type <t_string> comparaison;
 
 %%
 
@@ -37,7 +42,7 @@ programme:
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE { printf("#include <stdio.h>\n"); }
+	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin("#include <stdio.h>"); }
 	;
 
 bloc: declaration_variable
@@ -54,11 +59,19 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { 
+																	if(strcmp($3,"integer") == 0) {
+																		char * s = malloc(sizeof("int " + sizeof($1) + sizeof(";")));
+																		strcat(s,"int ");
+																		strcat(s,$1);
+																		strcat(s,";");
+																		ajouterEnFin(s);
+																	}  
+																	}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT
-	| IDENTIFIANT
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
+	| IDENTIFIANT { $$ = $1; }
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
@@ -124,37 +137,37 @@ expressions: comparaison
 	NOMBRE
 	;
 
-comparaison: expression INFERIEUREGAL expression
+comparaison: expression INFERIEUREGAL expression { $$ = concat_expression($1,$2,$3); }
 	| 
-	expression INFERIEUR expression
+	expression INFERIEUR expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression EGAL expression
+	expression EGAL expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression SUPERIEUR expression
+	expression SUPERIEUR expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression SUPERIEUREGAL expression
+	expression SUPERIEUREGAL expression { $$ = concat_expression($1,$2,$3); }
 	;
 
-expression: expression MULTIPLICATION expression
+expression: expression MULTIPLICATION expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression ADDITION expression { printf("%s + %s\n", $1, $3); }
+	expression ADDITION expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression SOUSTRACTION expression
+	expression SOUSTRACTION expression { $$ = concat_expression($1,$2,$3); }
 	|
-	expression DIVISION expression
+	expression DIVISION expression { $$ = concat_expression($1,$2,$3); }
 	|
-	PARENTHESEGAUCHE expression PARENTHESEDROITE
+	PARENTHESEGAUCHE expression PARENTHESEDROITE { $$ = concat_expression($1,$2,$3); }
 	|
-	NOMBRE
+	NOMBRE { $$ = $1; }
 	|
-	IDENTIFIANT
+	IDENTIFIANT { $$ = $1; }
 	;
 
-type_variable : STRING
-	| INTEGER
-	| REAL
-	| BOOLEAN
-	| CHAR
+type_variable : STRING { $$ = $1; }
+	| INTEGER { $$ = $1; }
+	| REAL { $$ = $1; }
+	| BOOLEAN { $$ = $1; }
+	| CHAR { $$ = $1; }
 	;
 
 %%
@@ -169,6 +182,7 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
+	impression();
 	if(f!=NULL)
 		fclose(f);
 }

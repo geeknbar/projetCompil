@@ -91,7 +91,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2053 of yacc.c  */
-#line 25 "grammaire.y"
+#line 26 "grammaire.y"
 
 	int t_int;
 	float t_float;

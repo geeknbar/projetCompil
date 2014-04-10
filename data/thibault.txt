@@ -1,7 +1,7 @@
 program prog;
 
 {main}
-var i:integer;
+var i,y:integer;
 begin
 	i := 5.2 + 2.8;
 end.
