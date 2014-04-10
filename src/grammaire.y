@@ -67,7 +67,7 @@ programme_entete:
 	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin("#include <stdio.h>"); }
 	;
 
-bloc: declaration_variable { ajouterEnFin("PASSE LA \n"); }
+bloc: declaration_variable {  }
 	declaration_fonction
 	declaration_procedure
 	instruction { 
@@ -97,59 +97,59 @@ liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_express
 	| IDENTIFIANT { $$ = $1; }
 	;
 
-declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable { ajouterEnFin("PASSE ICI \n"); }
+declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable {  }
 	|
 	;
 
-declaration_procedure: liste_procedures POINTVIRGULE declaration_variable { ajouterEnFin("PASSE ICI \n"); }
+declaration_procedure: liste_procedures POINTVIRGULE declaration_variable {  }
 	|
 	;
 
-liste_fonctions: liste_fonctions POINTVIRGULE declaration_fonctions
-	| declaration_fonctions
+liste_fonctions: liste_fonctions POINTVIRGULE declaration_fonctions {  }
+	| declaration_fonctions {  }
 	;
 
-liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
-	| declaration_procedures
+liste_procedures: liste_procedures POINTVIRGULE declaration_procedures {  }
+	| declaration_procedures {  }
 	;
 
-declaration_fonctions: fonction_entete bloc
+declaration_fonctions: fonction_entete bloc {  }
 	;
 
-declaration_procedures: procedure_entete bloc
+declaration_procedures: procedure_entete bloc {  }
 	;
 
-fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE
+fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {  }
 	;
 
-procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE
+procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE {  }
 	;
 
-parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE
+parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE {  }
 	;
 
-liste_parametres: liste_parametres VIRGULE declaration_variables
-	| declaration_variables
+liste_parametres: liste_parametres VIRGULE declaration_variables {  }
+	| declaration_variables {  }
 	;
 
-instruction: TBEGIN instruction_list TEND 
+instruction: TBEGIN instruction_list TEND {  }
 	;
 
-instruction_list: instruction_list POINTVIRGULE instructions
-	| instructions
+instruction_list: instruction_list POINTVIRGULE instructions {  }
+	| instructions {  }
 	;
 
-instructions: instruction_assignement
-	| instruction_while
-	| instruction_if
-	| instruction
+instructions: instruction_assignement {  }
+	| instruction_while {  }
+	| instruction_if {  }
+	| instruction {  }
 	|
 	;
 
 instruction_assignement: IDENTIFIANT ASSIGNATION expression {  }
 	;
 
-instruction_while: WHILE expressions DO instructions
+instruction_while: WHILE expressions DO instructions {  }
 	;
 
 instruction_if: IF expressions THEN instructions POINTVIRGULE { char * s1 = concat_deux_chaines($1,$2); 
@@ -163,37 +163,37 @@ expressions: comparaison { $$ = $1; }
 	NOMBRE { $$ = $1; }
 	;
 
-comparaison: expression INFERIEUREGAL expression { $$ = concat_expression($1,$2,$3); }
+comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_expression($1,$2,$3); }
 	| 
-	expression INFERIEUR expression { $$ = concat_expression($1,$2,$3); }
+	expression INFERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression EGAL expression { $$ = concat_expression($1,$2,$3); }
+	expression EGAL expression 						{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression SUPERIEUR expression { $$ = concat_expression($1,$2,$3); }
+	expression SUPERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression SUPERIEUREGAL expression { $$ = concat_expression($1,$2,$3); }
+	expression SUPERIEUREGAL expression 			{ $$ = concat_expression($1,$2,$3); }
 	;
 
-expression: expression MULTIPLICATION expression { $$ = concat_expression($1,$2,$3); }
+expression: expression MULTIPLICATION expression 	{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression ADDITION expression { $$ = concat_expression($1,$2,$3); }
+	expression ADDITION expression 					{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression SOUSTRACTION expression { $$ = concat_expression($1,$2,$3); }
+	expression SOUSTRACTION expression 				{ $$ = concat_expression($1,$2,$3); }
 	|
-	expression DIVISION expression { $$ = concat_expression($1,$2,$3); }
+	expression DIVISION expression 					{ $$ = concat_expression($1,$2,$3); }
 	|
-	PARENTHESEGAUCHE expression PARENTHESEDROITE { $$ = concat_expression($1,$2,$3); }
+	PARENTHESEGAUCHE expression PARENTHESEDROITE 	{ $$ = concat_expression($1,$2,$3); }
 	|
-	NOMBRE { $$ = $1; }
+	NOMBRE 		{ $$ = $1; }
 	|
 	IDENTIFIANT { $$ = $1; }
 	;
 
-type_variable : STRING { $$ = $1; }
-	| INTEGER { $$ = $1; }
-	| REAL { $$ = $1; }
-	| BOOLEAN { $$ = $1; }
-	| CHAR { $$ = $1; }
+type_variable : STRING 	{ $$ = $1; }
+	| INTEGER 			{ $$ = $1; }
+	| REAL 				{ $$ = $1; }
+	| BOOLEAN 			{ $$ = $1; }
+	| CHAR 				{ $$ = $1; }
 	;
 
 %%

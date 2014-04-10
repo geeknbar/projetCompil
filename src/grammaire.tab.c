@@ -1485,7 +1485,7 @@ yyreduce:
   case 4:
 /* Line 1787 of yacc.c  */
 #line 70 "grammaire.y"
-    { ajouterEnFin("PASSE LA \n"); }
+    {  }
     break;
 
   case 5:
@@ -1524,13 +1524,13 @@ yyreduce:
   case 13:
 /* Line 1787 of yacc.c  */
 #line 100 "grammaire.y"
-    { ajouterEnFin("PASSE ICI \n"); }
+    {  }
     break;
 
   case 15:
 /* Line 1787 of yacc.c  */
 #line 104 "grammaire.y"
-    { ajouterEnFin("PASSE ICI \n"); }
+    {  }
     break;
 
   case 36:
