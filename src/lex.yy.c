@@ -809,92 +809,92 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 39 "annalyseur_lexical.l"
-{ yylval.t_string = "begin"; return(TBEGIN); }
+{ yylval.t_string = alloc_yytext("begin"); return(TBEGIN); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 40 "annalyseur_lexical.l"
-{ yylval.t_string = "do"; return(DO); }
+{ yylval.t_string = alloc_yytext("do"); return(DO); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 41 "annalyseur_lexical.l"
-{ yylval.t_string = "div"; return(DIV); }
+{ yylval.t_string = alloc_yytext("div"); return(DIV); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 42 "annalyseur_lexical.l"
-{ yylval.t_string = "end"; return(TEND); }
+{ yylval.t_string = alloc_yytext("end"); return(TEND); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 43 "annalyseur_lexical.l"
-{ yylval.t_string = "function"; return(FUNCTION); }
+{ yylval.t_string = alloc_yytext("function"); return(FUNCTION); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 44 "annalyseur_lexical.l"
-{ yylval.t_string = "procedure"; return(PROCEDURE); }
+{ yylval.t_string = alloc_yytext("procedure"); return(PROCEDURE); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 45 "annalyseur_lexical.l"
-{ yylval.t_string = "if"; return(IF); }
+{ yylval.t_string = alloc_yytext("if"); return(IF); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 46 "annalyseur_lexical.l"
-{ yylval.t_string = "mod"; return(MOD); }
+{ yylval.t_string = alloc_yytext("mod"); return(MOD); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 47 "annalyseur_lexical.l"
-{ yylval.t_string = "program"; return(PROGRAM); }
+{ yylval.t_string = alloc_yytext("program"); return(PROGRAM); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 48 "annalyseur_lexical.l"
-{ yylval.t_string = "then"; return(THEN); }
+{ yylval.t_string = alloc_yytext("then"); return(THEN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 49 "annalyseur_lexical.l"
-{ yylval.t_string = "else"; return(ELSE); }
+{ yylval.t_string = alloc_yytext("else"); return(ELSE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 50 "annalyseur_lexical.l"
-{ yylval.t_string = "var"; return(VAR); }
+{ yylval.t_string = alloc_yytext("var"); return(VAR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 51 "annalyseur_lexical.l"
-{ yylval.t_string = "while"; return(WHILE); }
+{ yylval.t_string = alloc_yytext("while"); return(WHILE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 52 "annalyseur_lexical.l"
-{ yylval.t_string = "integer"; return(INTEGER); }
+{ yylval.t_string = alloc_yytext("integer"); return(INTEGER); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 53 "annalyseur_lexical.l"
-{ yylval.t_string = "string"; return(STRING); }
+{ yylval.t_string = alloc_yytext("string"); return(STRING); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 54 "annalyseur_lexical.l"
-{ yylval.t_string = "real"; return(REAL); }
+{ yylval.t_string = alloc_yytext("real"); return(REAL); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 55 "annalyseur_lexical.l"
-{ yylval.t_string = "boolean"; return(BOOLEAN); }
+{ yylval.t_string = alloc_yytext("boolean"); return(BOOLEAN); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 56 "annalyseur_lexical.l"
-{ yylval.t_string = "char"; return(CHAR); }
+{ yylval.t_string = alloc_yytext("char"); return(CHAR); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP

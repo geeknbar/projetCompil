@@ -67,7 +67,7 @@ programme_entete:
 	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin("#include <stdio.h>"); }
 	;
 
-bloc: declaration_variable {  }
+bloc: declaration_variable
 	declaration_fonction
 	declaration_procedure
 	instruction { 
@@ -132,35 +132,36 @@ liste_parametres: liste_parametres VIRGULE declaration_variables {  }
 	| declaration_variables {  }
 	;
 
-instruction: TBEGIN instruction_list TEND {  }
+instruction: TBEGIN instruction_list POINTVIRGULE TEND { $$ = concat_deux_chaines($2,$3); }
 	;
 
-instruction_list: instruction_list POINTVIRGULE instructions {  }
+instruction_list: instruction_list POINTVIRGULE instructions { $$ = concat_expression($1,$2,$3); }
 	| instructions {  }
-	;
-
-instructions: instruction_assignement {  }
-	| instruction_while {  }
-	| instruction_if {  }
-	| instruction {  }
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression {  }
+instructions: instruction_assignement 	{ $$ = $1; }
+	| instruction_while 				{ $$ = $1; }
+	| instruction_if 					{ $$ = $1; }
+	| instruction 						{ $$ = $1; }
+	;
+
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { $$ = concat_expression($1," = ",$3); }
 	;
 
 instruction_while: WHILE expressions DO instructions {  }
 	;
 
-instruction_if: IF expressions THEN instructions POINTVIRGULE { char * s1 = concat_deux_chaines($1,$2); 
-																char * s2 = concat_expression($3,$4,$5);
-																$$ = concat_deux_chaines(s1,s2);
-															  }
+instruction_if: IF expressions THEN instructions POINTVIRGULE 	{ 	
+																	char * s1 = concat_deux_chaines($1,$2); 
+																	char * s2 = concat_expression($3,$4,$5);
+																	$$ = concat_deux_chaines(s1,s2);
+															  	}
 	;
 
-expressions: comparaison { $$ = $1; }
+expressions: comparaison 	{ $$ = $1; }
 	|
-	NOMBRE { $$ = $1; }
+	NOMBRE 					{ $$ = $1; }
 	;
 
 comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_expression($1,$2,$3); }

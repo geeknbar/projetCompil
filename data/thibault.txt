@@ -4,4 +4,5 @@ program prog;
 var i,y:integer;
 begin
 	i := 5.2 + 2.8;
+	y := 3 + 3.5;
 end.

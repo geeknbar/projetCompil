@@ -36,24 +36,24 @@ CHIFFRE [0-9]
 LETTRE[a-zA-Z]
 %%
 
-{B}{E}{G}{I}{N}             { yylval.t_string = "begin"; return(TBEGIN); }
-{D}{O}                      { yylval.t_string = "do"; return(DO); }
-{D}{I}{V}                   { yylval.t_string = "div"; return(DIV); }
-{E}{N}{D}                   { yylval.t_string = "end"; return(TEND); }
-{F}{U}{N}{C}{T}{I}{O}{N}    { yylval.t_string = "function"; return(FUNCTION); }
-{P}{R}{O}{C}{E}{D}{U}{R}{E} { yylval.t_string = "procedure"; return(PROCEDURE); }
-{I}{F}                      { yylval.t_string = "if"; return(IF); }
-{M}{O}{D}                   { yylval.t_string = "mod"; return(MOD); }
-{P}{R}{O}{G}{R}{A}{M}       { yylval.t_string = "program"; return(PROGRAM); }
-{T}{H}{E}{N}                { yylval.t_string = "then"; return(THEN); }
-{E}{L}{S}{E}                { yylval.t_string = "else"; return(ELSE); }
-{V}{A}{R}                   { yylval.t_string = "var"; return(VAR); }
-{W}{H}{I}{L}{E}             { yylval.t_string = "while"; return(WHILE); }
-{I}{N}{T}{E}{G}{E}{R}       { yylval.t_string = "integer"; return(INTEGER); }
-{S}{T}{R}{I}{N}{G}          { yylval.t_string = "string"; return(STRING); }
-{R}{E}{A}{L}                { yylval.t_string = "real"; return(REAL); }
-{B}{O}{O}{L}{E}{A}{N}       { yylval.t_string = "boolean"; return(BOOLEAN); }
-{C}{H}{A}{R}                { yylval.t_string = "char"; return(CHAR); }
+{B}{E}{G}{I}{N}             { yylval.t_string = alloc_yytext("begin"); return(TBEGIN); }
+{D}{O}                      { yylval.t_string = alloc_yytext("do"); return(DO); }
+{D}{I}{V}                   { yylval.t_string = alloc_yytext("div"); return(DIV); }
+{E}{N}{D}                   { yylval.t_string = alloc_yytext("end"); return(TEND); }
+{F}{U}{N}{C}{T}{I}{O}{N}    { yylval.t_string = alloc_yytext("function"); return(FUNCTION); }
+{P}{R}{O}{C}{E}{D}{U}{R}{E} { yylval.t_string = alloc_yytext("procedure"); return(PROCEDURE); }
+{I}{F}                      { yylval.t_string = alloc_yytext("if"); return(IF); }
+{M}{O}{D}                   { yylval.t_string = alloc_yytext("mod"); return(MOD); }
+{P}{R}{O}{G}{R}{A}{M}       { yylval.t_string = alloc_yytext("program"); return(PROGRAM); }
+{T}{H}{E}{N}                { yylval.t_string = alloc_yytext("then"); return(THEN); }
+{E}{L}{S}{E}                { yylval.t_string = alloc_yytext("else"); return(ELSE); }
+{V}{A}{R}                   { yylval.t_string = alloc_yytext("var"); return(VAR); }
+{W}{H}{I}{L}{E}             { yylval.t_string = alloc_yytext("while"); return(WHILE); }
+{I}{N}{T}{E}{G}{E}{R}       { yylval.t_string = alloc_yytext("integer"); return(INTEGER); }
+{S}{T}{R}{I}{N}{G}          { yylval.t_string = alloc_yytext("string"); return(STRING); }
+{R}{E}{A}{L}                { yylval.t_string = alloc_yytext("real"); return(REAL); }
+{B}{O}{O}{L}{E}{A}{N}       { yylval.t_string = alloc_yytext("boolean"); return(BOOLEAN); }
+{C}{H}{A}{R}                { yylval.t_string = alloc_yytext("char"); return(CHAR); }
 
 ":="                        { yylval.t_string = alloc_yytext(yytext); return(ASSIGNATION); }
 "."                         { yylval.t_string = alloc_yytext(yytext); return(POINT); }
