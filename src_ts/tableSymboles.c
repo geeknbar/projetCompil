@@ -109,6 +109,20 @@ int rechercherElement(llist table_symboles, char* symbole)
     return 0;
 }
 
+void verificationContexte(llist table_symboles, char* symbole){
+    char* symb;
+    symb = malloc(strlen(symbole) + 1);
+    strcpy(symb, symbole);
+    if(rechercherElement(table_symboles, symb)==0)
+    {
+        printf("ERROR Le symbole %s n'existe pas\n", symb);
+    }
+    else
+    {
+        printf("VALIDE Le symbole existe\n");
+    }
+}
+
 llist ajoutSymbole(llist table_symboles, char* symbole, char* type_symb)
 {
     char* symb;

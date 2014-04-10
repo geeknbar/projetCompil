@@ -177,7 +177,7 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "variable expression");
+	IDENTIFIANT { verificationContexte(table_sym, $1);
 	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
 	;
 

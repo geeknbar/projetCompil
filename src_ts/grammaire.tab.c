@@ -1538,7 +1538,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 180 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (1)].t_string), "variable expression");
+    { verificationContexte(table_sym, (yyvsp[(1) - (1)].t_string));
 	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
     break;
 
