@@ -30,9 +30,33 @@
 	char * t_string;
 }
 
+%type <t_string> programme;
+%type <t_string> programme_entete;
+%type <t_string> bloc;
+%type <t_string> declaration_variable;
+%type <t_string> liste_variables;
+%type <t_string> declaration_variables;
+%type <t_string> liste_identifiants;
+%type <t_string> declaration_fonction;
+%type <t_string> declaration_procedure;
+%type <t_string> liste_fonctions;
+%type <t_string> liste_procedures;
+%type <t_string> declaration_fonctions;
+%type <t_string> declaration_procedures;
+%type <t_string> fonction_entete;
+%type <t_string> procedure_entete;
+%type <t_string> parametres;
+%type <t_string> liste_parametres;
+%type <t_string> instruction;
+%type <t_string> instruction_list;
+%type <t_string> instructions;
+%type <t_string> instruction_assignement;
+%type <t_string> instruction_while;
+%type <t_string> instruction_if;
+%type <t_string> expressions;
+%type <t_string> comparaison;
 %type <t_string> expression;
 %type <t_string> type_variable;
-%type <t_string> liste_identifiants;
 %%
 
 programme:
@@ -57,7 +81,7 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable {
+declaration_variables: liste_identifiants DEUXPOINTS type_variable {table_sym = ajoutListeSymbole(table_sym, $1, $3);
 																			
 																				printf("liste_id %s\n",$1);}
 	;
@@ -162,11 +186,11 @@ expression: expression MULTIPLICATION expression
 	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
 	;
 
-type_variable : STRING {char* s = "string"; $$ =s;}
-	| INTEGER {char* s = "integer"; $$ =s;}
-	| REAL {char* s = "reel"; $$ =s;}
-	| BOOLEAN {char* s = "booleen"; $$ =s;}
-	| CHAR {char* s = "char"; $$ =s;}
+type_variable : STRING
+	| INTEGER
+	| REAL
+	| BOOLEAN
+	| CHAR
 	;
 
 %%

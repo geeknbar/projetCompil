@@ -484,12 +484,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    39,    39,    43,    46,    52,    53,    56,    57,    60,
-      65,    66,    69,    70,    73,    74,    77,    78,    81,    82,
-      85,    88,    91,    99,   102,   105,   106,   109,   112,   113,
-     116,   117,   118,   119,   120,   123,   127,   130,   133,   135,
-     138,   140,   142,   144,   146,   149,   151,   153,   155,   157,
-     159,   161,   165,   166,   167,   168,   169
+       0,    63,    63,    67,    70,    76,    77,    80,    81,    84,
+      89,    90,    93,    94,    97,    98,   101,   102,   105,   106,
+     109,   112,   115,   123,   126,   129,   130,   133,   136,   137,
+     140,   141,   142,   143,   144,   147,   151,   154,   157,   159,
+     162,   164,   166,   168,   170,   173,   175,   177,   179,   181,
+     183,   185,   189,   190,   191,   192,   193
 };
 #endif
 
@@ -1492,15 +1492,15 @@ yyreduce:
         case 3:
 
 /* Line 1806 of yacc.c  */
-#line 43 "grammaire.y"
+#line 67 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (3)].t_string), "nom programme");}
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 60 "grammaire.y"
-    {
+#line 84 "grammaire.y"
+    {table_sym = ajoutListeSymbole(table_sym, (yyvsp[(1) - (3)].t_string), (yyvsp[(3) - (3)].t_string));
 																			
 																				printf("liste_id %s\n",(yyvsp[(1) - (3)].t_string));}
     break;
@@ -1508,14 +1508,14 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 65 "grammaire.y"
+#line 89 "grammaire.y"
     { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 91 "grammaire.y"
+#line 115 "grammaire.y"
     {
 									char str[80];
 									strcpy (str,"fonction ");
@@ -1527,14 +1527,14 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 99 "grammaire.y"
+#line 123 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (4)].t_string), "void");}
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 123 "grammaire.y"
+#line 147 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (3)].t_string), "assignement");
 /* ici il ne faut pas faire un ajout mais faire une vérification*/}
     break;
@@ -1542,50 +1542,15 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 161 "grammaire.y"
+#line 185 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(1) - (1)].t_string), "variable expression");
 	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
     break;
 
-  case 52:
-
-/* Line 1806 of yacc.c  */
-#line 165 "grammaire.y"
-    {char* s = "string"; (yyval.t_string) =s;}
-    break;
-
-  case 53:
-
-/* Line 1806 of yacc.c  */
-#line 166 "grammaire.y"
-    {char* s = "integer"; (yyval.t_string) =s;}
-    break;
-
-  case 54:
-
-/* Line 1806 of yacc.c  */
-#line 167 "grammaire.y"
-    {char* s = "reel"; (yyval.t_string) =s;}
-    break;
-
-  case 55:
-
-/* Line 1806 of yacc.c  */
-#line 168 "grammaire.y"
-    {char* s = "booleen"; (yyval.t_string) =s;}
-    break;
-
-  case 56:
-
-/* Line 1806 of yacc.c  */
-#line 169 "grammaire.y"
-    {char* s = "char"; (yyval.t_string) =s;}
-    break;
-
 
 
 /* Line 1806 of yacc.c  */
-#line 1589 "grammaire.tab.c"
+#line 1554 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1816,7 +1781,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 172 "grammaire.y"
+#line 196 "grammaire.y"
 
 
 int main(int argc, char* argv[]){

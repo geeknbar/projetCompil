@@ -16,4 +16,5 @@ llist supprimerElementEnTete(llist liste);
 void liberationMemoire(llist liste);
 char * concat_expression(char * s1, char * op, char * s2);
 char * concat_deux_chaines(char * s1, char * s2);
+char * alloc_yytext(char * yytext);
 #endif

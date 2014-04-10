@@ -133,7 +133,8 @@ llist ajoutListeSymbole(llist table_symboles, char* listeVariable, char* type_sy
     pch = strtok (listeVariable,",");
     while (pch != NULL)
     {
-        ajoutSymbole(table_symboles, pch, type_symb);
+        table_symboles = ajoutSymbole(table_symboles, pch, type_symb);
+        pch = strtok (NULL, ",");
     }
     return table_symboles;
 }
