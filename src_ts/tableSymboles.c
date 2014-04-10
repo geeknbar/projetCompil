@@ -109,6 +109,20 @@ int rechercherElement(llist table_symboles, char* symbole)
     return 0;
 }
 
+void verificationContexte(llist table_symboles, char* symbole){
+    char* symb;
+    symb = malloc(strlen(symbole) + 1);
+    strcpy(symb, symbole);
+    if(rechercherElement(table_symboles, symb)==0)
+    {
+        printf("ERROR Le symbole %s n'existe pas\n", symb);
+    }
+    else
+    {
+        printf("VALIDE Le symbole existe\n");
+    }
+}
+
 llist ajoutSymbole(llist table_symboles, char* symbole, char* type_symb)
 {
     char* symb;
@@ -127,6 +141,22 @@ llist ajoutSymbole(llist table_symboles, char* symbole, char* type_symb)
     }
     return table_symboles;
 }
+
+llist ajoutListeSymbole(llist table_symboles, char* listeVariable, char* type_symb){
+    char * pch;
+    pch = strtok (listeVariable,",");
+    while (pch != NULL)
+    {
+        table_symboles = ajoutSymbole(table_symboles, pch, type_symb);
+        pch = strtok (NULL, ",");
+    }
+    return table_symboles;
+}
+
+
+
+
+
 
 llist supprimerElementEnTete(llist liste)
 {
@@ -155,3 +185,26 @@ void liberationMemoire(llist liste)
     }
     free(liste);
 }
+
+
+char * concat_expression(char * s1, char * op, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2)); 
+    strcat(s,s1);
+    strcat(s,op);
+    strcat(s,s2);
+    return s;  
+}
+
+char * concat_deux_chaines(char * s1, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(s2)); 
+    strcat(s,s1);
+    strcat(s,s2);
+    return s;  
+}
+
+char * alloc_yytext(char * yytext) {
+    char * test = malloc(sizeof(yytext));
+    strcpy(test, yytext);
+    return test;
+}
+

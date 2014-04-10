@@ -30,9 +30,33 @@
 	char * t_string;
 }
 
+%type <t_string> programme;
+%type <t_string> programme_entete;
+%type <t_string> bloc;
+%type <t_string> declaration_variable;
+%type <t_string> liste_variables;
+%type <t_string> declaration_variables;
+%type <t_string> liste_identifiants;
+%type <t_string> declaration_fonction;
+%type <t_string> declaration_procedure;
+%type <t_string> liste_fonctions;
+%type <t_string> liste_procedures;
+%type <t_string> declaration_fonctions;
+%type <t_string> declaration_procedures;
+%type <t_string> fonction_entete;
+%type <t_string> procedure_entete;
+%type <t_string> parametres;
+%type <t_string> liste_parametres;
+%type <t_string> instruction;
+%type <t_string> instruction_list;
+%type <t_string> instructions;
+%type <t_string> instruction_assignement;
+%type <t_string> instruction_while;
+%type <t_string> instruction_if;
+%type <t_string> expressions;
+%type <t_string> comparaison;
 %type <t_string> expression;
 %type <t_string> type_variable;
-%type <t_string> liste_identifiants;
 %%
 
 programme:
@@ -57,12 +81,11 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutSymbole(table_sym, $1, $3);
-																																			printf("liste_id %s\n",$1);}
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutListeSymbole(table_sym, $1, $3);}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT {$$ = $3;/*n'arrive pas a récupérer cet identifiant avant la virgule*/}
-	| IDENTIFIANT {$$ = $1;}
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
+	| IDENTIFIANT
 	;
 
 declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
@@ -88,10 +111,7 @@ declaration_procedures: procedure_entete bloc
 	;
 
 fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {
-									char str[80];
-									strcpy (str,"fonction ");
-									strcat (str,$5);
-									table_sym = ajoutSymbole(table_sym, $2, str);
+									table_sym = ajoutSymbole(table_sym, $2, concat_deux_chaines("fonction", $5));
 									}
 	;
 
@@ -119,8 +139,7 @@ instructions: instruction_assignement
 	|
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { table_sym = ajoutSymbole(table_sym, $1, "assignement");
-/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 instruction_while: WHILE expressions DO instructions
@@ -157,15 +176,14 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT { table_sym = ajoutSymbole(table_sym, $1, "variable expression");
-	/* ici il ne faut pas faire un ajout mais faire une vérification*/}
+	IDENTIFIANT { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
-type_variable : STRING {char* s = "string"; $$ =s;}
-	| INTEGER {char* s = "integer"; $$ =s;}
-	| REAL {char* s = "reel"; $$ =s;}
-	| BOOLEAN {char* s = "booleen"; $$ =s;}
-	| CHAR {char* s = "char"; $$ =s;}
+type_variable : STRING
+	| INTEGER
+	| REAL
+	| BOOLEAN
+	| CHAR
 	;
 
 %%
