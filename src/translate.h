@@ -14,6 +14,7 @@ int estVide();
 //int rechercherElement(char* chaine);
 //llist ajoutSymbole(char* chaine);
 llist supprimerElementEnTete();
+void impression();
 void liberationMemoire();
 char * concat_expression(char * s1, char * op, char * s2);
 char * concat_deux_chaines(char * s1, char * s2);
