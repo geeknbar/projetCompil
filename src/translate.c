@@ -47,7 +47,6 @@ void ajouterEnFin(char* chaine)
     }
 }
 
-
 //llist ajouterEnTete(char* chaine)
 //{
 //    /* On crée un nouvel élément */

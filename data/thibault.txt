@@ -1,5 +1,12 @@
 program prog;
 
+{ function f }
+FUNCTION f(x:INTEGER):INTEGER;
+
+BEGIN
+	j := 2 - 8;
+END;
+
 {main}
 var i,y:integer;s:string;
 begin

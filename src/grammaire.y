@@ -89,7 +89,11 @@ declaration_variables: liste_identifiants DEUXPOINTS type_variable {
 																	if(strcmp($3,"integer") == 0) 
 																	{
 																		ajouterEnFin(concat_expression("int ",$1,";"));
-																	}  
+																	}
+																	if(strcmp($3,"string") == 0) 
+																	{
+																		ajouterEnFin(concat_expression("char * ",$1,";"));
+																	}
 																   }
 	;
 
