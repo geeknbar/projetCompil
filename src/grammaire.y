@@ -150,7 +150,10 @@ instructions: instruction_assignement
 instruction_assignement: IDENTIFIANT ASSIGNATION expression 	{ ajouterEnFin(concat_expression($1,$2,$3)); }
 	;
 
-instruction_while: WHILE expressions DO instructions 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
+instruction_while: 	WHILE 
+					expressions 
+					DO 				{ ajouterEnFin(concat_expression($1,$2,$3)); }
+					instructions 			
 	;
 
 instruction_if: IF 				
