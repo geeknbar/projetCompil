@@ -4,40 +4,40 @@
 #include "tableSymbolesSecondaires.h"
 #include "tableSymboles.h"
 
-typedef struct element element;
-typedef element* llistSecond;
-struct element
+typedef struct element_S element_S;
+typedef element_S* llistSecond;
+struct element_S
 {
-    llistSecond *listeSecond;
-    struct element *nxt;
+    llist *listeSecond;
+    struct element_S *nxt;
 };
 
-llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llistSecond listeSecondaire)
+llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llist listeSecondaire)
 {
     /* On crée un nouvel élément */
-    element* nouvelElement = malloc(sizeof(element));
+    element_S* nouvelElement_S = malloc(sizeof(element_S));
  
     /* On assigne la valeur au nouvel élément */
-    nouvelElement->listeSecond = &listeSecondaire;
+    nouvelElement_S->listeSecond = &listeSecondaire;
 
     /* On ajoute en fin, donc aucun élément ne va suivre */
-    nouvelElement->nxt = NULL;
+    nouvelElement_S->nxt = NULL;
  
     if(table_symboles == NULL)
     {
         /* Si la liste est videé il suffit de renvoyer l'élément créé */
-        return nouvelElement;
+        return nouvelElement_S;
     }
     else
     {
         /* Sinon, on parcourt la liste à l'aide d'un pointeur temporaire et on
         indique que le dernier élément de la liste est relié au nouvel élément */
-        element* temp=table_symboles;
+        element_S* temp=table_symboles;
         while(temp->nxt != NULL)
         {
             temp = temp->nxt;
         }
-        temp->nxt = nouvelElement;
+        temp->nxt = nouvelElement_S;
         return table_symboles;
     }
     return NULL;
@@ -45,16 +45,15 @@ llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llistSecond liste
 
 void afficherListeSecondaire(llistSecond table_symboles)
 {
-    // element *tmp = table_symboles;
+    // element_S *tmp = table_symboles;
     // /* Tant que l'on n'est pas au bout de la liste */
     // int i = 1;
     // while(tmp != NULL)
     // {
-    //     /* On affiche */
-    //     printf("Symbole %d : %s, Type : %s , occurence :%d \n", i, tmp->symb, tmp->type, tmp->occurence);
-    //     // printf("%s \n", tmp->symb);
-    //     /* On avance d'une case */
+    //     llist* toto = tmp->listeSecond;
+    //     afficherListe((*toto));
     //     tmp = tmp->nxt;
+    //     printf("%d\n", i);
     //     i++;
     // }
 }

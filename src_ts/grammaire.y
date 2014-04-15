@@ -112,9 +112,10 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 	| declaration_procedures
 	;
 
-declaration_fonctions: fonction_entete bloc {printf("\nTOTO\n");
-																						llist table_sym_b = NULL;
+declaration_fonctions: fonction_entete bloc {llist table_sym_b = NULL;
 																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b);
+																						afficherListe(table_sym);
+																						printf("\n");
 																						table_sym = table_sym_b;
 																						}
 
@@ -238,7 +239,8 @@ int main(int argc, char* argv[]){
 		fclose(f);
 
 	afficherListe(table_sym);
-	liberationMemoire(table_sym);
+	// liberationMemoire(table_sym);
+	// afficherListeSecondaire(table_sym_second);
 }
 
 void yyerror(char const* s){

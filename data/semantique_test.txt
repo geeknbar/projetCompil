@@ -21,4 +21,5 @@ END;
 VAR azer: INTEGER;
 BEGIN
  azer := 0;
+ pp:=9;
 END.

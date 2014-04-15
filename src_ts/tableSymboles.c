@@ -74,6 +74,7 @@ void afficherListe(llist table_symboles)
     int i = 1;
     while(tmp != NULL)
     {
+
         /* On affiche */
         printf("Symbole %d : %s, Type : %s , occurence :%d \n", i, tmp->symb, tmp->type, tmp->occurence);
         // printf("%s \n", tmp->symb);
@@ -81,6 +82,7 @@ void afficherListe(llist table_symboles)
         tmp = tmp->nxt;
         i++;
     }
+
 }
 
 int estVide(llist table_symboles)

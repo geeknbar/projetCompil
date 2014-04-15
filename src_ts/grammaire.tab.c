@@ -494,11 +494,11 @@ static const yytype_uint8 yyrline[] =
 {
        0,    71,    71,    75,    78,    84,    85,    88,    89,    92,
       95,    96,    99,   100,   103,   104,   107,   108,   111,   112,
-     115,   123,   126,   131,   134,   137,   138,   141,   144,   145,
-     148,   149,   152,   153,   154,   157,   158,   159,   162,   168,
-     173,   181,   184,   187,   189,   192,   194,   196,   198,   200,
-     203,   205,   207,   209,   211,   213,   215,   218,   219,   220,
-     221,   222
+     115,   124,   127,   132,   135,   138,   139,   142,   145,   146,
+     149,   150,   153,   154,   155,   158,   159,   160,   163,   169,
+     174,   182,   185,   188,   190,   193,   195,   197,   199,   201,
+     204,   206,   208,   210,   212,   214,   216,   219,   220,   221,
+     222,   223
 };
 #endif
 
@@ -1535,9 +1535,10 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 115 "grammaire.y"
-    {printf("\nTOTO\n");
-																						llist table_sym_b = NULL;
+    {llist table_sym_b = NULL;
 																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b);
+																						afficherListe(table_sym);
+																						printf("\n");
 																						table_sym = table_sym_b;
 																						}
     break;
@@ -1545,7 +1546,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 126 "grammaire.y"
+#line 127 "grammaire.y"
     {
 									table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (6)].t_string), concat_deux_chaines("fonction", (yyvsp[(5) - (6)].t_string)));
 									}
@@ -1554,28 +1555,28 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 131 "grammaire.y"
+#line 132 "grammaire.y"
     { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (4)].t_string), "void");}
     break;
 
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 184 "grammaire.y"
+#line 185 "grammaire.y"
     { verificationContexte(table_sym, (yyvsp[(1) - (3)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 215 "grammaire.y"
+#line 216 "grammaire.y"
     { verificationContexte(table_sym, (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1579 "grammaire.tab.c"
+#line 1580 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1806,7 +1807,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 225 "grammaire.y"
+#line 226 "grammaire.y"
 
 
 int main(int argc, char* argv[]){
@@ -1823,7 +1824,8 @@ int main(int argc, char* argv[]){
 		fclose(f);
 
 	afficherListe(table_sym);
-	liberationMemoire(table_sym);
+	// liberationMemoire(table_sym);
+	// afficherListeSecondaire(table_sym_second);
 }
 
 void yyerror(char const* s){
