@@ -119,7 +119,7 @@ void verificationContexte(llist table_symboles, char* symbole){
     }
     else
     {
-        printf("VALIDE Le symbole existe\n");
+        printf("VALIDE Le symbole %s existe\n", symb);
     }
 }
 

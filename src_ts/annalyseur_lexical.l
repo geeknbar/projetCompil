@@ -2,6 +2,7 @@
   #include<stdio.h>
   #include "tableSymboles.h"
   #include "grammaire.tab.h"
+  #include "tableSymbolesSecondaires.h"
   int line_no = 1;
 %}
 A [aA]

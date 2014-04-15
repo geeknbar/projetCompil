@@ -532,8 +532,9 @@ char *yytext;
   #include<stdio.h>
   #include "tableSymboles.h"
   #include "grammaire.tab.h"
+  #include "tableSymbolesSecondaires.h"
   int line_no = 1;
-#line 537 "lex.yy.c"
+#line 538 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -720,10 +721,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 36 "annalyseur_lexical.l"
+#line 37 "annalyseur_lexical.l"
 
 
-#line 727 "lex.yy.c"
+#line 728 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -808,187 +809,187 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 38 "annalyseur_lexical.l"
+#line 39 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("begin"); return(TBEGIN); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 39 "annalyseur_lexical.l"
+#line 40 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("do"); return(DO); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 40 "annalyseur_lexical.l"
+#line 41 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("div"); return(DIV); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 41 "annalyseur_lexical.l"
+#line 42 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("end"); return(TEND); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 42 "annalyseur_lexical.l"
+#line 43 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("function"); return(FUNCTION); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "annalyseur_lexical.l"
+#line 44 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("procedure"); return(PROCEDURE); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 44 "annalyseur_lexical.l"
+#line 45 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("if"); return(IF); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 45 "annalyseur_lexical.l"
+#line 46 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("mod"); return(MOD); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 46 "annalyseur_lexical.l"
+#line 47 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("program"); return(PROGRAM); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 47 "annalyseur_lexical.l"
+#line 48 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("then"); return(THEN); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 48 "annalyseur_lexical.l"
+#line 49 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("else"); return(ELSE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 49 "annalyseur_lexical.l"
+#line 50 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("var"); return(VAR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 50 "annalyseur_lexical.l"
+#line 51 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("while"); return(WHILE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 51 "annalyseur_lexical.l"
+#line 52 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("integer"); return(INTEGER); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 52 "annalyseur_lexical.l"
+#line 53 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("string"); return(STRING); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 53 "annalyseur_lexical.l"
+#line 54 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("real"); return(REAL); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 54 "annalyseur_lexical.l"
+#line 55 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("boolean"); return(BOOLEAN); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 55 "annalyseur_lexical.l"
+#line 56 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext("char"); return(CHAR); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 57 "annalyseur_lexical.l"
+#line 58 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(ASSIGNATION); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 58 "annalyseur_lexical.l"
+#line 59 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(POINT); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 59 "annalyseur_lexical.l"
+#line 60 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(DEUXPOINTS); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 60 "annalyseur_lexical.l"
+#line 61 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(VIRGULE); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 61 "annalyseur_lexical.l"
+#line 62 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(POINTVIRGULE); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 63 "annalyseur_lexical.l"
+#line 64 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(EGAL); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 64 "annalyseur_lexical.l"
+#line 65 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(SUPERIEUREGAL); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 65 "annalyseur_lexical.l"
+#line 66 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(SUPERIEUR); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 66 "annalyseur_lexical.l"
+#line 67 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(INFERIEUREGAL); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 67 "annalyseur_lexical.l"
+#line 68 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(INFERIEUR); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 68 "annalyseur_lexical.l"
+#line 69 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(DIFFERENT); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 70 "annalyseur_lexical.l"
+#line 71 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(ADDITION); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 71 "annalyseur_lexical.l"
+#line 72 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(SOUSTRACTION); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 72 "annalyseur_lexical.l"
+#line 73 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(MULTIPLICATION); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 73 "annalyseur_lexical.l"
+#line 74 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(DIVISION); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "annalyseur_lexical.l"
+#line 76 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(PARENTHESEGAUCHE); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "annalyseur_lexical.l"
+#line 77 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(PARENTHESEDROITE); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 78 "annalyseur_lexical.l"
+#line 79 "annalyseur_lexical.l"
 { yylval.t_string = alloc_yytext(yytext); return(APOSTROPHE); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 80 "annalyseur_lexical.l"
+#line 81 "annalyseur_lexical.l"
 {
   yylval.t_string = alloc_yytext(yytext);
   return IDENTIFIANT;
@@ -996,7 +997,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 85 "annalyseur_lexical.l"
+#line 86 "annalyseur_lexical.l"
 {
   yylval.t_string = alloc_yytext(yytext);
   return NOMBRE;
@@ -1004,7 +1005,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 90 "annalyseur_lexical.l"
+#line 91 "annalyseur_lexical.l"
 { register int c;
         while ((c = input()))
         {
@@ -1026,26 +1027,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 109 "annalyseur_lexical.l"
+#line 110 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 41:
 /* rule 41 can match eol */
 YY_RULE_SETUP
-#line 111 "annalyseur_lexical.l"
+#line 112 "annalyseur_lexical.l"
 {line_no++;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 113 "annalyseur_lexical.l"
+#line 114 "annalyseur_lexical.l"
 {}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 115 "annalyseur_lexical.l"
+#line 116 "annalyseur_lexical.l"
 ECHO;
 	YY_BREAK
-#line 1049 "lex.yy.c"
+#line 1050 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2043,7 +2044,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 115 "annalyseur_lexical.l"
+#line 116 "annalyseur_lexical.l"
 
 
 commenteof()

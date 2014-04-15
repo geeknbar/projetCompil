@@ -1,14 +1,16 @@
 %{
-	#include<stdio.h>
-	#include<string.h>
-	#include"tableSymboles.h"
+	#include <stdio.h>
+	#include <string.h>
+	#include "tableSymboles.h"
+	#include "tableSymbolesSecondaires.h"
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
 	llist table_sym = NULL;
+	llistSecond table_sym_second = NULL;
 %}
 
-%token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
+%token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE TO FOR
 %token <t_string> INTEGER STRING REAL BOOLEAN CHAR
 %token <t_string> ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
 %token <t_string> EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
@@ -22,6 +24,7 @@
 %left MULTIPLICATION DIVISION
 %left INFERIEUR SUPERIEUR
 %left EGAL
+%right THEN ELSE
 
 %error-verbose
 
@@ -50,14 +53,12 @@
 %type <t_string> liste_parametres;
 %type <t_string> instruction;
 %type <t_string> instruction_list;
-%type <t_string> instruction_bloc;
 %type <t_string> declaration;
 %type <t_string> declaration_close;
 %type <t_string> declaration_ouverte;
-%type <t_string> while_ouvert;
-%type <t_string> while_clos;
-%type <t_string> if_ouvert;
-%type <t_string> if_clos;
+%type <t_string> while;
+%type <t_string> if;
+%type <t_string> for;
 %type <t_string> instruction_assignement;
 %type <t_string> expressions;
 %type <t_string> comparaison;
@@ -71,7 +72,7 @@ programme:
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, "nom programme");}
+	PROGRAM IDENTIFIANT POINTVIRGULE { /*table_sym = ajoutSymbole(table_sym, $2, "nom programme");*/}
 	;
 
 bloc: declaration_variable
@@ -111,7 +112,12 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 	| declaration_procedures
 	;
 
-declaration_fonctions: fonction_entete bloc
+declaration_fonctions: fonction_entete bloc {printf("\nTOTO\n");
+																						llist table_sym_b = NULL;
+																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b);
+																						table_sym = table_sym_b;
+																						}
+
 	;
 
 declaration_procedures: procedure_entete bloc
@@ -132,45 +138,48 @@ liste_parametres: liste_parametres VIRGULE declaration_variables
 	| declaration_variables
 	;
 
-instruction : instruction_bloc
-	;
-
-instruction_bloc: TBEGIN instruction_list TEND
+instruction: TBEGIN instruction_list TEND
 	;
 
 instruction_list: instruction_list POINTVIRGULE declaration
 	| declaration
 	;
 
-declaration : declaration_ouverte
+declaration: declaration_ouverte
 	| declaration_close
 	;
 
-declaration_close : instruction_assignement
-	| while_clos
-	| if_clos
-	| instruction_bloc
-	|
+declaration_close: instruction_assignement
+	| instruction
+	| 
 	;
 
-declaration_ouverte : while_ouvert
-	| if_ouvert
+declaration_ouverte: while 
+	| if 
+	| for
 	;
 
-while_ouvert : WHILE expressions DO declaration_ouverte
-  ;
-
-while_clos : WHILE expressions DO declaration_close;
-  ;
-
-
-if_ouvert : IF expressions THEN declaration
-	| IF expressions THEN declaration_close ELSE declaration_ouverte
+while: 	WHILE 
+		expressions 
+		DO 
+		declaration 
 	;
 
-if_clos : IF expressions THEN declaration_close ELSE declaration_close
-  ;
+if: IF 
+	expressions 
+	THEN 
+	declaration 
+	| 
+	IF 
+	expressions 
+	THEN 
+	declaration 
+	ELSE 
+	declaration
+	;
 
+for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
+	;
 
 instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
