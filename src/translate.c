@@ -162,14 +162,14 @@ void liberationMemoire()
 }
 
 char * concat_deux_chaines(char * s1, char * s2) {
-    char * s = malloc(sizeof(s1) + sizeof(s2)); 
+    char * s = malloc(sizeof(s1) + sizeof(s2) + 256); 
     strcat(s,s1);
     strcat(s,s2);
     return s;  
 }
 
 char * concat_trois_chaines(char * s1, char * op, char * s2) {
-    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2)); 
+    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2) + 256); 
     strcat(s,s1);
     strcat(s,op);
     strcat(s,s2);
@@ -177,7 +177,7 @@ char * concat_trois_chaines(char * s1, char * op, char * s2) {
 }
 
 char * alloc_yytext(char * yytext) {
-    char * test = malloc(sizeof(yytext));
+    char * test = malloc(sizeof(yytext) + 256);
     strcpy(test, yytext);
     return test;
 }
@@ -270,8 +270,20 @@ void traduction() {
                     assignation = concat_deux_chaines(assignation,";");
                     printf("%s\n",assignation);
                 }
+            } else if (strcmp("affichage", tokens) == 0) {
+                char * affichage = strsep(&duplicata, " ");
+                strsep(&affichage,"w");
+                strsep(&affichage,"r");
+                strsep(&affichage,"i");
+                strsep(&affichage,"t");
+                strsep(&affichage,"e");
+                strsep(&affichage,"l");
+                strsep(&affichage,"n");
+                strsep(&affichage,"(");
+                printf("printf(\"%%d\",");
+                printf("%s;\n",affichage);
             } else {
-                printf("%s\n", curseur->code);
+                printf("\nERREUR : %s\n",curseur->code);
             }
         } else {
             // Mode déclaration de variables;

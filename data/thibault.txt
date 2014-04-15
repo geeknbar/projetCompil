@@ -11,7 +11,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		resultat := -1;
+		resultat := 0;
 	END;
 	estPlusPetitQueDix := resultat;
 END;

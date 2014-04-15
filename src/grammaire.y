@@ -16,6 +16,7 @@
 %token <t_string> APOSTROPHE
 %token <t_string> NOMBRE
 %token <t_string> IDENTIFIANT
+%token <t_string> WRITELN
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
@@ -61,6 +62,7 @@
 %type <t_string> comparaison;
 %type <t_string> expression;
 %type <t_string> type_variable;
+%type <t_string> write;
 
 %%
 
@@ -158,6 +160,7 @@ declaration_close: instruction_assignement
 declaration_ouverte: while 
 	| if 
 	| for
+	| write
 	;
 
 while: 	WHILE 
@@ -183,6 +186,20 @@ if: IF
 	;
 
 for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
+	;
+
+write: WRITELN 
+		PARENTHESEGAUCHE 
+		IDENTIFIANT 
+		PARENTHESEGAUCHE 
+		expression 
+		PARENTHESEDROITE 
+		PARENTHESEDROITE 	{
+			char * temporaire = concat_trois_chaines("affichage ",$1,$2);
+			char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
+			char * temporaire3 = concat_trois_chaines(temporaire2,$5,$6);
+			ajouterEnFin(concat_deux_chaines(temporaire3, $7));
+		}
 	;
 
 instruction_assignement: IDENTIFIANT ASSIGNATION expression { 
