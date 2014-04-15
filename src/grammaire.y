@@ -133,7 +133,7 @@ liste_parametres: liste_parametres VIRGULE declaration_variables { $$ = concat_e
 instruction: 	TBEGIN				{ ajouterEnFin("begin"); }
 				instruction_list 
 				POINTVIRGULE 
-				TEND 				
+				TEND				{ ajouterEnFin("end"); }	
 	;
 
 instruction_list: instruction_list POINTVIRGULE instructions 
@@ -156,8 +156,7 @@ instruction_while: WHILE expressions DO instructions 			{ ajouterEnFin(concat_ex
 instruction_if: IF 				
 				expressions 	
 				THEN 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
-				instructions 
-				POINTVIRGULE 		
+				instructions  		
 	;
 
 expressions: comparaison 	{ $$ = $1; } 	 	
