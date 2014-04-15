@@ -113,7 +113,7 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 	;
 
 declaration_fonctions: fonction_entete bloc {llist table_sym_b = NULL;
-																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b);
+																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b); /* probleme de copie */
 																						afficherListe(table_sym);
 																						printf("\n");
 																						table_sym = table_sym_b;
