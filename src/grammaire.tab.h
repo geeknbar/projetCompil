@@ -60,31 +60,32 @@ extern int yydebug;
      VAR = 269,
      WHILE = 270,
      FOR = 271,
-     INTEGER = 272,
-     STRING = 273,
-     REAL = 274,
-     BOOLEAN = 275,
-     CHAR = 276,
-     ASSIGNATION = 277,
-     POINT = 278,
-     DEUXPOINTS = 279,
-     VIRGULE = 280,
-     POINTVIRGULE = 281,
-     EGAL = 282,
-     SUPERIEUREGAL = 283,
-     SUPERIEUR = 284,
-     INFERIEUREGAL = 285,
-     INFERIEUR = 286,
-     DIFFERENT = 287,
-     ADDITION = 288,
-     SOUSTRACTION = 289,
-     MULTIPLICATION = 290,
-     DIVISION = 291,
-     PARENTHESEGAUCHE = 292,
-     PARENTHESEDROITE = 293,
-     APOSTROPHE = 294,
-     NOMBRE = 295,
-     IDENTIFIANT = 296
+     TO = 272,
+     INTEGER = 273,
+     STRING = 274,
+     REAL = 275,
+     BOOLEAN = 276,
+     CHAR = 277,
+     ASSIGNATION = 278,
+     POINT = 279,
+     DEUXPOINTS = 280,
+     VIRGULE = 281,
+     POINTVIRGULE = 282,
+     EGAL = 283,
+     SUPERIEUREGAL = 284,
+     SUPERIEUR = 285,
+     INFERIEUREGAL = 286,
+     INFERIEUR = 287,
+     DIFFERENT = 288,
+     ADDITION = 289,
+     SOUSTRACTION = 290,
+     MULTIPLICATION = 291,
+     DIVISION = 292,
+     PARENTHESEGAUCHE = 293,
+     PARENTHESEDROITE = 294,
+     APOSTROPHE = 295,
+     NOMBRE = 296,
+     IDENTIFIANT = 297
    };
 #endif
 
@@ -101,7 +102,7 @@ typedef union YYSTYPE
 
 
 /* Line 2053 of yacc.c  */
-#line 105 "grammaire.tab.h"
+#line 106 "grammaire.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

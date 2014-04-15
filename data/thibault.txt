@@ -8,6 +8,15 @@ BEGIN
 	BEGIN
 		i := 2 - 8;
 		j := 10 / 2;
+		WHILE j >= i DO
+		BEGIN
+			i := j + 56;
+		END;
+	END
+	ELSE
+	BEGIN
+		i := 10 / 2;
+		j := 2 - 8;
 	END;
 	WHILE j >= i DO
 	BEGIN
