@@ -7,7 +7,7 @@
 	extern FILE *yyin;
 %}
 
-%token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE
+%token <t_string> TBEGIN DO DIV TEND FUNCTION PROCEDURE IF MOD PROGRAM THEN ELSE VAR WHILE FOR TO
 %token <t_string> INTEGER STRING REAL BOOLEAN CHAR
 %token <t_string> ASSIGNATION POINT DEUXPOINTS VIRGULE POINTVIRGULE
 %token <t_string> EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
@@ -21,6 +21,7 @@
 %left MULTIPLICATION DIVISION
 %left INFERIEUR SUPERIEUR
 %left EGAL
+%right THEN ELSE
 
 %error-verbose
 
@@ -49,10 +50,13 @@
 %type <t_string> liste_parametres;
 %type <t_string> instruction;
 %type <t_string> instruction_list;
-%type <t_string> instructions;
+%type <t_string> declaration;
+%type <t_string> declaration_close;
+%type <t_string> declaration_ouverte;
+%type <t_string> while;
+%type <t_string> if;
+%type <t_string> for;
 %type <t_string> instruction_assignement;
-%type <t_string> instruction_while;
-%type <t_string> instruction_if;
 %type <t_string> expressions;
 %type <t_string> comparaison;
 %type <t_string> expression;
@@ -130,36 +134,52 @@ liste_parametres: liste_parametres VIRGULE declaration_variables { $$ = concat_e
 	| declaration_variables 
 	;
 
-instruction: 	TBEGIN				{ ajouterEnFin("begin"); }
-				instruction_list 
-				POINTVIRGULE 
-				TEND				{ ajouterEnFin("end"); }	
+instruction: 	TBEGIN 				{ ajouterEnFin("begin"); }
+				instruction_list 	
+				TEND				{ ajouterEnFin("end"); }
 	;
 
-instruction_list: instruction_list POINTVIRGULE instructions 
-	| instructions 
+instruction_list: instruction_list POINTVIRGULE declaration
+	| declaration
+	;
+
+declaration: declaration_ouverte
+	| declaration_close
+	;
+
+declaration_close: instruction_assignement
+	| instruction
 	| 
 	;
 
-instructions: instruction_assignement
-	| instruction_while 				
-	| instruction_if 									
-	| instruction 						
+declaration_ouverte: while 
+	| if 
+	| for
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression 	{ ajouterEnFin(concat_expression($1,$2,$3)); }
+while: 	WHILE 
+		expressions 
+		DO 
+		declaration 
 	;
 
-instruction_while: 	WHILE 
-					expressions 
-					DO 				{ ajouterEnFin(concat_expression($1,$2,$3)); }
-					instructions 			
+if: IF 
+	expressions 
+	THEN 
+	declaration 
+	| 
+	IF 
+	expressions 
+	THEN 
+	declaration 
+	ELSE 
+	declaration
 	;
 
-instruction_if: IF 				
-				expressions 	
-				THEN 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
-				instructions  		
+for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
+	;
+
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { ajouterEnFin(concat_expression($1,$2,$3)); }
 	;
 
 expressions: comparaison 	{ $$ = $1; } 	 	

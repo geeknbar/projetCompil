@@ -49,6 +49,8 @@ LETTRE[a-zA-Z]
 {E}{L}{S}{E}                { yylval.t_string = alloc_yytext("else"); return(ELSE); }
 {V}{A}{R}                   { yylval.t_string = alloc_yytext("var"); return(VAR); }
 {W}{H}{I}{L}{E}             { yylval.t_string = alloc_yytext("while"); return(WHILE); }
+{F}{O}{R}                   { yylval.t_string = alloc_yytext("for"); return(FOR); }
+{T}{O}                      { yylval.t_string = alloc_yytext("to"); return(TO); }
 {I}{N}{T}{E}{G}{E}{R}       { yylval.t_string = alloc_yytext("integer"); return(INTEGER); }
 {S}{T}{R}{I}{N}{G}          { yylval.t_string = alloc_yytext("string"); return(STRING); }
 {R}{E}{A}{L}                { yylval.t_string = alloc_yytext("real"); return(REAL); }
