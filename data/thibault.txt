@@ -2,14 +2,26 @@ program prog;
 
 { function f }
 FUNCTION f(x:INTEGER):INTEGER;
-
+var i,j:integer;
 BEGIN
-	j := 2 - 8;
+	IF i <= j THEN
+	BEGIN
+		i := 2 - 8;
+		j := 10 / 2;
+	END;
+END;
+
+{ function g }
+FUNCTION g(y:INTEGER):INTEGER;
+var k,l:integer;
+BEGIN
+	k := 2 - 8;
+	l := 10 / 2;
 END;
 
 {main}
-var i,y:integer;s:string;
+var m,n:integer;
 begin
-	i := 5.2 + 2.8;
-	y := 3 + 3.5;
+	m := 5 + 2;
+	n := j + 4;
 end.
