@@ -518,13 +518,13 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    68,    68,    72,    75,    81,    82,    85,    86,    89,
-      92,    93,    96,    97,   100,   101,   104,   105,   108,   109,
-     112,   115,   118,   127,   130,   133,   134,   137,   137,   142,
-     143,   146,   147,   150,   151,   152,   155,   156,   157,   162,
-     160,   168,   170,   166,   174,   177,   180,   182,   185,   187,
-     189,   191,   193,   196,   198,   200,   202,   204,   206,   208,
-     211,   212,   213,   214,   215
+       0,    68,    68,    72,    75,    81,    85,    88,    89,    92,
+      95,    96,    99,   100,   103,   104,   107,   108,   111,   112,
+     115,   118,   121,   130,   133,   136,   137,   140,   140,   145,
+     146,   149,   150,   153,   154,   155,   158,   159,   160,   165,
+     163,   171,   177,   169,   181,   184,   189,   191,   194,   196,
+     198,   200,   202,   205,   207,   209,   211,   213,   215,   217,
+     220,   221,   222,   223,   224
 };
 #endif
 
@@ -1503,47 +1503,56 @@ yyreduce:
     { ajouterEnFin((yyvsp[(2) - (3)].t_string)); }
     break;
 
+  case 5:
+/* Line 1787 of yacc.c  */
+#line 81 "grammaire.y"
+    { 
+							ajouterEnFin("declaration_variables ");
+							ajouterEnFin((yyvsp[(2) - (3)].t_string)); 
+							}
+    break;
+
   case 7:
 /* Line 1787 of yacc.c  */
-#line 85 "grammaire.y"
-    { ajouterEnFin(concat_deux_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
+#line 88 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 8:
 /* Line 1787 of yacc.c  */
-#line 86 "grammaire.y"
-    { ajouterEnFin((yyvsp[(1) - (1)].t_string)); }
+#line 89 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 9:
 /* Line 1787 of yacc.c  */
-#line 89 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 92 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 10:
 /* Line 1787 of yacc.c  */
-#line 92 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 95 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 11:
 /* Line 1787 of yacc.c  */
-#line 93 "grammaire.y"
+#line 96 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 20:
 /* Line 1787 of yacc.c  */
-#line 112 "grammaire.y"
+#line 115 "grammaire.y"
     { ajouterEnFin(concat_deux_chaines("fin_fonction ",(yyvsp[(1) - (2)].t_string))); }
     break;
 
   case 22:
 /* Line 1787 of yacc.c  */
-#line 118 "grammaire.y"
+#line 121 "grammaire.y"
     { 
-				ajouterEnFin(concat_expression((yyvsp[(1) - (6)].t_string)," ",(yyvsp[(2) - (6)].t_string))); 
+				ajouterEnFin(concat_trois_chaines((yyvsp[(1) - (6)].t_string)," ",(yyvsp[(2) - (6)].t_string))); 
 				ajouterEnFin(concat_deux_chaines("param ",(yyvsp[(3) - (6)].t_string)));
 				ajouterEnFin(concat_deux_chaines("type_return ", (yyvsp[(5) - (6)].t_string)));
 				ajouterEnFin(concat_deux_chaines("fin_declaration ",(yyvsp[(2) - (6)].t_string)));
@@ -1553,169 +1562,175 @@ yyreduce:
 
   case 24:
 /* Line 1787 of yacc.c  */
-#line 130 "grammaire.y"
+#line 133 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(2) - (3)].t_string); }
     break;
 
   case 25:
 /* Line 1787 of yacc.c  */
-#line 133 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 136 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 27:
 /* Line 1787 of yacc.c  */
-#line 137 "grammaire.y"
+#line 140 "grammaire.y"
     { ajouterEnFin("begin"); }
     break;
 
   case 28:
 /* Line 1787 of yacc.c  */
-#line 139 "grammaire.y"
+#line 142 "grammaire.y"
     { ajouterEnFin("end"); }
     break;
 
   case 39:
 /* Line 1787 of yacc.c  */
-#line 162 "grammaire.y"
-    { ajouterEnFin(concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
+#line 165 "grammaire.y"
+    { ajouterEnFin(concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
     break;
 
   case 41:
 /* Line 1787 of yacc.c  */
-#line 168 "grammaire.y"
-    { ajouterEnFin(concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
+#line 171 "grammaire.y"
+    { 
+	 					char * temporaire = concat_trois_chaines((yyvsp[(1) - (3)].t_string)," ",(yyvsp[(2) - (3)].t_string));
+	 					char * temporaire2 = concat_trois_chaines(temporaire," ",(yyvsp[(3) - (3)].t_string));
+						ajouterEnFin(temporaire2); 
+						}
     break;
 
   case 42:
 /* Line 1787 of yacc.c  */
-#line 170 "grammaire.y"
+#line 177 "grammaire.y"
     { ajouterEnFin("else"); }
     break;
 
   case 45:
 /* Line 1787 of yacc.c  */
-#line 177 "grammaire.y"
-    { ajouterEnFin(concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
+#line 184 "grammaire.y"
+    { 
+									char * temporaire = concat_deux_chaines("assignation ",(yyvsp[(1) - (3)].t_string));
+									ajouterEnFin(concat_trois_chaines(temporaire,(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string))); }
     break;
 
   case 46:
 /* Line 1787 of yacc.c  */
-#line 180 "grammaire.y"
+#line 189 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 47:
 /* Line 1787 of yacc.c  */
-#line 182 "grammaire.y"
+#line 191 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 48:
 /* Line 1787 of yacc.c  */
-#line 185 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 194 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 49:
 /* Line 1787 of yacc.c  */
-#line 187 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 196 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 50:
 /* Line 1787 of yacc.c  */
-#line 189 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 198 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 51:
 /* Line 1787 of yacc.c  */
-#line 191 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 200 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 52:
 /* Line 1787 of yacc.c  */
-#line 193 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 202 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 53:
 /* Line 1787 of yacc.c  */
-#line 196 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 205 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 54:
 /* Line 1787 of yacc.c  */
-#line 198 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 207 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 55:
 /* Line 1787 of yacc.c  */
-#line 200 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 209 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 56:
 /* Line 1787 of yacc.c  */
-#line 202 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 211 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 57:
 /* Line 1787 of yacc.c  */
-#line 204 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+#line 213 "grammaire.y"
+    { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 58:
-/* Line 1787 of yacc.c  */
-#line 206 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 59:
-/* Line 1787 of yacc.c  */
-#line 208 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 60:
-/* Line 1787 of yacc.c  */
-#line 211 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 61:
-/* Line 1787 of yacc.c  */
-#line 212 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 62:
-/* Line 1787 of yacc.c  */
-#line 213 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 63:
-/* Line 1787 of yacc.c  */
-#line 214 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
-    break;
-
-  case 64:
 /* Line 1787 of yacc.c  */
 #line 215 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
+  case 59:
+/* Line 1787 of yacc.c  */
+#line 217 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
+  case 60:
+/* Line 1787 of yacc.c  */
+#line 220 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
+  case 61:
+/* Line 1787 of yacc.c  */
+#line 221 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
+  case 62:
+/* Line 1787 of yacc.c  */
+#line 222 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
+  case 63:
+/* Line 1787 of yacc.c  */
+#line 223 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
+  case 64:
+/* Line 1787 of yacc.c  */
+#line 224 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
+    break;
+
 
 /* Line 1787 of yacc.c  */
-#line 1719 "grammaire.tab.c"
+#line 1734 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1947,7 +1962,7 @@ yyreturn:
 
 
 /* Line 2050 of yacc.c  */
-#line 218 "grammaire.y"
+#line 227 "grammaire.y"
 
 
 int main(int argc, char* argv[]){
@@ -1960,7 +1975,8 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
-	impression();
+	//impression();
+	traduction();
 	if(f!=NULL)
 		fclose(f);
 }

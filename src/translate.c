@@ -161,17 +161,17 @@ void liberationMemoire()
     free(affichage);
 }
 
-char * concat_expression(char * s1, char * op, char * s2) {
-    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2)); 
+char * concat_deux_chaines(char * s1, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(s2)); 
     strcat(s,s1);
-    strcat(s,op);
     strcat(s,s2);
     return s;  
 }
 
-char * concat_deux_chaines(char * s1, char * s2) {
-    char * s = malloc(sizeof(s1) + sizeof(s2)); 
+char * concat_trois_chaines(char * s1, char * op, char * s2) {
+    char * s = malloc(sizeof(s1) + sizeof(op) + sizeof(s2)); 
     strcat(s,s1);
+    strcat(s,op);
     strcat(s,s2);
     return s;  
 }
@@ -180,4 +180,104 @@ char * alloc_yytext(char * yytext) {
     char * test = malloc(sizeof(yytext));
     strcpy(test, yytext);
     return test;
+}
+
+void traduction() {
+    element * curseur = affichage;
+
+    char * nomFonction = "";
+    char * parametresFonction = "";
+    char * typeRetourFonction = "";
+
+    int declaration_variables = 0;
+    int boucle_if = 0;
+    int boucle_while = 0;
+
+    printf("Nom du programme : %s\n\n", curseur->code);
+    curseur = curseur->nxt;
+    printf("#include <stdio.h>\n");
+    while(curseur != NULL)
+    {
+
+        char * duplicata = strdup(curseur->code);
+        char * tokens = strsep(&duplicata, " ");
+
+        if (declaration_variables == 0) {
+            if (strcmp("function", tokens) == 0) {
+                nomFonction = strsep(&duplicata, " ");
+            } else if (strcmp("param", tokens) == 0) {
+                char * variables = strsep(&duplicata, ":");
+                char * type = strsep(&duplicata, ":");
+                char * dupvar = strdup(variables);
+                char * token = strsep(&dupvar, ",");
+                int nbParam = 0;
+                while(token != NULL) {
+                    if (nbParam == 0) {
+                        char * unParametre = concat_trois_chaines(conversionType(type)," ",token);
+                        parametresFonction = concat_deux_chaines(parametresFonction,unParametre); 
+                        nbParam++;
+                    } else {
+                        char * unParametre = concat_trois_chaines(conversionType(type)," ",token);
+                        parametresFonction = concat_trois_chaines(parametresFonction,",",unParametre); 
+                        nbParam++;
+                    }
+                    
+                    token = strsep(&dupvar, ",");
+                }
+            } else if (strcmp("type_return", tokens) == 0) {
+                typeRetourFonction = conversionType(strsep(&duplicata, " "));
+            } else if (strcmp("fin_declaration", tokens) == 0) {
+                printf("%s %s (%s) \n{\n",typeRetourFonction,nomFonction,parametresFonction);
+            } else if (strcmp("declaration_variables", tokens) == 0) {
+                declaration_variables = 1;
+            } else if (strcmp("begin", tokens) == 0) {
+                //printf(" DEBUT DE LA FONCTION \n");
+            } else if (strcmp("if", tokens) == 0) {
+                char * condition = strsep(&duplicata, " ");
+                printf("if (%s) \n{\n",condition);
+            } else if (strcmp("while", tokens) == 0) {
+                boucle_while = 1;
+            } else if (strcmp("assignation", tokens) == 0) {
+                
+            } else {
+                printf("%s\n", curseur->code);
+            }
+        } else {
+            // Mode déclaration de variables;
+
+            char * types = strsep(&tokens, ";");
+
+            while (types != NULL) {
+                char * variables = strsep(&types, ":");
+                char * type = strsep(&types, ":");
+                printf("%s;\n",concat_trois_chaines(conversionType(type)," ",variables));
+                types = strsep(&tokens, ";");
+            }
+
+            declaration_variables = 0;
+        }
+        
+
+        curseur = curseur->nxt;
+    }
+}
+
+char * conversionType(char * type) {
+    if (strcmp("integer", type) == 0) {
+        return "int";
+    }
+    if (strcmp("real", type) == 0) {
+        return "float";
+    }
+    if (strcmp("string", type) == 0) {
+        return "char *";
+    }
+    if (strcmp("char", type) == 0) {
+        return "char";
+    }
+    if (strcmp("boolean", type) == 0) {
+        return "int";
+    }
+
+    return "NO_TYPE";
 }

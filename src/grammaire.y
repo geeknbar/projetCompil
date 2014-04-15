@@ -75,21 +75,24 @@ programme_entete:
 bloc: declaration_variable
 	declaration_fonction
 	declaration_procedure
-	instruction 
+	instruction
 	;
 
-declaration_variable: VAR liste_variables POINTVIRGULE 
+declaration_variable: VAR liste_variables POINTVIRGULE { 
+							ajouterEnFin("declaration_variables ");
+							ajouterEnFin($2); 
+							}
 	|
 	;
 
-liste_variables: liste_variables POINTVIRGULE declaration_variables { ajouterEnFin(concat_deux_chaines($1,$3)); }
-	| declaration_variables { ajouterEnFin($1); }
+liste_variables: liste_variables POINTVIRGULE declaration_variables { $$ = concat_trois_chaines($1,$2,$3); }
+	| declaration_variables { $$ = $1; }
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { $$ = concat_expression($1,$2,$3); }
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { $$ = concat_trois_chaines($1,$2,$3); }
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_trois_chaines($1,$2,$3); }
 	| IDENTIFIANT { $$ = $1; }
 	;
 
@@ -116,7 +119,7 @@ declaration_procedures: procedure_entete bloc
 	;
 
 fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE { 
-				ajouterEnFin(concat_expression($1," ",$2)); 
+				ajouterEnFin(concat_trois_chaines($1," ",$2)); 
 				ajouterEnFin(concat_deux_chaines("param ",$3));
 				ajouterEnFin(concat_deux_chaines("type_return ", $5));
 				ajouterEnFin(concat_deux_chaines("fin_declaration ",$2));
@@ -130,7 +133,7 @@ procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE
 parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE { $$ = $2; }
 	;
 
-liste_parametres: liste_parametres VIRGULE declaration_variables { $$ = concat_expression($1,$2,$3); }
+liste_parametres: liste_parametres VIRGULE declaration_variables { $$ = concat_trois_chaines($1,$2,$3); }
 	| declaration_variables 
 	;
 
@@ -159,13 +162,17 @@ declaration_ouverte: while
 
 while: 	WHILE 
 		expressions 
-		DO 				{ ajouterEnFin(concat_expression($1,$2,$3)); }
+		DO 				{ ajouterEnFin(concat_trois_chaines($1,$2,$3)); }
 		declaration 
 	;
 
 if: IF 				
 	expressions 
-	THEN 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
+	THEN 			{ 
+	 					char * temporaire = concat_trois_chaines($1," ",$2);
+	 					char * temporaire2 = concat_trois_chaines(temporaire," ",$3);
+						ajouterEnFin(temporaire2); 
+						}
 	declaration 
 	ELSE 			{ ajouterEnFin("else"); }
 	declaration 
@@ -174,7 +181,9 @@ if: IF
 for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { ajouterEnFin(concat_expression($1,$2,$3)); }
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { 
+									char * temporaire = concat_deux_chaines("assignation ",$1);
+									ajouterEnFin(concat_trois_chaines(temporaire,$2,$3)); }
 	;
 
 expressions: comparaison 	{ $$ = $1; } 	 	
@@ -182,26 +191,26 @@ expressions: comparaison 	{ $$ = $1; }
 	NOMBRE 					{ $$ = $1; }	
 	;
 
-comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_expression($1,$2,$3); }	
+comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_trois_chaines($1,$2,$3); }	
 	| 
-	expression INFERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }				
+	expression INFERIEUR expression 				{ $$ = concat_trois_chaines($1,$2,$3); }				
 	|
-	expression EGAL expression 						{ $$ = concat_expression($1,$2,$3); }
+	expression EGAL expression 						{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	expression SUPERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }
+	expression SUPERIEUR expression 				{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	expression SUPERIEUREGAL expression 			{ $$ = concat_expression($1,$2,$3); }
+	expression SUPERIEUREGAL expression 			{ $$ = concat_trois_chaines($1,$2,$3); }
 	;
 
-expression: expression MULTIPLICATION expression 	{ $$ = concat_expression($1,$2,$3); }
+expression: expression MULTIPLICATION expression 	{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	expression ADDITION expression 					{ $$ = concat_expression($1,$2,$3); }
+	expression ADDITION expression 					{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	expression SOUSTRACTION expression 				{ $$ = concat_expression($1,$2,$3); }
+	expression SOUSTRACTION expression 				{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	expression DIVISION expression 					{ $$ = concat_expression($1,$2,$3); }
+	expression DIVISION expression 					{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
-	PARENTHESEGAUCHE expression PARENTHESEDROITE 	{ $$ = concat_expression($1,$2,$3); }
+	PARENTHESEGAUCHE expression PARENTHESEDROITE 	{ $$ = concat_trois_chaines($1,$2,$3); }
 	|
 	NOMBRE 											{ $$ = $1; }
 	|
@@ -227,7 +236,8 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
-	impression();
+	//impression();
+	traduction();
 	if(f!=NULL)
 		fclose(f);
 }

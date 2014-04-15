@@ -1,17 +1,13 @@
 program prog;
 
 { function f }
-FUNCTION f(x:INTEGER):INTEGER;
-var i,j:integer;
+FUNCTION f(x,y:INTEGER):INTEGER;
+var i,j:integer;s:string;
 BEGIN
 	IF i <= j THEN
 	BEGIN
 		i := 2 - 8;
 		j := 10 / 2;
-		WHILE j >= i DO
-		BEGIN
-			i := j + 56;
-		END;
 	END
 	ELSE
 	BEGIN
