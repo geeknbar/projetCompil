@@ -159,21 +159,16 @@ declaration_ouverte: while
 
 while: 	WHILE 
 		expressions 
-		DO 
+		DO 				{ ajouterEnFin(concat_expression($1,$2,$3)); }
 		declaration 
 	;
 
-if: IF 
+if: IF 				
 	expressions 
-	THEN 
+	THEN 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
 	declaration 
-	| 
-	IF 
-	expressions 
-	THEN 
+	ELSE 			{ ajouterEnFin("else"); }
 	declaration 
-	ELSE 
-	declaration
 	;
 
 for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
