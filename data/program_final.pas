@@ -2,7 +2,7 @@ PROGRAM prog;
 
 { function f }
 FUNCTION f(x:INTEGER) :INTEGER;
-VAR pp,yy:INTEGER;
+VAR i:INTEGER;
 BEGIN
 	i := 0;
 	f := 0;
@@ -16,5 +16,5 @@ END;
 { main program }
 VAR x: INTEGER;
 BEGIN
- o:=0;
+ WRITELN(f(x));
 END.

@@ -2,20 +2,24 @@ PROGRAM prog;
 
 { function f }
 FUNCTION f(x:INTEGER) :INTEGER;
-VAR i,pp,yy:INTEGER;
+VAR pp:INTEGER;
 BEGIN
-	i := 0;
-	f := 0;
-	z := 9;
-	WHILE i < x DO
-	BEGIN
-		IF i + a = 0 THEN
-			f := f + i;
-	END;
+	pp := 0;
+END;
+
+
+{ function g }
+FUNCTION g(q:INTEGER) :INTEGER;
+VAR oop:INTEGER;
+BEGIN
+	oop := 0;
+	g := g + i;
+
 END;
 
 { main program }
-VAR x: INTEGER;
+VAR azer: INTEGER;
 BEGIN
- o := 0;
+ azer := 0;
+ pp:=9;
 END.

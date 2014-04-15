@@ -2,6 +2,7 @@
   #include<stdio.h>
   #include "tableSymboles.h"
   #include "grammaire.tab.h"
+  #include "tableSymbolesSecondaires.h"
   int line_no = 1;
 %}
 A [aA]
@@ -53,6 +54,9 @@ LETTRE[a-zA-Z]
 {R}{E}{A}{L}                { yylval.t_string = alloc_yytext("real"); return(REAL); }
 {B}{O}{O}{L}{E}{A}{N}       { yylval.t_string = alloc_yytext("boolean"); return(BOOLEAN); }
 {C}{H}{A}{R}                { yylval.t_string = alloc_yytext("char"); return(CHAR); }
+
+{R}{E}{A}{D}{L}{N}          { yylval.t_string = alloc_yytext("readln"); return(READLN); }
+{W}{R}{I}{T}{E}{L}{N}       { yylval.t_string = alloc_yytext("writeln"); return(WRITELN); }
 
 ":="                        { yylval.t_string = alloc_yytext(yytext); return(ASSIGNATION); }
 "."                         { yylval.t_string = alloc_yytext(yytext); return(POINT); }
