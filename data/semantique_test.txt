@@ -17,5 +17,5 @@ END;
 { main program }
 VAR x: INTEGER;
 BEGIN
- o:= 0;
+ o := 0;
 END.

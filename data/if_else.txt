@@ -1,0 +1,13 @@
+PROGRAM prog;
+
+{ function f }
+FUNCTION f(x:INTEGER) :INTEGER;
+VAR pp,yy:INTEGER;
+BEGIN
+END;
+
+{ main program }
+VAR x: INTEGER;
+BEGIN
+ o:=0;
+END.

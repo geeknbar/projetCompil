@@ -49,15 +49,21 @@
 %type <t_string> liste_parametres;
 %type <t_string> instruction;
 %type <t_string> instruction_list;
-%type <t_string> instructions;
+%type <t_string> instruction_bloc;
+%type <t_string> declaration;
+%type <t_string> declaration_close;
+%type <t_string> declaration_ouverte;
+%type <t_string> while_ouvert;
+%type <t_string> while_clos;
+%type <t_string> if_ouvert;
+%type <t_string> if_clos;
 %type <t_string> instruction_assignement;
-%type <t_string> instruction_while;
-%type <t_string> instruction_if;
 %type <t_string> expressions;
 %type <t_string> comparaison;
 %type <t_string> expression;
 %type <t_string> type_variable;
 %%
+
 
 programme:
 	programme_entete bloc POINT 
@@ -125,27 +131,47 @@ liste_parametres: liste_parametres VIRGULE declaration_variables
 	| declaration_variables
 	;
 
-instruction: TBEGIN instruction_list TEND
+instruction : instruction_bloc
 	;
 
-instruction_list: instruction_list POINTVIRGULE instructions
-	| instructions
+instruction_bloc: TBEGIN instruction_list TEND
 	;
 
-instructions: instruction_assignement
-	| instruction_while
-	| instruction_if
-	| instruction
+instruction_list: instruction_list POINTVIRGULE declaration
+	| declaration
+	;
+
+declaration : declaration_ouverte
+	| declaration_close
+	;
+
+declaration_close : instruction_assignement
+	| while_clos
+	| if_clos
+	| instruction_bloc
 	|
 	;
 
+declaration_ouverte : while_ouvert
+	| if_ouvert
+	;
+
+while_ouvert : WHILE expressions DO declaration_ouverte
+  ;
+
+while_clos : WHILE expressions DO declaration_close;
+  ;
+
+
+if_ouvert : IF expressions THEN declaration
+	| IF expressions THEN declaration_close ELSE declaration_ouverte
+	;
+
+if_clos : IF expressions THEN declaration_close ELSE declaration_close
+  ;
+
+
 instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
-	;
-
-instruction_while: WHILE expressions DO instructions
-	;
-
-instruction_if: IF expressions THEN instructions POINTVIRGULE
 	;
 
 expressions: comparaison
