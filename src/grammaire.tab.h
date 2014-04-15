@@ -81,8 +81,9 @@ extern int yydebug;
      DIVISION = 290,
      PARENTHESEGAUCHE = 291,
      PARENTHESEDROITE = 292,
-     NOMBRE = 293,
-     IDENTIFIANT = 294
+     APOSTROPHE = 293,
+     NOMBRE = 294,
+     IDENTIFIANT = 295
    };
 #endif
 
@@ -91,7 +92,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2053 of yacc.c  */
-#line 26 "grammaire.y"
+#line 27 "grammaire.y"
 
 	int t_int;
 	float t_float;
@@ -99,7 +100,7 @@ typedef union YYSTYPE
 
 
 /* Line 2053 of yacc.c  */
-#line 103 "grammaire.tab.h"
+#line 104 "grammaire.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

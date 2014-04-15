@@ -76,6 +76,8 @@ LETTRE[a-zA-Z]
 "("                         { yylval.t_string = alloc_yytext(yytext); return(PARENTHESEGAUCHE); }
 ")"                         { yylval.t_string = alloc_yytext(yytext); return(PARENTHESEDROITE); }
 
+"'"                         { yylval.t_string = alloc_yytext(yytext); return(APOSTROPHE); }
+
 {LETTRE}({LETTRE}|{CHIFFRE})* {
   yylval.t_string = alloc_yytext(yytext);
 	return IDENTIFIANT;

@@ -13,6 +13,7 @@
 %token <t_string> EGAL SUPERIEUREGAL SUPERIEUR INFERIEUREGAL INFERIEUR DIFFERENT
 %token <t_string> ADDITION SOUSTRACTION MULTIPLICATION DIVISION
 %token <t_string> PARENTHESEGAUCHE PARENTHESEDROITE
+%token <t_string> APOSTROPHE
 %token <t_string> NOMBRE
 %token <t_string> IDENTIFIANT
 
@@ -64,109 +65,111 @@ programme:
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin("#include <stdio.h>"); }
+	PROGRAM IDENTIFIANT POINTVIRGULE { ajouterEnFin($2); }
 	;
 
 bloc: declaration_variable
 	declaration_fonction
 	declaration_procedure
-	instruction { 
-		ajouterEnFin("int main() {");
-		ajouterEnFin($4);
-		ajouterEnFin("return 0;}");
-	}
+	instruction 
 	;
 
-declaration_variable: VAR liste_variables POINTVIRGULE
+declaration_variable: VAR liste_variables POINTVIRGULE 
 	|
 	;
 
-liste_variables: liste_variables POINTVIRGULE declaration_variables
-	| declaration_variables
+liste_variables: liste_variables POINTVIRGULE declaration_variables { ajouterEnFin(concat_deux_chaines($1,$3)); }
+	| declaration_variables { ajouterEnFin($1); }
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { 
-																	if(strcmp($3,"integer") == 0) 
-																	{
-																		ajouterEnFin(concat_expression("int ",$1,";"));
-																	}  
-																   }
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { $$ = concat_expression($1,$2,$3); }
 	;
 
 liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
 	| IDENTIFIANT { $$ = $1; }
 	;
 
-declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable {  }
+declaration_fonction: liste_fonctions POINTVIRGULE declaration_variable
 	|
 	;
 
-declaration_procedure: liste_procedures POINTVIRGULE declaration_variable {  }
+declaration_procedure: liste_procedures POINTVIRGULE declaration_variable 
 	|
 	;
 
-liste_fonctions: liste_fonctions POINTVIRGULE declaration_fonctions {  }
-	| declaration_fonctions {  }
+liste_fonctions: liste_fonctions POINTVIRGULE declaration_fonctions 
+	| declaration_fonctions 
 	;
 
-liste_procedures: liste_procedures POINTVIRGULE declaration_procedures {  }
-	| declaration_procedures {  }
+liste_procedures: liste_procedures POINTVIRGULE declaration_procedures 
+	| declaration_procedures 
 	;
 
-declaration_fonctions: fonction_entete bloc {  }
+declaration_fonctions: fonction_entete bloc { ajouterEnFin(concat_deux_chaines("fin_fonction ",$1)); }
 	;
 
-declaration_procedures: procedure_entete bloc {  }
+declaration_procedures: procedure_entete bloc 
 	;
 
-fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {  }
+fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE { 
+				ajouterEnFin(concat_expression($1," ",$2)); 
+				ajouterEnFin(concat_deux_chaines("param ",$3));
+				ajouterEnFin(concat_deux_chaines("type_return ", $5));
+				ajouterEnFin(concat_deux_chaines("fin_declaration ",$2));
+				$$ = $2;
+				}
 	;
 
-procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE {  }
+procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE 
 	;
 
-parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE {  }
+parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE { $$ = $2; }
 	;
 
-liste_parametres: liste_parametres VIRGULE declaration_variables {  }
-	| declaration_variables {  }
+liste_parametres: liste_parametres VIRGULE declaration_variables { $$ = concat_expression($1,$2,$3); }
+	| declaration_variables 
 	;
 
-instruction: TBEGIN instruction_list POINTVIRGULE TEND { $$ = concat_deux_chaines($2,$3); }
+instruction: 	TBEGIN				{ ajouterEnFin("begin"); }
+				instruction_list 
+				POINTVIRGULE 
+				TEND				{ ajouterEnFin("end"); }	
 	;
 
-instruction_list: instruction_list POINTVIRGULE instructions { $$ = concat_expression($1,$2,$3); }
-	| instructions {  }
-	|
-	;
-
-instructions: instruction_assignement 	{ $$ = $1; }
-	| instruction_while 				{ $$ = $1; }
-	| instruction_if 					{ $$ = $1; }
-	| instruction 						{ $$ = $1; }
-	;
-
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { $$ = concat_expression($1," = ",$3); }
-	;
-
-instruction_while: WHILE expressions DO instructions {  }
-	;
-
-instruction_if: IF expressions THEN instructions POINTVIRGULE 	{ 	
-																	char * s1 = concat_deux_chaines($1,$2); 
-																	char * s2 = concat_expression($3,$4,$5);
-																	$$ = concat_deux_chaines(s1,s2);
-															  	}
-	;
-
-expressions: comparaison 	{ $$ = $1; }
-	|
-	NOMBRE 					{ $$ = $1; }
-	;
-
-comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_expression($1,$2,$3); }
+instruction_list: instruction_list POINTVIRGULE instructions 
+	| instructions 
 	| 
-	expression INFERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }
+	;
+
+instructions: instruction_assignement
+	| instruction_while 				
+	| instruction_if 									
+	| instruction 						
+	;
+
+instruction_assignement: IDENTIFIANT ASSIGNATION expression 	{ ajouterEnFin(concat_expression($1,$2,$3)); }
+	;
+
+instruction_while: 	WHILE 
+					expressions 
+					DO 				{ ajouterEnFin(concat_expression($1,$2,$3)); }
+					instructions 			
+	;
+
+instruction_if: IF 				
+				expressions 	
+				THEN 			{ ajouterEnFin(concat_expression($1,$2,$3)); }
+				instructions  		
+	;
+
+expressions: comparaison 	{ $$ = $1; } 	 	
+	|
+	NOMBRE 					{ $$ = $1; }	
+	;
+
+comparaison: expression INFERIEUREGAL expression 	{ $$ = concat_expression($1,$2,$3); }	
+	| 
+	expression INFERIEUR expression 				{ $$ = concat_expression($1,$2,$3); }				
 	|
 	expression EGAL expression 						{ $$ = concat_expression($1,$2,$3); }
 	|
@@ -185,9 +188,9 @@ expression: expression MULTIPLICATION expression 	{ $$ = concat_expression($1,$2
 	|
 	PARENTHESEGAUCHE expression PARENTHESEDROITE 	{ $$ = concat_expression($1,$2,$3); }
 	|
-	NOMBRE 		{ $$ = $1; }
+	NOMBRE 											{ $$ = $1; }
 	|
-	IDENTIFIANT { $$ = $1; }
+	IDENTIFIANT 									{ $$ = $1; }
 	;
 
 type_variable : STRING 	{ $$ = $1; }
