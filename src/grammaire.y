@@ -162,7 +162,11 @@ declaration_ouverte: while
 
 while: 	WHILE 
 		expressions 
-		DO 				{ ajouterEnFin(concat_trois_chaines($1,$2,$3)); }
+		DO 				{ 
+							char * temporaire = concat_trois_chaines($1," ",$2);
+	 						char * temporaire2 = concat_trois_chaines(temporaire," ",$3);
+							ajouterEnFin(temporaire2);
+						}
 		declaration 
 	;
 
@@ -172,7 +176,7 @@ if: IF
 	 					char * temporaire = concat_trois_chaines($1," ",$2);
 	 					char * temporaire2 = concat_trois_chaines(temporaire," ",$3);
 						ajouterEnFin(temporaire2); 
-						}
+					}
 	declaration 
 	ELSE 			{ ajouterEnFin("else"); }
 	declaration 

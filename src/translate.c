@@ -190,12 +190,13 @@ void traduction() {
     char * typeRetourFonction = "";
 
     int declaration_variables = 0;
-    int boucle_if = 0;
-    int boucle_while = 0;
+    int est_fonction = 0;
+    int est_procedure = 0;
+    int est_main = 0;
 
     printf("Nom du programme : %s\n\n", curseur->code);
     curseur = curseur->nxt;
-    printf("#include <stdio.h>\n");
+    printf("#include <stdio.h>\n\n");
     while(curseur != NULL)
     {
 
@@ -205,6 +206,10 @@ void traduction() {
         if (declaration_variables == 0) {
             if (strcmp("function", tokens) == 0) {
                 nomFonction = strsep(&duplicata, " ");
+                est_fonction = 1;
+            } else if (strcmp("fin_fonction", tokens) == 0) {
+                printf("\n");
+                est_fonction = 0;
             } else if (strcmp("param", tokens) == 0) {
                 char * variables = strsep(&duplicata, ":");
                 char * type = strsep(&duplicata, ":");
@@ -229,16 +234,30 @@ void traduction() {
             } else if (strcmp("fin_declaration", tokens) == 0) {
                 printf("%s %s (%s) \n{\n",typeRetourFonction,nomFonction,parametresFonction);
             } else if (strcmp("declaration_variables", tokens) == 0) {
+                if (est_fonction == 0) {
+                    printf("int main()\n{\n");
+                    est_main = 1;
+                }
                 declaration_variables = 1;
             } else if (strcmp("begin", tokens) == 0) {
-                //printf(" DEBUT DE LA FONCTION \n");
+                // DEBUT D'UN BLOC
+            } else if (strcmp("end", tokens) == 0) {
+                // FIN D'UN BLOC
+                printf("}\n");
+            } else if (strcmp("else", tokens) == 0) {
+                // FIN D'UN BLOC
+                printf("else\n{\n");
             } else if (strcmp("if", tokens) == 0) {
                 char * condition = strsep(&duplicata, " ");
                 printf("if (%s) \n{\n",condition);
             } else if (strcmp("while", tokens) == 0) {
-                boucle_while = 1;
+                char * condition = strsep(&duplicata, " ");
+                printf("while (%s) \n{\n",condition);
             } else if (strcmp("assignation", tokens) == 0) {
-                
+                char * assignation = strsep(&duplicata, " ");
+                assignation = replace_str(assignation, ":=", " = ");
+                assignation = concat_deux_chaines(assignation,";");
+                printf("%s\n",assignation);
             } else {
                 printf("%s\n", curseur->code);
             }
@@ -280,4 +299,20 @@ char * conversionType(char * type) {
     }
 
     return "NO_TYPE";
+}
+
+char * replace_str(char *str, char *orig, char *rep)
+{
+  static char buffer[4096];
+  char *p;
+
+  if(!(p = strstr(str, orig)))  // Is 'orig' even in 'str'?
+    return str;
+
+  strncpy(buffer, str, p-str); // Copy characters from 'str' start to 'orig' st$
+  buffer[p-str] = '\0';
+
+  sprintf(buffer+(p-str), "%s%s", rep, p+strlen(orig));
+
+  return buffer;
 }

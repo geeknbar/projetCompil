@@ -21,5 +21,6 @@ char * concat_trois_chaines(char * s1, char * op, char * s2);
 char * alloc_yytext(char * yytext);
 void traduction();
 char * conversionType(char * type);
+char * replace_str(char *str, char *orig, char *rep);
 
 #endif
