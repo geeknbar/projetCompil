@@ -19,6 +19,7 @@
 %token <t_string> APOSTROPHE
 %token <t_string> NOMBRE
 %token <t_string> IDENTIFIANT
+%token <t_string> READLN WRITELN
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
@@ -64,6 +65,8 @@
 %type <t_string> comparaison;
 %type <t_string> expression;
 %type <t_string> type_variable;
+%type <t_string> writeln;
+%type <t_string> readln;
 %%
 
 
@@ -158,6 +161,14 @@ declaration_close: instruction_assignement
 declaration_ouverte: while 
 	| if 
 	| for
+	| writeln
+	| readln
+	;
+
+writeln: WRITELN PARENTHESEGAUCHE IDENTIFIANT PARENTHESEGAUCHE IDENTIFIANT PARENTHESEDROITE PARENTHESEDROITE POINTVIRGULE
+	;
+
+readln: READLN PARENTHESEGAUCHE IDENTIFIANT PARENTHESEDROITE POINTVIRGULE
 	;
 
 while: 	WHILE 

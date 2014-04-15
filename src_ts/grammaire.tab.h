@@ -76,7 +76,9 @@
      PARENTHESEDROITE = 294,
      APOSTROPHE = 295,
      NOMBRE = 296,
-     IDENTIFIANT = 297
+     IDENTIFIANT = 297,
+     READLN = 298,
+     WRITELN = 299
    };
 #endif
 
@@ -87,7 +89,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 31 "grammaire.y"
+#line 32 "grammaire.y"
 
 	int t_int;
 	float t_float;
@@ -96,7 +98,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 100 "grammaire.tab.h"
+#line 102 "grammaire.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
