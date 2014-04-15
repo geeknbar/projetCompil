@@ -243,6 +243,9 @@ void traduction() {
                 // DEBUT D'UN BLOC
             } else if (strcmp("end", tokens) == 0) {
                 // FIN D'UN BLOC
+                if (est_main == 1) {
+                    printf("return 0;\n");
+                }
                 printf("}\n");
             } else if (strcmp("else", tokens) == 0) {
                 // FIN D'UN BLOC
@@ -255,9 +258,18 @@ void traduction() {
                 printf("while (%s) \n{\n",condition);
             } else if (strcmp("assignation", tokens) == 0) {
                 char * assignation = strsep(&duplicata, " ");
-                assignation = replace_str(assignation, ":=", " = ");
-                assignation = concat_deux_chaines(assignation,";");
-                printf("%s\n",assignation);
+                char * partie_gauche = strdup(assignation);
+                partie_gauche = strsep(&partie_gauche, ":=");
+                if (strcmp(partie_gauche,nomFonction) == 0) {
+                    char * partie_droite = strdup(assignation);
+                    strsep(&partie_droite,":");
+                    strsep(&partie_droite,"=");
+                    printf("return %s;\n",partie_droite);
+                } else {
+                    assignation = replace_str(assignation, ":=", " = ");
+                    assignation = concat_deux_chaines(assignation,";");
+                    printf("%s\n",assignation);
+                }
             } else {
                 printf("%s\n", curseur->code);
             }

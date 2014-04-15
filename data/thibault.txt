@@ -1,36 +1,23 @@
 program prog;
 
 { function f }
-FUNCTION f(x,y:INTEGER):INTEGER;
-var i,j:integer;s:string;
+FUNCTION estPlusPetitQueDix(nombre:INTEGER):INTEGER;
+var resultat:integer;
 BEGIN
-	IF i <= j THEN
+	resultat := 0;
+	IF nombre <= 10 THEN
 	BEGIN
-		i := 2 - 8;
-		j := 10 / 2;
+		resultat := nombre;
 	END
 	ELSE
 	BEGIN
-		i := 10 / 2;
-		j := 2 - 8;
+		resultat := -1;
 	END;
-	WHILE j >= i DO
-	BEGIN
-		i := i + 1;
-	END;
-END;
-
-{ function g }
-FUNCTION g(y:INTEGER):INTEGER;
-var k,l:integer;
-BEGIN
-	k := 2 - 8;
-	l := 10 / 2;
+	estPlusPetitQueDix := resultat;
 END;
 
 {main}
-var m,n:integer;
+var inutile:integer;
 begin
-	m := 5 + 2;
-	n := j + 4;
+	writeln(estPlusPetitQueDix(5));
 end.
