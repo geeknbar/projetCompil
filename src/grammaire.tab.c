@@ -1647,8 +1647,8 @@ yyreduce:
   case 47:
 /* Line 1787 of yacc.c  */
 #line 208 "grammaire.y"
-    { char * temporaire = concat_trois_chaines("affichage ",(yyvsp[(1) - (4)].t_string),(yyvsp[(2) - (4)].t_string));
-										char * temporaire2 = concat_trois_chaines(temporaire,(yyvsp[(3) - (4)].t_string),(yyvsp[(4) - (4)].t_string));
+    { char * temporaire = concat_trois_chaines((yyvsp[(1) - (4)].t_string),(yyvsp[(2) - (4)].t_string),(yyvsp[(3) - (4)].t_string));
+										char * temporaire2 = concat_deux_chaines(temporaire,(yyvsp[(4) - (4)].t_string));
 										(yyval.t_string) = temporaire2;
 										}
     break;
@@ -2034,8 +2034,8 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
-	impression();
-	//traduction();
+	//impression();
+	traduction();
 	if(f!=NULL)
 		fclose(f);
 }

@@ -205,8 +205,8 @@ write: WRITELN
 interieur_write: 	IDENTIFIANT 
 					PARENTHESEGAUCHE 
 					expression 
-					PARENTHESEDROITE { char * temporaire = concat_trois_chaines("affichage ",$1,$2);
-										char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
+					PARENTHESEDROITE { char * temporaire = concat_trois_chaines($1,$2,$3);
+										char * temporaire2 = concat_deux_chaines(temporaire,$4);
 										$$ = temporaire2;
 										}
 					|
@@ -269,8 +269,8 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
-	impression();
-	//traduction();
+	//impression();
+	traduction();
 	if(f!=NULL)
 		fclose(f);
 }
