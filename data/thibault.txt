@@ -18,15 +18,14 @@ END;
 
 { procedure g }
 PROCEDURE afficherUnADix;
-var compteur:integer;message:string;
+var compteur:integer;
 BEGIN
-	{ message := 'Termine'; }
 	WHILE compteur <= 10 DO
     BEGIN
-		{ writeln(compteur); }
+		writeln(compteur);
 		compteur := compteur+1;
 	END;
-	{ writeln(message); }
+	writeln('Termine');
 END;
 
 { main }

@@ -272,9 +272,13 @@ void traduction() {
                     char * partie_droite = strdup(assignation);
                     strsep(&partie_droite,":");
                     strsep(&partie_droite,"=");
+                    partie_droite = replace_str(partie_droite, "'", "\"");
+                    assignation = replace_str(assignation, "'", "\"");
                     printf("return %s;\n",partie_droite);
                 } else {
                     assignation = replace_str(assignation, ":=", " = ");
+                    assignation = replace_str(assignation, "'", "\"");
+                    assignation = replace_str(assignation, "'", "\"");
                     assignation = concat_deux_chaines(assignation,";");
                     printf("%s\n",assignation);
                 }
@@ -288,8 +292,17 @@ void traduction() {
                 strsep(&affichage,"l");
                 strsep(&affichage,"n");
                 strsep(&affichage,"(");
-                printf("printf(\"%%d\",");
-                printf("%s;\n",affichage);
+                char * temporaire = malloc(256);
+                temporaire = strncpy(temporaire,affichage,1);
+                if (strcmp(temporaire,"'") == 0) {
+                    printf("printf(\"%%s\",");
+                    affichage = replace_str(affichage, "'", "\"");
+                    affichage = replace_str(affichage, "'", "\"");
+                    printf("%s;\n",affichage);
+                } else {
+                    printf("printf(\"%%d\",");
+                    printf("%s;\n",affichage);
+                }
             } else {
                 printf("\nERREUR : %s\n",curseur->code);
             }

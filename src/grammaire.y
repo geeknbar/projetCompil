@@ -209,6 +209,8 @@ interieur_write: 	IDENTIFIANT
 										char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
 										$$ = temporaire2;
 										}
+					|
+					expression { $$ = $1; }
 
 instruction_assignement: IDENTIFIANT ASSIGNATION expression { 
 									char * temporaire = concat_deux_chaines("assignation ",$1);
@@ -244,6 +246,8 @@ expression: expression MULTIPLICATION expression 	{ $$ = concat_trois_chaines($1
 	NOMBRE 											{ $$ = $1; }
 	|
 	IDENTIFIANT 									{ $$ = $1; }
+	|
+	APOSTROPHE IDENTIFIANT APOSTROPHE				{ $$ = concat_trois_chaines($1,$2,$3); }
 	;
 
 type_variable : STRING 	{ $$ = $1; }
