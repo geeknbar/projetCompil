@@ -17,6 +17,7 @@
 %token <t_string> NOMBRE
 %token <t_string> IDENTIFIANT
 %token <t_string> WRITELN
+%token <t_string> CHAINE
 
 %left ADDITION SOUSTRACTION
 %left MULTIPLICATION DIVISION
@@ -63,7 +64,8 @@
 %type <t_string> expression;
 %type <t_string> type_variable;
 %type <t_string> write;
-%type <t_string> interieur_write
+%type <t_string> interieur_write;
+%type <t_string> appel_procedure;
 
 %%
 
@@ -158,6 +160,7 @@ declaration: declaration_ouverte
 
 declaration_close: instruction_assignement
 	| instruction
+	| appel_procedure
 	| 
 	;
 
@@ -217,6 +220,9 @@ instruction_assignement: IDENTIFIANT ASSIGNATION expression {
 									ajouterEnFin(concat_trois_chaines(temporaire,$2,$3)); }
 	;
 
+appel_procedure: IDENTIFIANT POINTVIRGULE { ajouterEnFin(concat_deux_chaines("appel_procedure ",$1)); }
+	;
+
 expressions: comparaison 	{ $$ = $1; } 	 	
 	|
 	NOMBRE 					{ $$ = $1; }	
@@ -247,7 +253,7 @@ expression: expression MULTIPLICATION expression 	{ $$ = concat_trois_chaines($1
 	|
 	IDENTIFIANT 									{ $$ = $1; }
 	|
-	APOSTROPHE IDENTIFIANT APOSTROPHE				{ $$ = concat_trois_chaines($1,$2,$3); }
+	CHAINE				{ $$ = $1; }
 	;
 
 type_variable : STRING 	{ $$ = $1; }

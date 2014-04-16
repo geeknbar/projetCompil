@@ -33,7 +33,9 @@ Y [yY]
 Z [zZ]
 
 CHIFFRE [0-9]
-LETTRE[a-zA-Z]
+LETTRE [a-zA-Z]
+APOSTROPHE [']
+
 %%
 
 {B}{E}{G}{I}{N}             { yylval.t_string = alloc_yytext("begin"); return(TBEGIN); }
@@ -89,6 +91,11 @@ LETTRE[a-zA-Z]
 {CHIFFRE}{CHIFFRE}*(.{CHIFFRE}{CHIFFRE}*)? {
   yylval.t_string = alloc_yytext(yytext);
   return NOMBRE;
+}
+
+{APOSTROPHE}(.)*{APOSTROPHE} {
+  yylval.t_string = alloc_yytext(yytext);
+  return CHAINE;
 }
 
 "{"   { register int c;

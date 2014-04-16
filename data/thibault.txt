@@ -20,6 +20,7 @@ END;
 PROCEDURE afficherUnADix;
 var compteur:integer;
 BEGIN
+	compteur := 1;
 	WHILE compteur <= 10 DO
     BEGIN
 		writeln(compteur);
@@ -31,8 +32,8 @@ END;
 { main }
 var inutile:integer;
 begin
-    { writeln('estPlusPetitQueDix(5)'); }
+    writeln('estPlusPetitQueDix(5)');
 	writeln(estPlusPetitQueDix(5));
-    { writeln('afficherUnADix'); }
-	{ afficherUnADix; }
+    writeln('afficherUnADix');
+	afficherUnADix;
 end.

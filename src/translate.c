@@ -212,6 +212,10 @@ void traduction() {
                 typeRetourFonction = "void";
                 printf("%s %s ()\n{\n",typeRetourFonction,nomFonction);
                 est_fonction = 1;
+            } else if (strcmp("appel_procedure", tokens) == 0) {
+                char * nomProcedure = strsep(&duplicata, " ");
+                printf("%s ();\n",nomProcedure);
+                est_fonction = 1;
             } else if (strcmp("fin_fonction", tokens) == 0) {
                 printf("\n");
                 est_fonction = 0;
@@ -295,12 +299,12 @@ void traduction() {
                 char * temporaire = malloc(256);
                 temporaire = strncpy(temporaire,affichage,1);
                 if (strcmp(temporaire,"'") == 0) {
-                    printf("printf(\"%%s\",");
+                    printf("printf(\"%%s\\n\",");
                     affichage = replace_str(affichage, "'", "\"");
                     affichage = replace_str(affichage, "'", "\"");
                     printf("%s;\n",affichage);
                 } else {
-                    printf("printf(\"%%d\",");
+                    printf("printf(\"%%d\\n\",");
                     printf("%s;\n",affichage);
                 }
             } else {

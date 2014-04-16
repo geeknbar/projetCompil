@@ -86,7 +86,8 @@ extern int yydebug;
      APOSTROPHE = 295,
      NOMBRE = 296,
      IDENTIFIANT = 297,
-     WRITELN = 298
+     WRITELN = 298,
+     CHAINE = 299
    };
 #endif
 
@@ -95,7 +96,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2053 of yacc.c  */
-#line 29 "grammaire.y"
+#line 30 "grammaire.y"
 
 	int t_int;
 	float t_float;
@@ -103,7 +104,7 @@ typedef union YYSTYPE
 
 
 /* Line 2053 of yacc.c  */
-#line 107 "grammaire.tab.h"
+#line 108 "grammaire.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
