@@ -8,6 +8,7 @@ BEGIN
 	IF nombre <= 10 THEN
 	BEGIN
 		resultat := nombre;
+		nombre := 0;
 	END
 	ELSE
 	BEGIN
@@ -30,10 +31,12 @@ BEGIN
 END;
 
 { main }
-var inutile:integer;
+var test:integer;
 begin
     writeln('estPlusPetitQueDix(5)');
 	writeln(estPlusPetitQueDix(5));
     writeln('afficherUnADix');
 	afficherUnADix;
+	test := estPlusPetitQueDix(5);
+	writeln(test);
 end.

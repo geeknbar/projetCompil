@@ -160,14 +160,14 @@ declaration: declaration_ouverte
 
 declaration_close: instruction_assignement
 	| instruction
-	| appel_procedure
-	| 
+	|
 	;
 
 declaration_ouverte: while 
 	| if 
 	| for
-	| write
+	| write 
+	| appel_procedure
 	;
 
 while: 	WHILE 
@@ -203,6 +203,7 @@ write: WRITELN
 			char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
 			ajouterEnFin(temporaire2);
 		}
+		declaration
 	;
 
 interieur_write: 	IDENTIFIANT 
@@ -215,12 +216,13 @@ interieur_write: 	IDENTIFIANT
 					|
 					expression { $$ = $1; }
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { 
-									char * temporaire = concat_deux_chaines("assignation ",$1);
-									ajouterEnFin(concat_trois_chaines(temporaire,$2,$3)); }
+instruction_assignement: IDENTIFIANT ASSIGNATION interieur_write { 
+						char * temporaire = concat_deux_chaines("assignation ",$1);
+						ajouterEnFin(concat_trois_chaines(temporaire,$2,$3)); }
 	;
 
 appel_procedure: IDENTIFIANT POINTVIRGULE { ajouterEnFin(concat_deux_chaines("appel_procedure ",$1)); }
+	declaration
 	;
 
 expressions: comparaison 	{ $$ = $1; } 	 	
