@@ -269,8 +269,8 @@ int main(int argc, char* argv[]){
 			yyin=f;
 	}
 	yyparse();
-	//impression();
-	traduction();
+	impression();
+	//traduction();
 	if(f!=NULL)
 		fclose(f);
 }
