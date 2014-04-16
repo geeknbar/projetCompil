@@ -63,6 +63,7 @@
 %type <t_string> expression;
 %type <t_string> type_variable;
 %type <t_string> write;
+%type <t_string> interieur_write
 
 %%
 
@@ -117,7 +118,7 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 declaration_fonctions: fonction_entete bloc { ajouterEnFin(concat_deux_chaines("fin_fonction ",$1)); }
 	;
 
-declaration_procedures: procedure_entete bloc 
+declaration_procedures: procedure_entete bloc { ajouterEnFin(concat_deux_chaines("fin_procedure ",$1)); }
 	;
 
 fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE { 
@@ -129,7 +130,10 @@ fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTV
 				}
 	;
 
-procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE 
+procedure_entete: PROCEDURE IDENTIFIANT POINTVIRGULE { 
+														ajouterEnFin(concat_trois_chaines($1," ",$2));
+														$$ = $2;
+													 }
 	;
 
 parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE { $$ = $2; }
@@ -190,17 +194,21 @@ for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
 
 write: WRITELN 
 		PARENTHESEGAUCHE 
-		IDENTIFIANT 
-		PARENTHESEGAUCHE 
-		expression 
-		PARENTHESEDROITE 
+		interieur_write
 		PARENTHESEDROITE 	{
 			char * temporaire = concat_trois_chaines("affichage ",$1,$2);
 			char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
-			char * temporaire3 = concat_trois_chaines(temporaire2,$5,$6);
-			ajouterEnFin(concat_deux_chaines(temporaire3, $7));
+			ajouterEnFin(temporaire2);
 		}
 	;
+
+interieur_write: 	IDENTIFIANT 
+					PARENTHESEGAUCHE 
+					expression 
+					PARENTHESEDROITE { char * temporaire = concat_trois_chaines("affichage ",$1,$2);
+										char * temporaire2 = concat_trois_chaines(temporaire,$3,$4);
+										$$ = temporaire2;
+										}
 
 instruction_assignement: IDENTIFIANT ASSIGNATION expression { 
 									char * temporaire = concat_deux_chaines("assignation ",$1);

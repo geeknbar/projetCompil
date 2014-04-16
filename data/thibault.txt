@@ -4,7 +4,7 @@ program prog;
 FUNCTION estPlusPetitQueDix(nombre:INTEGER):INTEGER;
 var resultat:integer;
 BEGIN
-	resultat := 0;
+    resultat := 0;
 	IF nombre <= 10 THEN
 	BEGIN
 		resultat := nombre;
@@ -16,8 +16,24 @@ BEGIN
 	estPlusPetitQueDix := resultat;
 END;
 
-{main}
+{ procedure g }
+PROCEDURE afficherUnADix;
+var compteur:integer;message:string;
+BEGIN
+	{ message := 'Termine'; }
+	WHILE compteur <= 10 DO
+    BEGIN
+		{ writeln(compteur); }
+		compteur := compteur+1;
+	END;
+	{ writeln(message); }
+END;
+
+{ main }
 var inutile:integer;
 begin
+    { writeln('estPlusPetitQueDix(5)'); }
 	writeln(estPlusPetitQueDix(5));
+    { writeln('afficherUnADix'); }
+	{ afficherUnADix; }
 end.

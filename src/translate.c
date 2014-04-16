@@ -207,7 +207,15 @@ void traduction() {
             if (strcmp("function", tokens) == 0) {
                 nomFonction = strsep(&duplicata, " ");
                 est_fonction = 1;
+            } else if (strcmp("procedure", tokens) == 0) {
+                nomFonction = strsep(&duplicata, " ");
+                typeRetourFonction = "void";
+                printf("%s %s ()\n{\n",typeRetourFonction,nomFonction);
+                est_fonction = 1;
             } else if (strcmp("fin_fonction", tokens) == 0) {
+                printf("\n");
+                est_fonction = 0;
+            } else if (strcmp("fin_procedure", tokens) == 0) {
                 printf("\n");
                 est_fonction = 0;
             } else if (strcmp("param", tokens) == 0) {
