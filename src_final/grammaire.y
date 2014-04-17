@@ -8,6 +8,7 @@
 	void yyerror(char const* s);
 	extern FILE *yyin;
 	llistTS table_sym = NULL;
+	llistTS table_sym_global = NULL;
 	llistSecond table_sym_second = NULL;
 %}
 
@@ -144,6 +145,7 @@ fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTV
 				ajouterEnFin(concat_deux_chaines("fin_declaration ",$2));
 				$$ = $2;
 				table_sym = ajoutSymboleTS(table_sym, $2, concat_deux_chainesTS("fonction", $5));
+				table_sym_global = ajoutSymboleTS(table_sym_global, $2, concat_deux_chainesTS("fonction", $5));
 				}
 	;
 
@@ -151,6 +153,7 @@ procedure_entete: PROCEDURE IDENTIFIANT POINTVIRGULE {
 														ajouterEnFin(concat_trois_chaines($1," ",$2));
 														$$ = $2;
 														table_sym = ajoutSymboleTS(table_sym, $2, "void");
+														table_sym_global = ajoutSymboleTS(table_sym_global, $2, "void");
 													 }
 	;
 
@@ -208,7 +211,7 @@ if: IF
 	declaration 
 	;
 
-for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
+for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration {verificationContexteTS(table_sym, $2);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 write: WRITELN 
@@ -228,20 +231,28 @@ interieur_write: 	IDENTIFIANT
 					PARENTHESEDROITE { char * temporaire = concat_trois_chaines($1,$2,$3);
 										char * temporaire2 = concat_deux_chaines(temporaire,$4);
 										$$ = temporaire2;
+										if(verificationContexteTS(table_sym_global, $1) == 1){
+										}else{
+											verificationContexteTS(table_sym, $1);
+										}
 										}
 					|
 					expression { $$ = $1; }
+;
 
 instruction_assignement: IDENTIFIANT ASSIGNATION interieur_write { 
 						char * temporaire = concat_deux_chaines("assignation ",$1);
 						ajouterEnFin(concat_trois_chaines(temporaire,$2,$3));
-						verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/
+						if(verificationContexteTS(table_sym_global, $1) == 1){
+						}else{
+							verificationContexteTS(table_sym, $1);
+						}
 						}
 	;
 
 appel_procedure: IDENTIFIANT POINTVIRGULE { ajouterEnFin(concat_deux_chaines("appel_procedure ",$1)); }
-	declaration
-	;
+	declaration {verificationContexteTS(table_sym_global, $1);/*vérification de l'identifiant si il est déclaré*/}
+	; 
 
 expressions: comparaison 	{ $$ = $1; } 	 	
 	|

@@ -10,7 +10,7 @@ llistTS ajouterEnTeteTS(llistTS table_symboles, char* symbole);
 void afficherListeTS(llistTS table_symboles);
 int estVideTS(llistTS table_symboles);
 int rechercherElementTS(llistTS table_symboles, char* symbole);
-void verificationContexteTS(llistTS table_symboles, char* symbole);
+int verificationContexteTS(llistTS table_symboles, char* symbole);
 llistTS ajoutSymboleTS(llistTS table_symboles, char* symbole, char* type_symb);
 llistTS ajoutListeSymboleTS(llistTS table_symboles, char* listeVariable, char* type_symb);
 llistTS supprimerElementEnTeteTS(llistTS liste);

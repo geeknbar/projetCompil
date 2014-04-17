@@ -111,17 +111,19 @@ int rechercherElementTS(llistTS table_symboles, char* symbole)
     return 0;
 }
 
-void verificationContexteTS(llistTS table_symboles, char* symbole){
+int verificationContexteTS(llistTS table_symboles, char* symbole){
     char* symb;
     symb = malloc(strlen(symbole) + 1);
     strcpy(symb, symbole);
     if(rechercherElementTS(table_symboles, symb)==0)
     {
         printf("ERROR Le symbole %s n'existe pas\n", symb);
+        return 0;
     }
     else
     {
         printf("VALIDE Le symbole %s existe\n", symb);
+        return 1;
     }
 }
 
