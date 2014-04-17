@@ -1,5 +1,5 @@
 all: programmeTraduction
-prog:  grammaire.tab.o lex.yy.o translate.o tableSymboles.o tableSymbolesSecondaires.o
+programmeTraduction:  grammaire.tab.o lex.yy.o translate.o tableSymboles.o tableSymbolesSecondaires.o
 	gcc -o $@ $^ -lfl
 grammaire.tab.o: grammaire.tab.c grammaire.tab.h
 	gcc -o $@ -c grammaire.tab.c
