@@ -4,40 +4,40 @@
 #include "tableSymbolesSecondaires.h"
 #include "tableSymboles.h"
 
-typedef struct element_S element_S;
-typedef element_S* llistSecond;
-struct element_S
+typedef struct element_TSS element_TSS;
+typedef element_TSS* llistSecond;
+struct element_TSS
 {
-    llist *listeSecond;
-    struct element_S *nxt;
+    llistTS *listeSecond;
+    struct element_TSS *nxt;
 };
 
-llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llist listeSecondaire)
+llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llistTS listeSecondaire)
 {
     /* On crée un nouvel élément */
-    element_S* nouvelElement_S = malloc(sizeof(element_S));
+    element_TSS* nouvelElement_TSS = malloc(sizeof(element_TSS));
  
     /* On assigne la valeur au nouvel élément */
-    nouvelElement_S->listeSecond = &listeSecondaire;
+    nouvelElement_TSS->listeSecond = &listeSecondaire;
 
     /* On ajoute en fin, donc aucun élément ne va suivre */
-    nouvelElement_S->nxt = NULL;
+    nouvelElement_TSS->nxt = NULL;
  
     if(table_symboles == NULL)
     {
         /* Si la liste est videé il suffit de renvoyer l'élément créé */
-        return nouvelElement_S;
+        return nouvelElement_TSS;
     }
     else
     {
         /* Sinon, on parcourt la liste à l'aide d'un pointeur temporaire et on
         indique que le dernier élément de la liste est relié au nouvel élément */
-        element_S* temp=table_symboles;
+        element_TSS* temp=table_symboles;
         while(temp->nxt != NULL)
         {
             temp = temp->nxt;
         }
-        temp->nxt = nouvelElement_S;
+        temp->nxt = nouvelElement_TSS;
         return table_symboles;
     }
     return NULL;
@@ -45,7 +45,7 @@ llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llist listeSecond
 
 void afficherListeSecondaire(llistSecond table_symboles)
 {
-    // element_S *tmp = table_symboles;
+    // element_TSS *tmp = table_symboles;
     // /* Tant que l'on n'est pas au bout de la liste */
     // int i = 1;
     // while(tmp != NULL)

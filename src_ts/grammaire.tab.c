@@ -75,7 +75,7 @@
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
-	llist table_sym = NULL;
+	llistTS table_sym = NULL;
 	llistSecond table_sym_second = NULL;
 
 
@@ -1529,30 +1529,30 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 78 "grammaire.y"
-    { /*table_sym = ajoutSymbole(table_sym, $2, "nom programme");*/}
+    { /*table_sym = ajoutSymboleTS(table_sym, $2, "nom programme");*/}
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
 #line 95 "grammaire.y"
-    { table_sym = ajoutListeSymbole(table_sym, (yyvsp[(1) - (3)].t_string), (yyvsp[(3) - (3)].t_string));}
+    { table_sym = ajoutListeSymboleTS(table_sym, (yyvsp[(1) - (3)].t_string), (yyvsp[(3) - (3)].t_string));}
     break;
 
   case 10:
 
 /* Line 1806 of yacc.c  */
 #line 98 "grammaire.y"
-    { (yyval.t_string) = concat_expression((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
+    { (yyval.t_string) = concat_expressionTS((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 20:
 
 /* Line 1806 of yacc.c  */
 #line 118 "grammaire.y"
-    {llist table_sym_b = NULL;
+    {llistTS table_sym_b = NULL;
 																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b); /* probleme de copie */
-																						afficherListe(table_sym);
+																						afficherListeTS(table_sym);
 																						printf("\n");
 																						table_sym = table_sym_b;
 																						}
@@ -1563,7 +1563,7 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 130 "grammaire.y"
     {
-									table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (6)].t_string), concat_deux_chaines("fonction", (yyvsp[(5) - (6)].t_string)));
+									table_sym = ajoutSymboleTS(table_sym, (yyvsp[(2) - (6)].t_string), concat_deux_chainesTS("fonction", (yyvsp[(5) - (6)].t_string)));
 									}
     break;
 
@@ -1571,21 +1571,21 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 135 "grammaire.y"
-    { table_sym = ajoutSymbole(table_sym, (yyvsp[(2) - (4)].t_string), "void");}
+    { table_sym = ajoutSymboleTS(table_sym, (yyvsp[(2) - (4)].t_string), "void");}
     break;
 
   case 46:
 
 /* Line 1806 of yacc.c  */
 #line 196 "grammaire.y"
-    { verificationContexte(table_sym, (yyvsp[(1) - (3)].t_string));/*vérification de l'identifiant si il est déclaré*/}
+    { verificationContexteTS(table_sym, (yyvsp[(1) - (3)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 60:
 
 /* Line 1806 of yacc.c  */
 #line 227 "grammaire.y"
-    { verificationContexte(table_sym, (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
+    { verificationContexteTS(table_sym, (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
 
@@ -1838,7 +1838,7 @@ int main(int argc, char* argv[]){
 	if(f!=NULL)
 		fclose(f);
 
-	afficherListe(table_sym);
+	afficherListeTS(table_sym);
 	// liberationMemoire(table_sym);
 	// afficherListeSecondaire(table_sym_second);
 }

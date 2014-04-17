@@ -2,9 +2,9 @@
 #define TABSS_H
 #include "tableSymboles.h"
 
-typedef struct element_S element_S;
-typedef element_S* llistSecond;
+typedef struct element_TSS element_TSS;
+typedef element_TSS* llistSecond;
 
-llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llist listeSecondaire);
+llistSecond ajouterEnFinSecondaire(llistSecond table_symboles, llistTS listeSecondaire);
 void afficherListeSecondaire(llistSecond table_symboles);
 #endif

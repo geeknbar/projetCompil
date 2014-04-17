@@ -6,7 +6,7 @@
 	int yylex();
 	void yyerror(char const* s);
 	extern FILE *yyin;
-	llist table_sym = NULL;
+	llistTS table_sym = NULL;
 	llistSecond table_sym_second = NULL;
 %}
 
@@ -75,7 +75,7 @@ programme:
 	;
 
 programme_entete:
-	PROGRAM IDENTIFIANT POINTVIRGULE { /*table_sym = ajoutSymbole(table_sym, $2, "nom programme");*/}
+	PROGRAM IDENTIFIANT POINTVIRGULE { /*table_sym = ajoutSymboleTS(table_sym, $2, "nom programme");*/}
 	;
 
 bloc: declaration_variable
@@ -92,10 +92,10 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables
 	| declaration_variables
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutListeSymbole(table_sym, $1, $3);}
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { table_sym = ajoutListeSymboleTS(table_sym, $1, $3);}
 	;
 
-liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expression($1,$2,$3); }
+liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_expressionTS($1,$2,$3); }
 	| IDENTIFIANT
 	;
 
@@ -115,9 +115,9 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 	| declaration_procedures
 	;
 
-declaration_fonctions: fonction_entete bloc {llist table_sym_b = NULL;
+declaration_fonctions: fonction_entete bloc {llistTS table_sym_b = NULL;
 																						table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b); /* probleme de copie */
-																						afficherListe(table_sym);
+																						afficherListeTS(table_sym);
 																						printf("\n");
 																						table_sym = table_sym_b;
 																						}
@@ -128,11 +128,11 @@ declaration_procedures: procedure_entete bloc
 	;
 
 fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTVIRGULE {
-									table_sym = ajoutSymbole(table_sym, $2, concat_deux_chaines("fonction", $5));
+									table_sym = ajoutSymboleTS(table_sym, $2, concat_deux_chainesTS("fonction", $5));
 									}
 	;
 
-procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE { table_sym = ajoutSymbole(table_sym, $2, "void");}
+procedure_entete: PROCEDURE IDENTIFIANT parametres POINTVIRGULE { table_sym = ajoutSymboleTS(table_sym, $2, "void");}
 	;
 
 parametres: PARENTHESEGAUCHE liste_parametres PARENTHESEDROITE
@@ -193,7 +193,7 @@ if: IF
 for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration
 	;
 
-instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
+instruction_assignement: IDENTIFIANT ASSIGNATION expression { verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 expressions: comparaison
@@ -224,7 +224,7 @@ expression: expression MULTIPLICATION expression
 	|
 	NOMBRE
 	|
-	IDENTIFIANT { verificationContexte(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
+	IDENTIFIANT { verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 type_variable : STRING
@@ -249,7 +249,7 @@ int main(int argc, char* argv[]){
 	if(f!=NULL)
 		fclose(f);
 
-	afficherListe(table_sym);
+	afficherListeTS(table_sym);
 	// liberationMemoire(table_sym);
 	// afficherListeSecondaire(table_sym_second);
 }
