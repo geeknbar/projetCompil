@@ -89,7 +89,7 @@ bloc: declaration_variable
 
 declaration_variable: VAR liste_variables POINTVIRGULE { 
 							ajouterEnFin("declaration_variables ");
-							ajouterEnFin($2); 
+							ajouterEnFin($2);
 							}
 	|
 	;
@@ -98,7 +98,10 @@ liste_variables: liste_variables POINTVIRGULE declaration_variables { $$ = conca
 	| declaration_variables { $$ = $1; }
 	;
 
-declaration_variables: liste_identifiants DEUXPOINTS type_variable { $$ = concat_trois_chaines($1,$2,$3); }
+declaration_variables: liste_identifiants DEUXPOINTS type_variable { 
+							$$ = concat_trois_chaines($1,$2,$3);
+							table_sym = ajoutListeSymboleTS(table_sym, $1, $3);
+							}
 	;
 
 liste_identifiants: liste_identifiants VIRGULE IDENTIFIANT { $$ = concat_trois_chaines($1,$2,$3); }
@@ -121,7 +124,14 @@ liste_procedures: liste_procedures POINTVIRGULE declaration_procedures
 	| declaration_procedures 
 	;
 
-declaration_fonctions: fonction_entete bloc { ajouterEnFin(concat_deux_chaines("fin_fonction ",$1)); }
+declaration_fonctions: fonction_entete bloc {
+							ajouterEnFin(concat_deux_chaines("fin_fonction ",$1));
+							llistTS table_sym_b = NULL;
+							table_sym_second = ajouterEnFinSecondaire(table_sym_second, table_sym_b); /* probleme de copie */
+							// afficherListeTS(table_sym);
+							printf("\n");
+							table_sym = table_sym_b;
+						}
 	;
 
 declaration_procedures: procedure_entete bloc { ajouterEnFin(concat_deux_chaines("fin_procedure ",$1)); }
@@ -133,12 +143,14 @@ fonction_entete: FUNCTION IDENTIFIANT parametres DEUXPOINTS type_variable POINTV
 				ajouterEnFin(concat_deux_chaines("type_return ", $5));
 				ajouterEnFin(concat_deux_chaines("fin_declaration ",$2));
 				$$ = $2;
+				table_sym = ajoutSymboleTS(table_sym, $2, concat_deux_chainesTS("fonction", $5));
 				}
 	;
 
 procedure_entete: PROCEDURE IDENTIFIANT POINTVIRGULE { 
 														ajouterEnFin(concat_trois_chaines($1," ",$2));
 														$$ = $2;
+														table_sym = ajoutSymboleTS(table_sym, $2, "void");
 													 }
 	;
 
@@ -222,7 +234,9 @@ interieur_write: 	IDENTIFIANT
 
 instruction_assignement: IDENTIFIANT ASSIGNATION interieur_write { 
 						char * temporaire = concat_deux_chaines("assignation ",$1);
-						ajouterEnFin(concat_trois_chaines(temporaire,$2,$3)); }
+						ajouterEnFin(concat_trois_chaines(temporaire,$2,$3));
+						verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/
+						}
 	;
 
 appel_procedure: IDENTIFIANT POINTVIRGULE { ajouterEnFin(concat_deux_chaines("appel_procedure ",$1)); }
@@ -257,7 +271,7 @@ expression: expression MULTIPLICATION expression 	{ $$ = concat_trois_chaines($1
 	|
 	NOMBRE 											{ $$ = $1; }
 	|
-	IDENTIFIANT 									{ $$ = $1; }
+	IDENTIFIANT 									{ $$ = $1; verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
 	|
 	CHAINE				{ $$ = $1; }
 	;
