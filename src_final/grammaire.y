@@ -211,7 +211,11 @@ if: IF
 	declaration 
 	;
 
-for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration {verificationContexteTS(table_sym, $2);/*vérification de l'identifiant si il est déclaré*/}
+for: FOR IDENTIFIANT ASSIGNATION expression TO expression DO declaration {
+		if(verificationContexteTS(table_sym, $2)==0)
+			printf("ERROR Le symbole %s n'existe pas\n", $2);
+		else 
+			printf("VALIDE Le symbole %s existe\n", $2);/*vérification de l'identifiant si il est déclaré*/}
 	;
 
 write: WRITELN 
@@ -232,8 +236,11 @@ interieur_write: 	IDENTIFIANT
 										char * temporaire2 = concat_deux_chaines(temporaire,$4);
 										$$ = temporaire2;
 										if(verificationContexteTS(table_sym_global, $1) == 1){
-										}else{
-											verificationContexteTS(table_sym, $1);
+											printf("VALIDE Le symbole %s existe\n", $1);
+										}else if(verificationContexteTS(table_sym, $1) ==1 ){
+											printf("VALIDE Le symbole %s existe\n", $1);
+										} else {
+											printf("ERROR Le symbole %s n'existe pas\n", $1);
 										}
 										}
 					|
@@ -244,14 +251,21 @@ instruction_assignement: IDENTIFIANT ASSIGNATION interieur_write {
 						char * temporaire = concat_deux_chaines("assignation ",$1);
 						ajouterEnFin(concat_trois_chaines(temporaire,$2,$3));
 						if(verificationContexteTS(table_sym_global, $1) == 1){
-						}else{
-							verificationContexteTS(table_sym, $1);
+							printf("VALIDE Le symbole %s existe\n", $1);
+						}else if(verificationContexteTS(table_sym, $1) ==1 ){
+							printf("VALIDE Le symbole %s existe\n", $1);
+						} else {
+							printf("ERROR Le symbole %s n'existe pas\n", $1);
 						}
 						}
 	;
 
 appel_procedure: IDENTIFIANT POINTVIRGULE { ajouterEnFin(concat_deux_chaines("appel_procedure ",$1)); }
-	declaration {verificationContexteTS(table_sym_global, $1);/*vérification de l'identifiant si il est déclaré*/}
+	declaration {
+		if(verificationContexteTS(table_sym, $1)==0)
+			printf("ERROR Le symbole %s n'existe pas\n", $1);
+		else 
+			printf("VALIDE Le symbole %s existe\n", $1);/*vérification de l'identifiant si il est déclaré*/}
 	; 
 
 expressions: comparaison 	{ $$ = $1; } 	 	
@@ -282,7 +296,11 @@ expression: expression MULTIPLICATION expression 	{ $$ = concat_trois_chaines($1
 	|
 	NOMBRE 											{ $$ = $1; }
 	|
-	IDENTIFIANT 									{ $$ = $1; verificationContexteTS(table_sym, $1);/*vérification de l'identifiant si il est déclaré*/}
+	IDENTIFIANT 									{ $$ = $1; 
+		if(verificationContexteTS(table_sym, $1)==0)
+			printf("ERROR Le symbole %s n'existe pas\n", $1);
+		else 
+			printf("VALIDE Le symbole %s existe\n", $1);/*vérification de l'identifiant si il est déclaré*/}
 	|
 	CHAINE				{ $$ = $1; }
 	;

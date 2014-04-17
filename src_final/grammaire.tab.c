@@ -504,10 +504,10 @@ static const yytype_uint16 yyrline[] =
      108,   109,   112,   113,   116,   117,   120,   121,   124,   125,
      128,   138,   141,   152,   160,   163,   164,   167,   167,   172,
      173,   176,   177,   180,   181,   182,   185,   186,   187,   188,
-     189,   194,   192,   204,   210,   202,   214,   220,   217,   228,
-     240,   243,   253,   253,   257,   259,   262,   264,   266,   268,
-     270,   273,   275,   277,   279,   281,   283,   285,   287,   290,
-     291,   292,   293,   294
+     189,   194,   192,   204,   210,   202,   214,   224,   221,   232,
+     247,   250,   263,   263,   271,   273,   276,   278,   280,   282,
+     284,   287,   289,   291,   293,   295,   297,   299,   305,   308,
+     309,   310,   311,   312
 };
 #endif
 
@@ -1697,13 +1697,17 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 214 "grammaire.y"
-    {verificationContexteTS(table_sym, (yyvsp[(2) - (8)].t_string));/*vérification de l'identifiant si il est déclaré*/}
+    {
+		if(verificationContexteTS(table_sym, (yyvsp[(2) - (8)].t_string))==0)
+			printf("ERROR Le symbole %s n'existe pas\n", (yyvsp[(2) - (8)].t_string));
+		else 
+			printf("VALIDE Le symbole %s existe\n", (yyvsp[(2) - (8)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 220 "grammaire.y"
+#line 224 "grammaire.y"
     {
 			char * temporaire = concat_trois_chaines("affichage ",(yyvsp[(1) - (4)].t_string),(yyvsp[(2) - (4)].t_string));
 			char * temporaire2 = concat_trois_chaines(temporaire,(yyvsp[(3) - (4)].t_string),(yyvsp[(4) - (4)].t_string));
@@ -1714,13 +1718,16 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 231 "grammaire.y"
+#line 235 "grammaire.y"
     { char * temporaire = concat_trois_chaines((yyvsp[(1) - (4)].t_string),(yyvsp[(2) - (4)].t_string),(yyvsp[(3) - (4)].t_string));
 										char * temporaire2 = concat_deux_chaines(temporaire,(yyvsp[(4) - (4)].t_string));
 										(yyval.t_string) = temporaire2;
 										if(verificationContexteTS(table_sym_global, (yyvsp[(1) - (4)].t_string)) == 1){
-										}else{
-											verificationContexteTS(table_sym, (yyvsp[(1) - (4)].t_string));
+											printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (4)].t_string));
+										}else if(verificationContexteTS(table_sym, (yyvsp[(1) - (4)].t_string)) ==1 ){
+											printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (4)].t_string));
+										} else {
+											printf("ERROR Le symbole %s n'existe pas\n", (yyvsp[(1) - (4)].t_string));
 										}
 										}
     break;
@@ -1728,20 +1735,23 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 240 "grammaire.y"
+#line 247 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 243 "grammaire.y"
+#line 250 "grammaire.y"
     { 
 						char * temporaire = concat_deux_chaines("assignation ",(yyvsp[(1) - (3)].t_string));
 						ajouterEnFin(concat_trois_chaines(temporaire,(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)));
 						if(verificationContexteTS(table_sym_global, (yyvsp[(1) - (3)].t_string)) == 1){
-						}else{
-							verificationContexteTS(table_sym, (yyvsp[(1) - (3)].t_string));
+							printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (3)].t_string));
+						}else if(verificationContexteTS(table_sym, (yyvsp[(1) - (3)].t_string)) ==1 ){
+							printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (3)].t_string));
+						} else {
+							printf("ERROR Le symbole %s n'existe pas\n", (yyvsp[(1) - (3)].t_string));
 						}
 						}
     break;
@@ -1749,161 +1759,169 @@ yyreduce:
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 253 "grammaire.y"
+#line 263 "grammaire.y"
     { ajouterEnFin(concat_deux_chaines("appel_procedure ",(yyvsp[(1) - (2)].t_string))); }
     break;
 
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 254 "grammaire.y"
-    {verificationContexteTS(table_sym_global, (yyvsp[(1) - (4)].t_string));/*vérification de l'identifiant si il est déclaré*/}
+#line 264 "grammaire.y"
+    {
+		if(verificationContexteTS(table_sym, (yyvsp[(1) - (4)].t_string))==0)
+			printf("ERROR Le symbole %s n'existe pas\n", (yyvsp[(1) - (4)].t_string));
+		else 
+			printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (4)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 257 "grammaire.y"
+#line 271 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 259 "grammaire.y"
+#line 273 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 262 "grammaire.y"
+#line 276 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 57:
 
 /* Line 1806 of yacc.c  */
-#line 264 "grammaire.y"
+#line 278 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 58:
 
 /* Line 1806 of yacc.c  */
-#line 266 "grammaire.y"
+#line 280 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 59:
 
 /* Line 1806 of yacc.c  */
-#line 268 "grammaire.y"
+#line 282 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 60:
 
 /* Line 1806 of yacc.c  */
-#line 270 "grammaire.y"
+#line 284 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 61:
 
 /* Line 1806 of yacc.c  */
-#line 273 "grammaire.y"
+#line 287 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 62:
 
 /* Line 1806 of yacc.c  */
-#line 275 "grammaire.y"
+#line 289 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 63:
 
 /* Line 1806 of yacc.c  */
-#line 277 "grammaire.y"
+#line 291 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 64:
 
 /* Line 1806 of yacc.c  */
-#line 279 "grammaire.y"
+#line 293 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 65:
 
 /* Line 1806 of yacc.c  */
-#line 281 "grammaire.y"
+#line 295 "grammaire.y"
     { (yyval.t_string) = concat_trois_chaines((yyvsp[(1) - (3)].t_string),(yyvsp[(2) - (3)].t_string),(yyvsp[(3) - (3)].t_string)); }
     break;
 
   case 66:
 
 /* Line 1806 of yacc.c  */
-#line 283 "grammaire.y"
+#line 297 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 67:
 
 /* Line 1806 of yacc.c  */
-#line 285 "grammaire.y"
-    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); verificationContexteTS(table_sym, (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
+#line 299 "grammaire.y"
+    { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); 
+		if(verificationContexteTS(table_sym, (yyvsp[(1) - (1)].t_string))==0)
+			printf("ERROR Le symbole %s n'existe pas\n", (yyvsp[(1) - (1)].t_string));
+		else 
+			printf("VALIDE Le symbole %s existe\n", (yyvsp[(1) - (1)].t_string));/*vérification de l'identifiant si il est déclaré*/}
     break;
 
   case 68:
 
 /* Line 1806 of yacc.c  */
-#line 287 "grammaire.y"
+#line 305 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 69:
 
 /* Line 1806 of yacc.c  */
-#line 290 "grammaire.y"
+#line 308 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 70:
 
 /* Line 1806 of yacc.c  */
-#line 291 "grammaire.y"
+#line 309 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 71:
 
 /* Line 1806 of yacc.c  */
-#line 292 "grammaire.y"
+#line 310 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 72:
 
 /* Line 1806 of yacc.c  */
-#line 293 "grammaire.y"
+#line 311 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
   case 73:
 
 /* Line 1806 of yacc.c  */
-#line 294 "grammaire.y"
+#line 312 "grammaire.y"
     { (yyval.t_string) = (yyvsp[(1) - (1)].t_string); }
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1907 "grammaire.tab.c"
+#line 1925 "grammaire.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2134,7 +2152,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 297 "grammaire.y"
+#line 315 "grammaire.y"
 
 
 int main(int argc, char* argv[]){
