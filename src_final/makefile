@@ -1,4 +1,4 @@
-all: prog
+all: programmeTraduction
 prog:  grammaire.tab.o lex.yy.o translate.o tableSymboles.o tableSymbolesSecondaires.o
 	gcc -o $@ $^ -lfl
 grammaire.tab.o: grammaire.tab.c grammaire.tab.h
