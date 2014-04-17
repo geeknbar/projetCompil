@@ -7,7 +7,6 @@ typedef struct element element;
 typedef element * llist;
 struct element
 {
-    // int val;
     char * code;
     struct element *nxt;
     int occurence;
@@ -47,21 +46,6 @@ void ajouterEnFin(char* chaine)
     }
 }
 
-//llist ajouterEnTete(char* chaine)
-//{
-//    /* On crée un nouvel élément */
-//    element* nouvelElement = malloc(sizeof(element));
-// 
-//    /* On assigne la valeur au nouvel élément */
-//    nouvelElement->code = chaine;
-// 
-//    /* On assigne l'adresse de l'élément suivant au nouvel élément */
-//    nouvelElement->nxt = affichage;
-// 
-//    /* On retourne la nouvelle liste, i.e. le pointeur sur le premier élément */
-//    return nouvelElement;
-//}
-
 void afficherListe()
 {
     element * tmp = affichage;
@@ -82,43 +66,6 @@ int estVide()
 {
     return (affichage == NULL)? 1 : 0;
 }
-
-//int rechercherElement(char* chaine)
-//{
-//    element *tmp=affichage;
-//    /* Tant que l'on n'est pas au bout de la liste */
-//    while(tmp != NULL)
-//    {
-//        if(strcmp(tmp->code, chaine)==0)
-//        {
-//            /* Si l'élément a la valeur recherchée, on renvoie son adresse */
-//            //problème si on le laisse ce free , a revoir
-//            // free(tmp);
-//            /* On augmente le nombre d'occurence de 1*/
-//            tmp->occurence +=1;
-//            return 1;
-//        }
-//        tmp = tmp->nxt;
-//    }
-//    free(tmp);
-//    return 0;
-//}
-
-//llist ajoutSymbole(char* chaine)
-//{
-//    char* code;
-//    code = malloc(strlen(chaine) + 1);
-//    strcpy(code, chaine);
-//    if (rechercherElement(affichage, code)==0)
-//    {
-//        affichage = ajouterEnFin(affichage, code);
-//    } 
-//    else
-//    {
-//        free(code);
-//    }
-//    return affichage;
-//}
 
 llist supprimerElementEnTete()
 {
@@ -194,7 +141,6 @@ void traduction() {
     int est_procedure = 0;
     int est_main = 0;
 
-    printf("Nom du programme : %s\n\n", curseur->code);
     curseur = curseur->nxt;
     printf("#include <stdio.h>\n\n");
     while(curseur != NULL)
@@ -355,10 +301,10 @@ char * replace_str(char *str, char *orig, char *rep)
   static char buffer[4096];
   char *p;
 
-  if(!(p = strstr(str, orig)))  // Is 'orig' even in 'str'?
+  if(!(p = strstr(str, orig)))  
     return str;
 
-  strncpy(buffer, str, p-str); // Copy characters from 'str' start to 'orig' st$
+  strncpy(buffer, str, p-str); 
   buffer[p-str] = '\0';
 
   sprintf(buffer+(p-str), "%s%s", rep, p+strlen(orig));

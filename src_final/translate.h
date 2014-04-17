@@ -8,11 +8,8 @@ typedef element * llist;
 llist affichage;
 
 void ajouterEnFin(char* chaine);
-//llist ajouterEnTete(char* chaine);
 void afficherListe();
 int estVide();
-//int rechercherElement(char* chaine);
-//llist ajoutSymbole(char* chaine);
 llist supprimerElementEnTete();
 void impression();
 void liberationMemoire();
