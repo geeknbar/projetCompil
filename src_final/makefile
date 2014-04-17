@@ -16,4 +16,4 @@ lex.yy.o: lex.yy.c
 lex.yy.c: annalyseur_lexical.l grammaire.tab.h
 	flex annalyseur_lexical.l
 clean:
-	rm prog *.o
+	rm programmeTraduction *.o
